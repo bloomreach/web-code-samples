@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.toggle-field .rbui-field-label--normal {
+  color: #cbd5e1;
+  font-size: 11px;
+}
