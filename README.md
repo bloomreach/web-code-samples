@@ -24,5 +24,5 @@ This repository holds code samples that demonstrate how to implement the various
 
 ## Contributing
 
-Contributions are very welcome. Please read the principles above and open a pull request and one of our team members will help get it reviewed and merged
+Contributions are very welcome. Please read the guidelines above and open a pull request and one of our team members will help get it reviewed and merged
 
