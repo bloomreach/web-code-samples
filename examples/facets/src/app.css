@@ -1,0 +1,28 @@
+/*
+If the tailwind play cdn javascript is not working, uncomment the block below and run the example
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*/
+
+.facet-label {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-width: 0;
+  width: 100%;
+  display: flex;
+}
+
+.toggle-field .rbui-field-label--normal {
+  color: var(--banana-neutral-100);
+  font-size: 11px;
+}
+
+.applied-facet-tag {
+  --rbui-tag-color: var(--banana-tag-input-foreground-default);
+  --rbui-tag-background-color: var(--banana-tag-input-background-default);
+  --rbui-tag-background-color-hover: var(--banana-tag-input-background-hover);
+  font-weight: 600;
+}
