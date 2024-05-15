@@ -15,4 +15,4 @@ npm run dev
 
 or:
 
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/github/bloomreach/discovery-web-code-samples/tree/main/examples/visual-search)
+[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/github/bloomreach/web-code-samples/tree/main/examples/visual-search)

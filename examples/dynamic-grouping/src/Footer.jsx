@@ -31,7 +31,7 @@ export const Footer = () => {
             <a
               target="_blank"
               className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
-              href="https://github.com/bloomreach/discovery-web-code-samples/tree/main/examples/dynamic-grouping"
+              href="https://github.com/bloomreach/web-code-samples/tree/main/examples/dynamic-grouping"
             >
               See the source on Github <ExternalLinkIcon size={12} />
             </a>
