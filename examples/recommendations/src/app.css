@@ -1,0 +1,12 @@
+/*
+If the tailwind play cdn javascript is not working, uncomment the block below and run the example
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*/
+.toggle-field .rbui-field-label--normal {
+  color: var(--banana-neutral-100);
+  font-size: 11px;
+}
