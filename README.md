@@ -3,15 +3,16 @@
 This repository holds code samples that demonstrate how to implement the various features offered by the Bloomreach product
 
 ## Examples
-
-- [Search](./examples/search/README.md)
-- [Autosuggest](./examples/autosuggest/README.md)
-- [Recommendations](./examples/recommendations/README.md)
-- [Facets](./examples/facets/README.md)
-- [Categories](./examples/categories/README.md)
-- [Dynamic grouping](./examples/dynamic-grouping/README.md)
-- [Relevance by segment](./examples/relevance-by-segment/README.md)
-- [Visual search](./examples/visual-search/README.md)
+|  |  |  |
+| --- | --- | --- |
+| Search | [Source](./examples/search/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/search) |
+| Autosuggest | [Source](./examples/autosuggest/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/autosuggest) |
+| Recommendations | [Source](./examples/recommendations/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/recommendations) |
+| Facets | [Source](./examples/facets/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/facets) |
+| Categories | [Source](./examples/categories/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/categories) |
+| Dynamic grouping | [Source](./examples/dynamic-grouping/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/dynamic-grouping) |
+| Relevance by segment | [Source](./examples/relevance-by-segment/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/relevance-by-segment) |
+| Visual search | [Source](./examples/visual-search/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/visual-search) |
 
 ## Guidelines for writing a code sample
 
