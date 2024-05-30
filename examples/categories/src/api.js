@@ -9,6 +9,8 @@ initialize({
 });
 
 const callAPI = async (query, searchType = 'keyword') => {
+  // See https://documentation.bloomreach.com/discovery/reference/product-search-category-api
+  // for descriptions about the parameters used below
   const options = {
     _br_uid_2: `uid=12345:v=11.8:ts=${Date.now()}:hc=3`,
     url: 'https://example.com',

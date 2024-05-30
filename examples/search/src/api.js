@@ -12,12 +12,15 @@ const config = {
   domain_key,
 };
 
-// initialize the Discovery SDK 
+// Initialize the Discovery SDK
 initialize(config);
 
 export const getSearchResults = (query, page, perPage, sort) => {
   const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
-  // call API using SDK
+  // See https://documentation.bloomreach.com/discovery/reference/product-search-category-api
+  // for descriptions about the parameters used below
+
+  // Call API using SDK
   return productSearch({
         _br_uid_2: uid,
         url: 'https://example.com',

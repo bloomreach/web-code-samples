@@ -21,6 +21,8 @@ export const getRecommendations = (pid) => {
 export const constructDetailsUrl = (pid) => {
   const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
 
+  // See https://documentation.bloomreach.com/discovery/reference/product-search-category-api
+  // for descriptions about the parameters used below
   const params = new URLSearchParams({
     _br_uid_2: uid,
     account_id: account_id,
@@ -45,6 +47,8 @@ export const constructDetailsUrl = (pid) => {
 export const constructRecommendationsUrl = (pid) => {
   const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
 
+  // See https://documentation.bloomreach.com/discovery/reference/recs-pathways-parameters-reference
+  // for descriptions about the parameters used below
   const params = new URLSearchParams({
     _br_uid_2: uid,
     account_id: account_id,
