@@ -3,6 +3,9 @@
 This repository holds code samples that demonstrate how to implement the various features offered by the Bloomreach product
 
 ## Examples
+
+### Discovery
+
 |  |  |  |
 | --- | --- | --- |
 | Search | [Source](./examples/search/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/search) |
