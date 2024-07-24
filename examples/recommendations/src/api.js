@@ -19,9 +19,6 @@ export const getDetails = (pid) => {
   // for descriptions about the parameters used below
   const options = {
     _br_uid_2: uid,
-    account_id: account_id,
-    auth_key: auth_key,
-    domain_key: domain_key,
     search_type: "keyword",
     request_type: "search",
     url: "https://example.com",
@@ -45,9 +42,6 @@ export const getRecommendations = (pid) => {
   // for descriptions about the parameters used below
   const options = {
     _br_uid_2: uid,
-    account_id: account_id,
-    auth_key: auth_key,
-    domain_key: domain_key,
     item_ids: pid,
     fields: "pid,title,price,sale_price,description,thumb_image",
     filter: `-pid:${pid}`,

@@ -11,9 +11,6 @@ export const getSearchResults = (query, page, perPage, groupBy) => {
 
   const options = {
     _br_uid_2: uid,
-    account_id: account_id,
-    auth_key: auth_key,
-    domain_key: domain_key,
     search_type: "keyword",
     request_type: "search",
     url: "https://example.com",
