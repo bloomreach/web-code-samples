@@ -1,11 +1,11 @@
 import { account_id, auth_key, catalog_views, domain_key } from './config';
-import { initialize, autoSuggest } from '@bloomreach/discovery-web-sdk';
+import { autoSuggest } from '@bloomreach/discovery-web-sdk';
 
-initialize({
+const config = {
   account_id: account_id,
   auth_key: auth_key,
   domain_key: domain_key,
-});
+};
 
 export const getSuggestions = (query) => {
   const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
@@ -20,5 +20,5 @@ export const getSuggestions = (query) => {
     q: query,
   };
 
-  return autoSuggest(searchOptions);
+  return autoSuggest(config, searchOptions);
 };

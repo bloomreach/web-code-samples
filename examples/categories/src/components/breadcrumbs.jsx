@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronRightIcon } from "@bloomreach/react-banana-ui";
+import { ChevronRightIcon } from "@bloomreach/react-banana-ui";
 
 export const Breadcrumbs = ({ items, active, onSelect }) => {
   if (!active || active.length === 0) {

@@ -4,7 +4,7 @@ import {
     domain_key,
 } from "./config";
 
-import { initialize, productSearch } from '@bloomreach/discovery-web-sdk';
+import { productSearch } from '@bloomreach/discovery-web-sdk';
 
 const config = {
   account_id,
@@ -12,16 +12,13 @@ const config = {
   domain_key,
 };
 
-// Initialize the Discovery SDK
-initialize(config);
-
 export const getSearchResults = (query, page, perPage, sort) => {
   const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
   // See https://documentation.bloomreach.com/discovery/reference/product-search-category-api
   // for descriptions about the parameters used below
 
   // Call API using SDK
-  return productSearch({
+  return productSearch(config, {
         _br_uid_2: uid,
         url: 'https://example.com',
         ref_url: 'https://example.com',

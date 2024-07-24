@@ -100,7 +100,7 @@ export default function App() {
 
         <div>
           <InputField
-            helperText="Search for chair, sofa, bed, pillow, chiar (for autocorrect)..."
+            helperText="Search for chair, sofa, bed, pillow, coffee, chiar (for autocorrect)..."
             value={query}
             leftElement={
               loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />

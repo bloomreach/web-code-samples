@@ -1,12 +1,11 @@
+import { categorySearch, productSearch } from '@bloomreach/discovery-web-sdk';
 import { account_id, auth_key, domain_key } from './config';
 
-import { initialize, categorySearch, productSearch } from '@bloomreach/discovery-web-sdk';
-
-initialize({
+const config = {
   account_id: account_id,
   auth_key: auth_key,
   domain_key: domain_key,
-});
+};
 
 const callAPI = async (query, searchType = 'keyword') => {
   // See https://documentation.bloomreach.com/discovery/reference/product-search-category-api
@@ -23,11 +22,10 @@ const callAPI = async (query, searchType = 'keyword') => {
     fl: 'pid,score,is_live,title,description,brand,price,price_range,sale_price,sale_price_range,url,promotions,thumb_image,skuid,sku_color,sku_size,sku_thumb_images,sku_swatch_images,sku_price,sku_sale_price,onSale,inStock',
   };
 
-
   if (searchType === 'keyword') {
-    return productSearch(options);
+    return productSearch(config, options);
   } else {
-    return categorySearch(options);
+    return categorySearch(config, options);
   }
 };
 

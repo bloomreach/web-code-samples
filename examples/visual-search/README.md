@@ -1,4 +1,4 @@
-# Bloomreach - Search example
+# Bloomreach - Visual search example
 
 This example demonstrates how to setup Bloomreach's visual search feature. See `config.ts` file to configure it to run for your account and catalog
 
