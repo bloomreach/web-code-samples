@@ -1,0 +1,32 @@
+{
+  "name": "discovery-code-samples-pixel",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@bloomreach/discovery-web-sdk": "^1.1.0",
+    "@bloomreach/react-banana-ui": "1.20.0",
+    "@mui/base": "^5.0.0-beta.40",
+    "@uidotdev/usehooks": "^2.4.1",
+    "@uiw/react-json-view": "^2.0.0-alpha.25",
+    "lodash": "^4.17.21",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-cookie": "^7.1.4",
+    "react-dom": "^18",
+    "react-highlight-words": "^0.20.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.11",
+    "@types/react": "18.3.3",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}

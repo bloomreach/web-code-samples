@@ -1,0 +1,81 @@
+import {useEffect} from "react";
+import Link from "next/link";
+import {InfoIcon, Tooltip} from "@bloomreach/react-banana-ui";
+import JsonView from "@uiw/react-json-view";
+import {Price} from "../components/Price";
+import useDataLayer from "../hooks/useDataLayer";
+import {useDebugTools} from "../hooks/useDebugTools";
+
+export const ProductsCarouselWidget = ({ data }) => {
+  const {showJson} = useDebugTools();
+  const dataLayer = useDataLayer();
+
+  function sendClickEvent(id) {
+    dataLayer.push({
+      event: 'event_widgetClick',
+      widgetId: data.metadata.widget.id,
+      widgetType: data.metadata.widget.type,
+      widgetRequestId: data.metadata.widget.rid,
+      itemId: id,
+    })
+  }
+
+  useEffect(() => {
+    dataLayer.push({
+      event: 'event_widgetView',
+      widgetId: data.metadata.widget.id,
+      widgetType: data.metadata.widget.type,
+      widgetRequestId: data.metadata.widget.rid
+    })
+  }, []);
+
+  if (!data) {
+    return null;
+  }
+
+  return (
+    <div>
+      <div className="flex gap-2 my-2 items-center">
+        <div className="text-md font-semibold">Similar products</div>
+        <div>
+          <Tooltip title="This widget shows products similar to the product above">
+            <InfoIcon className="text-slate-500"/>
+          </Tooltip>
+        </div>
+      </div>
+      {showJson ? (
+        <JsonView value={data} collapsed={1}/>
+      ) : (
+        <div>
+          {data?.response ? (
+            <div className="flex flex-row gap-4">
+              {data.response.docs.map((doc) => (
+                <Link
+                  className="m-2 w-48 shadow-md rounded-md border border-slate-100"
+                  href={`/products/${doc.pid}`}
+                  onClick={() => sendClickEvent(doc.pid)}
+                  key={doc.pid}
+                >
+                  <div className="flex flex-col gap-2">
+                    <div
+                      className="w-full rounded-t-md overflow-hidden border-b border-slate-200 ">
+                      <img
+                        src={doc.thumb_image}
+                        alt={doc.title}
+                        className="mr-2 w-full"
+                      />
+                    </div>
+                    <div className="p-2 pt-0">
+                      <h3 className="text-sm font-bold">{doc.title}</h3>
+                      <Price className="text-sm" product={doc}/>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      )}
+    </div>
+  );
+};
