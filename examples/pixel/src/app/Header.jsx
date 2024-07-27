@@ -152,6 +152,7 @@ export const Header = () => {
                                 <div className="w-8">
                                   <img
                                     src={suggestion.thumb_image}
+                                    alt=""
                                     className="mr-2 w-full"
                                   />
                                 </div>

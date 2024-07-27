@@ -49,7 +49,7 @@ export default function Page({ params }) {
   const sku = product?.variants.length ? product.variants[0].skuid : undefined;
 
   useEffect(() => {
-    if (!data) {
+    if (!product) {
       return;
     }
     dataLayer.push({
@@ -58,7 +58,7 @@ export default function Page({ params }) {
       title: product.title,
       sku: sku
     });
-  }, [data]);
+  }, [product, sku]);
 
   const addToCart = (product) => {
     addItem({

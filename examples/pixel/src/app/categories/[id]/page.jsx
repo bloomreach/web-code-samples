@@ -136,6 +136,7 @@ export default function Page({ params, searchParams }) {
                             <div className="w-full rounded-t-md overflow-hidden border-b border-slate-200 ">
                               <img
                                 src={product.thumb_image}
+                                alt=""
                                 className="mr-2 w-full"
                               />
                             </div>
