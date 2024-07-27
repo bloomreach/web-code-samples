@@ -38,7 +38,7 @@ export default function Page({ params }) {
       });
       setRecOptions({
         item_ids: pid,
-        filter: `-pid:${pid}`,
+        filter: `-pid:("${pid}")`,
         rows: 4,
         start: 0
       })
