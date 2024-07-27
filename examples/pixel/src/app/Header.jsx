@@ -1,21 +1,16 @@
-import _ from "lodash";
-import {useEffect, useState} from "react";
-import Link from "next/link";
-import {useRouter, useSearchParams} from 'next/navigation'
-import JsonView from "@uiw/react-json-view";
-import Highlighter from "react-highlight-words";
-import {
-  InputField,
-  LoaderIcon,
-  SearchIcon,
-  Badge,
-} from "@bloomreach/react-banana-ui";
-import useAutosuggestApi from "../hooks/useAutosuggestApi";
-import {config} from "../utils";
-import useCart from "../hooks/useCart";
-import useDataLayer from "../hooks/useDataLayer";
+import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import JsonView from '@uiw/react-json-view';
+import Highlighter from 'react-highlight-words';
+import { InputField, LoaderIcon, SearchIcon, Badge } from '@bloomreach/react-banana-ui';
+import useAutosuggestApi from '../hooks/useAutosuggestApi';
+import { config } from '../utils';
+import useCart from '../hooks/useCart';
+import useDataLayer from '../hooks/useDataLayer';
 
-export const Header = () => {
+export function Header() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { cartCount } = useCart();
@@ -24,25 +19,25 @@ export const Header = () => {
   const [query, setQuery] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
   const [isHoveringResults, setIsHoveringResults] = useState(false);
-  const {loading, error, data} = useAutosuggestApi(config, options);
+  const { loading, error, data } = useAutosuggestApi(config, options);
 
   useEffect(() => {
     setQuery(searchParams.get('q') || '');
-  }, [searchParams])
+  }, [searchParams]);
 
   useEffect(() => {
-    setOptions({q: query});
-  }, [query])
+    setOptions({ q: query });
+  }, [query]);
 
   const handleSubmit = (e) => {
     e && e.preventDefault();
     dataLayer.push({
       event: 'event_search',
-      query: query
+      query,
     });
     setIsInputActive(false);
     router.push(`/products?q=${query}`);
-  }
+  };
 
   const handleQuerySearch = (term) => {
     setIsHoveringResults(false);
@@ -52,7 +47,7 @@ export const Header = () => {
       query: term,
     });
     router.push(`/products?q=${term}`);
-  }
+  };
 
   const isOpen = isInputActive || isHoveringResults;
 
@@ -91,7 +86,7 @@ export const Header = () => {
             leftElement={
               loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />
             }
-            inputProps={{id: "search-field"}}
+            inputProps={{ id: 'search-field' }}
             clearable
             fullWidth
             helperText="Search for chair, sofa, bed, pillow..."
@@ -100,12 +95,17 @@ export const Header = () => {
             onChange={(e) => setQuery(e.target.value)}
           />
         </form>
-        {isOpen && query ? <div className="border rounded bg-white shadow-md absolute z-10 w-full top-10" onMouseEnter={() => setIsHoveringResults(true)} onMouseLeave={() => setIsHoveringResults(false)}>
-          <div>
-            {error && <JsonView value={error} />}
-            {
+        {isOpen && query ? (
+          <div
+            className="border rounded bg-white shadow-md absolute z-10 w-full top-10"
+            onMouseEnter={() => setIsHoveringResults(true)}
+            onMouseLeave={() => setIsHoveringResults(false)}
+          >
+            <div>
+              {error && <JsonView value={error} />}
+              {
               data && (() => {
-                const results = data.suggestionGroups[0];
+                const [results] = data.suggestionGroups;
                 const querySuggestions = _.take(results.querySuggestions, 6);
                 const productSuggestions = _.take(results.searchSuggestions, 6);
 
@@ -119,7 +119,10 @@ export const Header = () => {
                         <ul>
                           {querySuggestions.map((suggestion) => (
                             <li
-                              className="list-none p-2 my-2 border-b border-slate-200 cursor-pointer hover:bg-slate-100 last:border-b-0"
+                              className={`
+                              list-none p-2 my-2 border-b border-slate-200
+                              cursor-pointer hover:bg-slate-100 last:border-b-0
+                              `}
                               key={suggestion.displayText}
                               onClick={() => handleQuerySearch(suggestion.displayText)}
                             >
@@ -174,10 +177,11 @@ export const Header = () => {
                 );
               })()
             }
+            </div>
           </div>
-        </div> : null}
+        ) : null}
       </div>
 
     </>
-  )
+  );
 }

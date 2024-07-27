@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import JsonView from "@uiw/react-json-view";
-import {Button} from "@bloomreach/react-banana-ui";
-import useDataLayer from "../../hooks/useDataLayer";
+import JsonView from '@uiw/react-json-view';
+import { Button } from '@bloomreach/react-banana-ui';
+import useDataLayer from '../../hooks/useDataLayer';
 
 export default function Page() {
   const { events, clearEvents } = useDataLayer();
@@ -22,7 +22,7 @@ export default function Page() {
 
           </div>
           <div className="flex flex-col gap-4">
-            <JsonView value={events} collapsed={2}/>
+            <JsonView value={events} collapsed={2} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 export const buildCategoryHierarchy = (categories) => {
   if (!categories) {
@@ -6,7 +6,7 @@ export const buildCategoryHierarchy = (categories) => {
   }
 
   const categoriesClone = _.cloneDeep(categories);
-  const categoryMap = _.keyBy(categoriesClone, "cat_id");
+  const categoryMap = _.keyBy(categoriesClone, 'cat_id');
 
   categoriesClone.forEach((category) => {
     if (category.parent) {
@@ -24,7 +24,7 @@ export const getActiveCategories = (categories, activeCategoryId) => {
   if (!activeCategoryId) {
     return [];
   }
-  const categoryMap = _.keyBy(categories, "cat_id");
+  const categoryMap = _.keyBy(categories, 'cat_id');
 
   const activeCategories = [];
 

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import {getItemWidget} from "@bloomreach/discovery-web-sdk";
-import {useCookies} from "react-cookie";
-import {BR_COOKIE} from "../constants";
-import {product_fields} from "../config";
+import { useState, useEffect } from 'react';
+import { getItemWidget } from '@bloomreach/discovery-web-sdk';
+import { useCookies } from 'react-cookie';
+import { BR_COOKIE } from '../constants';
+import { product_fields } from '../config';
 
 function useRecommendationsApi(widgetId, config, options) {
   const [data, setData] = useState(null);
@@ -26,10 +26,10 @@ function useRecommendationsApi(widgetId, config, options) {
           url: window.location.href,
           ref_url: window.location.href,
           request_id: Date.now(),
-          br_diagnostic: "all",
+          br_diagnostic: 'all',
         },
-        ...options
-      }
+        ...options,
+      },
     ).then((res) => {
       setLoading(false);
       setError(null);
@@ -38,8 +38,8 @@ function useRecommendationsApi(widgetId, config, options) {
       setLoading(false);
       setError(err);
       setData(null);
-    })
-  }, [widgetId, config, options, cookies])
+    });
+  }, [widgetId, config, options, cookies]);
 
   return { data, loading, error };
 }

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { autoSuggest } from '@bloomreach/discovery-web-sdk';
-import {useCookies} from "react-cookie";
-import {BR_COOKIE} from "../constants";
+import { useCookies } from 'react-cookie';
+import { BR_COOKIE } from '../constants';
 
 function useAutosuggestApi(config, options) {
   const [data, setData] = useState(null);
@@ -23,17 +23,17 @@ function useAutosuggestApi(config, options) {
         ref_url: window.location.href,
         request_id: Date.now(),
         q: options.q,
-      }
-      ).then((res) => {
-        setLoading(false);
-        setError(null);
-        setData(res);
+      },
+    ).then((res) => {
+      setLoading(false);
+      setError(null);
+      setData(res);
     }, (err) => {
-        setLoading(false);
-        setError(err);
-        setData(null);
-    })
-  }, [config, options, cookies])
+      setLoading(false);
+      setError(err);
+      setData(null);
+    });
+  }, [config, options, cookies]);
 
   return { data, loading, error };
 }

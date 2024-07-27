@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { ChevronRightIcon } from "@bloomreach/react-banana-ui";
+import Link from 'next/link';
+import { ChevronRightIcon } from '@bloomreach/react-banana-ui';
 
-export const Breadcrumbs = ({ items, active }) => {
+export function Breadcrumbs({ items, active }) {
   if (!active || active.length === 0) {
     return null;
   }
@@ -31,4 +31,4 @@ export const Breadcrumbs = ({ items, active }) => {
       })}
     </div>
   );
-};
+}

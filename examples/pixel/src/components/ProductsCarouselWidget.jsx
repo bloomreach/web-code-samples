@@ -1,13 +1,13 @@
-import {useEffect} from "react";
-import Link from "next/link";
-import {InfoIcon, Tooltip} from "@bloomreach/react-banana-ui";
-import JsonView from "@uiw/react-json-view";
-import {Price} from "../components/Price";
-import useDataLayer from "../hooks/useDataLayer";
-import {useDebugTools} from "../hooks/useDebugTools";
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { InfoIcon, Tooltip } from '@bloomreach/react-banana-ui';
+import JsonView from '@uiw/react-json-view';
+import { Price } from './Price';
+import useDataLayer from '../hooks/useDataLayer';
+import { useDebugTools } from '../hooks/useDebugTools';
 
-export const ProductsCarouselWidget = ({ title = "Similar products", data }) => {
-  const {showJson} = useDebugTools();
+export function ProductsCarouselWidget({ title = 'Similar products', data }) {
+  const { showJson } = useDebugTools();
   const dataLayer = useDataLayer();
 
   function sendClickEvent(id) {
@@ -25,7 +25,7 @@ export const ProductsCarouselWidget = ({ title = "Similar products", data }) => 
       event: 'event_widgetView',
       widgetId: data.metadata.widget.id,
       widgetType: data.metadata.widget.type,
-      widgetRequestId: data.metadata.widget.rid
+      widgetRequestId: data.metadata.widget.rid,
     });
   }, []);
 
@@ -39,12 +39,12 @@ export const ProductsCarouselWidget = ({ title = "Similar products", data }) => 
         <div className="text-md font-semibold">{title}</div>
         <div>
           <Tooltip title="This widget shows products similar to the product above">
-            <InfoIcon className="text-slate-500"/>
+            <InfoIcon className="text-slate-500" />
           </Tooltip>
         </div>
       </div>
       {showJson ? (
-        <JsonView value={data} collapsed={1}/>
+        <JsonView value={data} collapsed={1} />
       ) : (
         <div>
           {data?.response ? (
@@ -58,7 +58,8 @@ export const ProductsCarouselWidget = ({ title = "Similar products", data }) => 
                 >
                   <div className="flex flex-col gap-2">
                     <div
-                      className="w-full rounded-t-md overflow-hidden border-b border-slate-200 ">
+                      className="w-full rounded-t-md overflow-hidden border-b border-slate-200 "
+                    >
                       <img
                         src={doc.thumb_image}
                         alt={doc.title}
@@ -67,7 +68,7 @@ export const ProductsCarouselWidget = ({ title = "Similar products", data }) => 
                     </div>
                     <div className="p-2 pt-0">
                       <h3 className="text-sm font-bold">{doc.title}</h3>
-                      <Price className="text-sm" product={doc}/>
+                      <Price className="text-sm" product={doc} />
                     </div>
                   </div>
                 </Link>
@@ -78,4 +79,4 @@ export const ProductsCarouselWidget = ({ title = "Similar products", data }) => 
       )}
     </div>
   );
-};
+}

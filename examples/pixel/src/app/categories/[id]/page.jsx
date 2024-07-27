@@ -1,41 +1,41 @@
-"use client";
+'use client';
 
-import {useCallback, useEffect, useState} from "react";
-import Link from "next/link";
-import {usePathname, useRouter} from "next/navigation";
-import JsonView from "@uiw/react-json-view";
-import {LoaderIcon, Pagination} from "@bloomreach/react-banana-ui";
-import { Breadcrumbs } from "./breadcrumbs";
-import { CategoryNav } from "./category-nav";
-import { Price } from "../../../components/Price";
+import { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import JsonView from '@uiw/react-json-view';
+import { LoaderIcon, Pagination } from '@bloomreach/react-banana-ui';
+import { Breadcrumbs } from './breadcrumbs';
+import { CategoryNav } from './category-nav';
+import { Price } from '../../../components/Price';
 
-import { buildCategoryHierarchy, getActiveCategories } from "./utils";
-import useDataLayer from "../../../hooks/useDataLayer";
-import {useDebugTools} from "../../../hooks/useDebugTools";
-import useSearchApi from "../../../hooks/useSearchApi";
-import {config} from "../../../utils";
+import { buildCategoryHierarchy, getActiveCategories } from './utils';
+import useDataLayer from '../../../hooks/useDataLayer';
+import { useDebugTools } from '../../../hooks/useDebugTools';
+import useSearchApi from '../../../hooks/useSearchApi';
+import { config } from '../../../utils';
 
 export default function Page({ params, searchParams }) {
   const { id: categoryId } = params;
-  const { page= 0, rows = 24 } = searchParams;
+  const { page = 0, rows = 24 } = searchParams;
   const router = useRouter();
   const pathname = usePathname();
-  const {showJson} = useDebugTools();
+  const { showJson } = useDebugTools();
   const dataLayer = useDataLayer();
   const [categories, setCategories] = useState([]);
   const [categoryHierarchy, setCategoryHierarchy] = useState([]);
   const [categoryProductsOptions, setCategoryProductsOptions] = useState({});
-  const [categoriesListOptions] = useState({q: '*'});
+  const [categoriesListOptions] = useState({ q: '*' });
 
-  const {loading, error, data} = useSearchApi('category', config, categoryProductsOptions);
-  const {loading: cLoading, error: cError, data: cData} = useSearchApi('keyword', config, categoriesListOptions);
+  const { loading, error, data } = useSearchApi('category', config, categoryProductsOptions);
+  const { loading: cLoading, error: cError, data: cData } = useSearchApi('keyword', config, categoriesListOptions);
 
   const activeCategories = getActiveCategories(categories, categoryId);
 
   useEffect(() => {
     if (cData) {
       const categoryFacets = cData?.facet_counts?.facets.find(
-        (facet) => facet.name === 'category'
+        (facet) => facet.name === 'category',
       );
       if (!categoryFacets) {
         return;
@@ -51,8 +51,8 @@ export default function Page({ params, searchParams }) {
     if (categoryId) {
       setCategoryProductsOptions({
         q: categoryId,
-        rows: rows,
-        start: page * rows
+        rows,
+        start: page * rows,
       });
     }
   }, [categoryId, rows, page]);
@@ -71,15 +71,15 @@ export default function Page({ params, searchParams }) {
     (obj) => {
       const params = new URLSearchParams(searchParams);
 
-      Object.keys(obj).forEach(key => {
+      Object.keys(obj).forEach((key) => {
         if (obj.hasOwnProperty(key)) {
           params.set(key, obj[key]);
         }
-      })
+      });
 
-      router.push(pathname + '?' + params.toString());
+      router.push(`${pathname}?${params.toString()}`);
     },
-    [router, pathname, searchParams]
+    [router, pathname, searchParams],
   );
 
   return (
@@ -97,7 +97,9 @@ export default function Page({ params, searchParams }) {
               <div className="w-96">
                 {cLoading && (
                   <div className="flex flex-row gap-2">
-                    <LoaderIcon className="animate-spin" /> Loading...
+                    <LoaderIcon className="animate-spin" />
+                    {' '}
+                    Loading...
                   </div>
                 )}
                 {cError && (
@@ -114,7 +116,9 @@ export default function Page({ params, searchParams }) {
               <div className="w-full">
                 {loading && (
                   <div className="flex flex-row gap-2">
-                    <LoaderIcon className="animate-spin" /> Loading...
+                    <LoaderIcon className="animate-spin" />
+                    {' '}
+                    Loading...
                   </div>
                 )}
                 {error && (
@@ -154,13 +158,11 @@ export default function Page({ params, searchParams }) {
                       <div className="my-8">
                         <Pagination
                           count={data.response.numFound}
-                          itemsPerPage={parseInt(rows)}
+                          itemsPerPage={parseInt(rows, 10)}
                           itemsPerPageOptions={[12, 24, 48]}
-                          onItemsPerPageChange={(newPerPage) =>
-                            updateQueryParams({rows: newPerPage, page: 0})
-                          }
-                          onPageChange={(newPage) => updateQueryParams({page: newPage})}
-                          page={parseInt(page)}
+                          onItemsPerPageChange={(newPerPage) => updateQueryParams({ rows: newPerPage, page: 0 })}
+                          onPageChange={(newPage) => updateQueryParams({ page: newPage })}
+                          page={parseInt(page, 10)}
                         />
                       </div>
                     ) : null}

@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import {useEffect, useState} from "react";
-import { useLocalStorage } from "usehooks-ts";
-import {usePathname} from "next/navigation";
-import {account_id, catalog_views, domain_key} from "../config";
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
+import { usePathname } from 'next/navigation';
+import { account_id, catalog_views, domain_key } from '../config';
 
 function useDataLayer() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoDataLayer', []);
@@ -17,18 +17,18 @@ function useDataLayer() {
   function push(data) {
     let payload;
 
-    switch(data.event) {
-      case "view_product":
+    switch (data.event) {
+      case 'view_product':
         payload = {
           ptype: 'product',
           prod_id: data.pid,
           prod_name: data.title,
           sku: data.sku,
-        }
+        };
         BrTrk?.getTracker().updateBrData(constructPayload(payload));
         BrTrk?.getTracker().logPageView();
         break;
-      case "view_category":
+      case 'view_category':
         payload = {
           ptype: 'category',
           cat_id: data.cat_id,
@@ -38,104 +38,104 @@ function useDataLayer() {
         BrTrk?.getTracker().logPageView();
 
         break;
-      case "view_search":
+      case 'view_search':
         payload = {
           ptype: 'search',
-          search_term: data.query
+          search_term: data.query,
         };
 
         BrTrk?.getTracker().updateBrData(constructPayload(payload));
         BrTrk?.getTracker().logPageView();
         break;
-      case "view_conversion":
+      case 'view_conversion':
         payload = {
           ptype: 'conversion',
           is_conversion: 1,
           basket_value: data.cartTotal,
           order_id: data.orderId,
           basket: {
-            items: data.cart.map(item => {
+            items: data.cart.map((item) => {
               return {
-                prod_id : item.id,
+                prod_id: item.id,
                 sku: item.sku,
                 name: item.title,
                 quantity: item.count,
-                price: item.price
-              }
-            })
+                price: item.price,
+              };
+            }),
           },
-        }
+        };
 
         BrTrk?.getTracker().updateBrData(constructPayload(payload));
         BrTrk?.getTracker().logPageView();
         break;
-      case "event_addToCart":
+      case 'event_addToCart':
         payload = {
           prod_id: data.pid,
           sku: data.sku,
         };
 
         BrTrk?.getTracker().logEvent(
-          "cart",
-          "click-add",
-          constructPayload(payload)
+          'cart',
+          'click-add',
+          constructPayload(payload),
         );
         break;
-      case "event_search":
+      case 'event_search':
         payload = {
           q: data.query,
-          catalogs: [{ "name" : catalog_views }],
+          catalogs: [{ name: catalog_views }],
         };
 
         BrTrk?.getTracker().logEvent(
-          "suggest",
-          "submit",
+          'suggest',
+          'submit',
           constructPayload(payload),
           {},
-          true
+          true,
         );
         break;
-      case "event_suggest":
+      case 'event_suggest':
         payload = {
           aq: data.userQuery,
           q: data.query,
-          catalogs: [{ "name" : catalog_views }],
+          catalogs: [{ name: catalog_views }],
         };
 
         BrTrk?.getTracker().logEvent(
-          "suggest",
-          "click",
+          'suggest',
+          'click',
           constructPayload(payload),
           {},
-          true
+          true,
         );
         break;
-      case "event_widgetView":
+      case 'event_widgetView':
         payload = {
           wid: data.widgetId,
           wty: data.widgetType,
           wrid: data.widgetRequestId,
         };
 
-        BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload), true)
+        BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload), true);
         break;
-      case "event_widgetClick":
+      case 'event_widgetClick':
         payload = {
           wid: data.widgetId,
           wty: data.widgetType,
           wrid: data.widgetRequestId,
-          item_id: data.itemId
+          item_id: data.itemId,
         };
 
-        BrTrk?.getTracker().logEvent('widget','widget-click', constructPayload(payload),true)
+        BrTrk?.getTracker().logEvent('widget', 'widget-click', constructPayload(payload), true);
         break;
       default:
         payload = {};
-        console.log('[useDataLayer] unknown event', data)
+        console.log('[useDataLayer] unknown event', data);
         break;
     }
 
-    setEvents(_.take([...[{...payload, ...{event: data.event}}], ...events], 25));
+    setEvents(_.take([...[{ ...payload, ...{ event: data.event } }], ...events], 25));
   }
 
   function constructPayload(data) {
@@ -149,7 +149,7 @@ function useDataLayer() {
         orig_ref_url: `${window.location.origin}${pathname}`,
       },
       ...data,
-    }
+    };
   }
 
   function clearEvents() {

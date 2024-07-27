@@ -1,18 +1,18 @@
 'use client';
 
-import { Inter } from "next/font/google";
-import Script from "next/script";
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import { CookiesProvider } from 'react-cookie';
-import {account_id} from "../config";
-import {Footer} from "./Footer";
-import {Header} from "./Header";
-import DebugToolsProvider from "../hooks/useDebugTools";
-import {DeveloperToolbar} from "./DeveloperToolbar";
+import { account_id } from '../config';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import DebugToolsProvider from '../hooks/useDebugTools';
+import { DeveloperToolbar } from './DeveloperToolbar';
 
-import "./globals.css";
-import "@bloomreach/react-banana-ui/style.css";
+import './globals.css';
+import '@bloomreach/react-banana-ui/style.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
   return (
@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
             </main>
           </CookiesProvider>
         </DebugToolsProvider>
-        <Script src={`//cdn.brcdn.com/v1/br-trk-${account_id}.js`} async></Script>
+        <Script src={`//cdn.brcdn.com/v1/br-trk-${account_id}.js`} async />
       </body>
     </html>
-);
+  );
 }

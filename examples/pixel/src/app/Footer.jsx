@@ -1,6 +1,6 @@
-import {ExternalLinkIcon} from "@bloomreach/react-banana-ui";
+import { ExternalLinkIcon } from '@bloomreach/react-banana-ui';
 
-export const Footer = () => {
+export function Footer() {
   return (
     <div className="footer mt-4 border-t p-4">
       <div className="max-w-5xl mx-auto flex flex-row gap-4">
@@ -14,7 +14,11 @@ export const Footer = () => {
           <a
             href="https://www.bloomreach.com/en/request-demo"
             target="_blank"
-            className="self-start font-semibold bg-[#00b2db] py-2 px-8 text-center text-white rounded-full hover:bg-[#1ebee6] active:bg-[#0ca8cc]"
+            className={`
+            self-start font-semibold bg-[#00b2db] py-2 px-8 text-center text-white
+            rounded-full hover:bg-[#1ebee6] active:bg-[#0ca8cc]
+            `}
+            rel="noreferrer"
           >
             Get in touch
           </a>
@@ -29,8 +33,11 @@ export const Footer = () => {
               target="_blank"
               className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
               href="https://github.com/bloomreach/web-code-samples/tree/main/examples/pixel"
+              rel="noreferrer"
             >
-              See the source on Github <ExternalLinkIcon />
+              See the source on Github
+              {' '}
+              <ExternalLinkIcon />
             </a>
           </div>
         </div>
@@ -44,6 +51,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/pixel-overview"
+                rel="noreferrer"
               >
                 Pixel overview
               </a>
@@ -53,6 +61,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/events-management"
+                rel="noreferrer"
               >
                 Events management
               </a>
@@ -62,6 +71,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/page-view-pixels"
+                rel="noreferrer"
               >
                 Page view pixels
               </a>
@@ -71,6 +81,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/event-pixels"
+                rel="noreferrer"
               >
                 Event pixels
               </a>
@@ -80,6 +91,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/virtual-page-view-pixel"
+                rel="noreferrer"
               >
                 Single page application tracking
               </a>
@@ -89,6 +101,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/using-tag-manager"
+                rel="noreferrer"
               >
                 Tag manager pixel integration
               </a>
@@ -98,6 +111,7 @@ export const Footer = () => {
                 target="_blank"
                 className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/bloomreach-discovery-sdk-1"
+                rel="noreferrer"
               >
                 Bloomreach SDK
               </a>
@@ -106,5 +120,5 @@ export const Footer = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }

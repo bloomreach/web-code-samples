@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import {useCookies} from "react-cookie";
-import { productSearch, categorySearch, bestseller } from "@bloomreach/discovery-web-sdk";
-import { product_fields } from "../config";
-import { BR_COOKIE } from "../constants";
+import { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { productSearch, categorySearch, bestseller } from '@bloomreach/discovery-web-sdk';
+import { product_fields } from '../config';
+import { BR_COOKIE } from '../constants';
 
 function useSearchApi(searchType = 'keyword', config, options) {
   const [data, setData] = useState(null);
@@ -24,12 +24,12 @@ function useSearchApi(searchType = 'keyword', config, options) {
         br_diagnostic: 'all',
         fl: product_fields,
       },
-      ...options
-    }
+      ...options,
+    };
 
     const fetchData = async () => {
       setLoading(true);
-      let res
+      let res;
 
       if (searchType === 'category') {
         res = await categorySearch(config, opts);
@@ -40,7 +40,7 @@ function useSearchApi(searchType = 'keyword', config, options) {
       }
       setData(res);
       setError(null);
-    }
+    };
 
     fetchData()
       .catch((e) => {
@@ -50,7 +50,7 @@ function useSearchApi(searchType = 'keyword', config, options) {
       .finally(() => {
         setLoading(false);
       });
-  }, [searchType, config, options, cookies])
+  }, [searchType, config, options, cookies]);
 
   return { data, loading, error };
 }

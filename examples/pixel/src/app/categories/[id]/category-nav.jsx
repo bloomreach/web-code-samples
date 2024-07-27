@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { ChevronDownIcon, ChevronRightIcon } from "@bloomreach/react-banana-ui";
+import Link from 'next/link';
+import { ChevronDownIcon, ChevronRightIcon } from '@bloomreach/react-banana-ui';
 
-export const CategoryNav = ({ items, active }) => {
+export function CategoryNav({ items, active }) {
   return (
     <div className="flex flex-col gap-2">
       {items.map((item) => {
@@ -19,11 +19,15 @@ export const CategoryNav = ({ items, active }) => {
                                 cursor-pointer
                                 text-sm
                                 items-center
-                                ${isActive ? "font-semibold" : ""}
-                                ${!hasChildren ? "pl-6" : ""}
+                                ${isActive ? 'font-semibold' : ''}
+                                ${!hasChildren ? 'pl-6' : ''}
                                 `}
               >
-                {item.cat_name} ({item.count})
+                {item.cat_name}
+                {' '}
+                (
+                {item.count}
+                )
               </Link>
             </div>
             {isActive && hasChildren ? (
@@ -39,4 +43,4 @@ export const CategoryNav = ({ items, active }) => {
       })}
     </div>
   );
-};
+}

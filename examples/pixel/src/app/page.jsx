@@ -1,26 +1,27 @@
-"use client";
-import {useEffect, useState} from "react";
-import Link from 'next/link'
-import { Price } from "../components/Price";
-import JsonView from "@uiw/react-json-view";
-import {useDebugTools} from "../hooks/useDebugTools";
-import useSearchApi from "../hooks/useSearchApi";
-import { config } from '../utils'
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import JsonView from '@uiw/react-json-view';
+import { Price } from '../components/Price';
+import { useDebugTools } from '../hooks/useDebugTools';
+import useSearchApi from '../hooks/useSearchApi';
+import { config } from '../utils';
 
 export default function Home() {
-  const {showJson} = useDebugTools();
+  const { showJson } = useDebugTools();
   const [categories, setCategories] = useState([]);
   const [options] = useState({
     q: '*',
-    rows: 12
+    rows: 12,
   });
-  const { loading, error, data } = useSearchApi('bestseller', config, options)
+  const { loading, error, data } = useSearchApi('bestseller', config, options);
 
   useEffect(() => {
     if (data) {
       setCategories(getRandomCategories(data));
     }
-  }, [data])
+  }, [data]);
 
   return (
     <div>
@@ -29,7 +30,7 @@ export default function Home() {
           <div className="font-medium my-4 mt-8 uppercase opacity-50">Shop by category</div>
           <div className="flex flex-col">
             {showJson ? (
-              <JsonView value={categories} collapsed={1}/>
+              <JsonView value={categories} collapsed={1} />
             ) : (
               <div className="flex flex-row flex-wrap gap-4">
                 {categories.map((category) => (
@@ -43,7 +44,11 @@ export default function Home() {
                         <div
                           className="w-full text-sm font-bold"
                         >
-                          {category.cat_name} ({category.count})
+                          {category.cat_name}
+                          {' '}
+                          (
+                          {category.count}
+                          )
                         </div>
                       </div>
                     </div>
@@ -107,14 +112,12 @@ export default function Home() {
 }
 
 function getRandomCategories(data) {
-  const categories = data.facet_counts.facets.filter(facet => facet.name === 'category');
+  const categories = data.facet_counts.facets.filter((facet) => facet.name === 'category');
   if (!categories.length) {
     return [];
   }
 
   return categories[0].value
-    .filter(cat => cat.cat_name.split(' ').length === 1)
+    .filter((cat) => cat.cat_name.split(' ').length === 1)
     .slice(0, 12);
 }
-
-
