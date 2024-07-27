@@ -36,6 +36,7 @@ export default function Page() {
                 </a>
               </>
             }
+            inputProps={{id: "user-id-field"}}
             value={userId}
             onChange={e => setUserId(e.target.value)}
           />

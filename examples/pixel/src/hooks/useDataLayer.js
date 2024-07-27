@@ -1,12 +1,18 @@
 import _ from 'lodash';
-import { useLocalStorage } from "@uidotdev/usehooks";
+import {useEffect, useState} from "react";
+import { useLocalStorage } from "usehooks-ts";
 import {usePathname} from "next/navigation";
 import {account_id, catalog_views, domain_key} from "../config";
 
 function useDataLayer() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoDataLayer', []);
   const [userId, setUserId] = useLocalStorage('BrPixelDemoUserId', '');
+  const [eventsCount, setEventsCount] = useState(0);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setEventsCount(events.length);
+  }, [events]);
 
   function push(data) {
     let payload;
@@ -150,6 +156,6 @@ function useDataLayer() {
     setEvents([]);
   }
 
-  return { events, push, clearEvents, setUserId, userId };
+  return { events, eventsCount, push, clearEvents, setUserId, userId };
 }
 export default useDataLayer;

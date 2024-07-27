@@ -3,7 +3,7 @@
 import {useEffect, useState} from "react";
 import JsonView from "@uiw/react-json-view";
 import {Button} from "@bloomreach/react-banana-ui";
-import {useIntersectionObserver} from '@uidotdev/usehooks';
+import {useIntersectionObserver} from 'usehooks-ts';
 import { Price } from "../../../components/Price";
 import useCart from "../../../hooks/useCart";
 import useDataLayer from "../../../hooks/useDataLayer";
@@ -23,7 +23,7 @@ export default function Page({ params }) {
   const [recOptions, setRecOptions] = useState({})
   const {loading, error, data} = useSearchApi('keyword', config, options);
   const {data: similarProducts} = useRecommendationsApi(similar_products_widget_id, config, recOptions);
-  const [ref, entry] = useIntersectionObserver({
+  const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,
     rootMargin: "0px",
@@ -111,7 +111,7 @@ export default function Page({ params }) {
         )}
       </div>
       <div className="w-full" ref={ref}>
-        {entry?.isIntersecting && similarProducts && (<ProductsCarouselWidget data={similarProducts} />)}
+        {isIntersecting && similarProducts && (<ProductsCarouselWidget data={similarProducts} />)}
       </div>
     </div>
   );

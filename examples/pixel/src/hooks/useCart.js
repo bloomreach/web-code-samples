@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocalStorage } from "@uidotdev/usehooks";
+import { useLocalStorage } from "usehooks-ts";
 
 function useCart() {
   const [cart, setCart] = useLocalStorage('BrPixelDemoCart', []);
@@ -9,7 +9,6 @@ function useCart() {
   useEffect(() => {
     setCartCount(cart.reduce((total, item) => total + item.count, 0));
     setCartTotal(cart.reduce((total, item) => total + item.price * item.count, 0).toFixed(2));
-
   }, [cart]);
 
   const addItem = (item, count= 1) => {

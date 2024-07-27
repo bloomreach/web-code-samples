@@ -6,7 +6,7 @@ import useDataLayer from "../hooks/useDataLayer";
 
 export const DeveloperToolbar = () => {
   const {showJson, setShowJson} = useDebugTools();
-  const { events } = useDataLayer();
+  const { eventsCount } = useDataLayer();
 
   return (
     <div className="bg-[#002840]">
@@ -20,7 +20,7 @@ export const DeveloperToolbar = () => {
           <Link href="/events" className="flex gap-1 hover:text-white">
             Pixel events
             <span
-              className="bg-[#ffd500] rounded-full px-2 text-[#002840] font-bold">{events.length}</span>
+              className="bg-[#ffd500] rounded-full px-2 text-[#002840] font-bold">{eventsCount}</span>
           </Link>
         </div>
         <div>&middot;</div>
