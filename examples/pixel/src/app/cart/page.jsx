@@ -4,10 +4,32 @@ import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {Button, MinusIcon, PlusIcon, TrashIcon} from "@bloomreach/react-banana-ui";
 import useCart from "../../hooks/useCart";
+import useRecommendationsApi from "../../hooks/useRecommendationsApi";
+import {similar_products_widget_id} from "../../config";
+import {config} from "../../utils";
+import {useIntersectionObserver} from "usehooks-ts";
+import {useEffect, useState} from "react";
+import {ProductsCarouselWidget} from "../../components/ProductsCarouselWidget";
 
 export default function Page() {
   const router = useRouter();
   const { cart, incrementItem, decrementItem, removeItem, cartCount, cartTotal } = useCart();
+  const [recOptions, setRecOptions] = useState({})
+  const {data: similarProducts} = useRecommendationsApi(similar_products_widget_id, config, recOptions);
+  const [ref, isIntersecting] = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: "0px",
+  });
+
+  useEffect(() => {
+    setRecOptions({
+      item_ids: cart.map(item => item.id).join(','),
+      filter: `-pid:(${cart.map(item => `"${item.id}"`).join(' OR ')})`,
+      rows: 4,
+      start: 0
+    })
+  }, [cart]);
 
   return (
     <div>
@@ -76,6 +98,10 @@ export default function Page() {
                       Proceed to Checkout
                     </Button>
                   </div>
+                </div>
+                <div className="w-full" ref={ref}>
+                  {isIntersecting && similarProducts && (
+                    <ProductsCarouselWidget title="Recommendations based on items in cart" data={similarProducts}/>)}
                 </div>
               </>
               : <div className="p-4 text-center text-xl opacity-50">No items in cart</div>

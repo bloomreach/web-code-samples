@@ -6,7 +6,7 @@ import {Price} from "../components/Price";
 import useDataLayer from "../hooks/useDataLayer";
 import {useDebugTools} from "../hooks/useDebugTools";
 
-export const ProductsCarouselWidget = ({ data }) => {
+export const ProductsCarouselWidget = ({ title = "Similar products", data }) => {
   const {showJson} = useDebugTools();
   const dataLayer = useDataLayer();
 
@@ -17,7 +17,7 @@ export const ProductsCarouselWidget = ({ data }) => {
       widgetType: data.metadata.widget.type,
       widgetRequestId: data.metadata.widget.rid,
       itemId: id,
-    })
+    });
   }
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const ProductsCarouselWidget = ({ data }) => {
       widgetId: data.metadata.widget.id,
       widgetType: data.metadata.widget.type,
       widgetRequestId: data.metadata.widget.rid
-    })
+    });
   }, []);
 
   if (!data) {
@@ -36,7 +36,7 @@ export const ProductsCarouselWidget = ({ data }) => {
   return (
     <div>
       <div className="flex gap-2 my-2 items-center">
-        <div className="text-md font-semibold">Similar products</div>
+        <div className="text-md font-semibold">{title}</div>
         <div>
           <Tooltip title="This widget shows products similar to the product above">
             <InfoIcon className="text-slate-500"/>

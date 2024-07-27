@@ -41,7 +41,7 @@ export default function Page({ params }) {
         filter: `-pid:("${pid}")`,
         rows: 4,
         start: 0
-      })
+      });
     }
   }, [pid]);
 
@@ -55,6 +55,7 @@ export default function Page({ params }) {
     dataLayer.push({
       event: 'view_product',
       pid: product.pid,
+      title: product.title,
       sku: sku
     });
   }, [data]);
