@@ -20,6 +20,9 @@ export default function Page() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">User</h1>
+            <p className="text-gray-500 dark:text-gray-400">
+              Tracking identifiers
+            </p>
           </div>
         </div>
 

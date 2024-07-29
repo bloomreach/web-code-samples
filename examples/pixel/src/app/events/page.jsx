@@ -1,7 +1,7 @@
 'use client';
 
 import JsonView from '@uiw/react-json-view';
-import { Button } from '@bloomreach/react-banana-ui';
+import {Button, ExternalLinkIcon} from '@bloomreach/react-banana-ui';
 import useDataLayer from '../../hooks/useDataLayer';
 
 export default function Page() {
@@ -15,11 +15,20 @@ export default function Page() {
             <div>
               <h1 className="text-2xl font-bold">Pixel events</h1>
               <p className="text-gray-500 dark:text-gray-400">
-                View the last 25 pixel events
+                View the last 25 pixel events. See the events on the dashboard in
+                {' '}
+                <a
+                  className="text-blue-400 hover:underline inline-flex flex-row gap-2 items-center"
+                  href="https://tools.bloomreach.com/navapp/discovery/events/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Events Manager
+                  <ExternalLinkIcon size={16} />
+                </a>
               </p>
             </div>
             <Button type="secondary" onClick={clearEvents}>Clear</Button>
-
           </div>
           <div className="flex flex-col gap-4">
             <JsonView value={events} collapsed={2} />
