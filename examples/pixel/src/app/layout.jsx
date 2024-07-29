@@ -6,7 +6,7 @@ import { CookiesProvider } from 'react-cookie';
 import { account_id } from '../config';
 import { Footer } from './Footer';
 import { Header } from './Header';
-import DebugToolsProvider from '../hooks/useDebugTools';
+import DeveloperToolsProvider from '../hooks/useDeveloperTools';
 import { DeveloperToolbar } from './DeveloperToolbar';
 
 import './globals.css';
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <DebugToolsProvider>
+        <DeveloperToolsProvider>
           <CookiesProvider>
             <main className="min-h-screen flex flex-col">
               <DeveloperToolbar />
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
               <Footer />
             </main>
           </CookiesProvider>
-        </DebugToolsProvider>
+        </DeveloperToolsProvider>
         <Script src={`//cdn.brcdn.com/v1/br-trk-${account_id}.js`} async />
       </body>
     </html>

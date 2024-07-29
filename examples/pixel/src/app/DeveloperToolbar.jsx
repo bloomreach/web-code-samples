@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { ToggleField } from '@bloomreach/react-banana-ui';
 import { account_id, account_name } from '../config';
-import { useDebugTools } from '../hooks/useDebugTools';
+import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useDataLayer from '../hooks/useDataLayer';
 
 export function DeveloperToolbar() {
-  const { showJson, setShowJson } = useDebugTools();
+  const { showJson, setShowJson } = useDeveloperTools();
   const { eventsCount } = useDataLayer();
 
   return (

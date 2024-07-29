@@ -8,7 +8,7 @@ import JsonView from '@uiw/react-json-view';
 import { Pagination } from '@bloomreach/react-banana-ui';
 import { Price } from '../../components/Price';
 import useDataLayer from '../../hooks/useDataLayer';
-import { useDebugTools } from '../../hooks/useDebugTools';
+import { useDeveloperTools } from '../../hooks/useDeveloperTools';
 import useSearchApi from '../../hooks/useSearchApi';
 import { account_id, auth_key, domain_key } from '../../config';
 
@@ -18,7 +18,7 @@ const config = {
   domain_key,
 };
 export default function Page({ searchParams }) {
-  const { showJson } = useDebugTools();
+  const { showJson } = useDeveloperTools();
   const router = useRouter();
   const { q = '', sort = '', page = 0, rows = 12 } = searchParams;
   const dataLayer = useDataLayer();
@@ -52,7 +52,7 @@ export default function Page({ searchParams }) {
       const params = new URLSearchParams(searchParams);
 
       Object.keys(obj).forEach((key) => {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
           params.set(key, obj[key]);
         }
       });
@@ -125,7 +125,7 @@ export default function Page({ searchParams }) {
             {data?.response?.docs?.length ? (
               <div className="flex flex-col">
                 <div className="flex flex-row flex-wrap">
-                  {data?.response?.docs.map((product, index) => (
+                  {data?.response?.docs.map((product) => (
                     <Link
                       href={`/products/${product.pid}`}
                       className="m-2 w-56 shadow-md rounded-md border border-slate-100"

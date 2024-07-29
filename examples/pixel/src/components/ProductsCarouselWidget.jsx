@@ -4,10 +4,10 @@ import { InfoIcon, Tooltip } from '@bloomreach/react-banana-ui';
 import JsonView from '@uiw/react-json-view';
 import { Price } from './Price';
 import useDataLayer from '../hooks/useDataLayer';
-import { useDebugTools } from '../hooks/useDebugTools';
+import { useDeveloperTools } from '../hooks/useDeveloperTools';
 
 export function ProductsCarouselWidget({ title = 'Similar products', data }) {
-  const { showJson } = useDebugTools();
+  const { showJson } = useDeveloperTools();
   const dataLayer = useDataLayer();
 
   function sendClickEvent(id) {

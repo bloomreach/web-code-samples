@@ -11,7 +11,7 @@ import { Price } from '../../../components/Price';
 
 import { buildCategoryHierarchy, getActiveCategories } from './utils';
 import useDataLayer from '../../../hooks/useDataLayer';
-import { useDebugTools } from '../../../hooks/useDebugTools';
+import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
 import useSearchApi from '../../../hooks/useSearchApi';
 import { config } from '../../../utils';
 
@@ -20,7 +20,7 @@ export default function Page({ params, searchParams }) {
   const { page = 0, rows = 24 } = searchParams;
   const router = useRouter();
   const pathname = usePathname();
-  const { showJson } = useDebugTools();
+  const { showJson } = useDeveloperTools();
   const dataLayer = useDataLayer();
   const [categories, setCategories] = useState([]);
   const [categoryHierarchy, setCategoryHierarchy] = useState([]);
@@ -72,7 +72,7 @@ export default function Page({ params, searchParams }) {
       const params = new URLSearchParams(searchParams);
 
       Object.keys(obj).forEach((key) => {
-        if (obj.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
           params.set(key, obj[key]);
         }
       });
@@ -130,11 +130,11 @@ export default function Page({ params, searchParams }) {
                 {data?.response?.docs?.length ? (
                   <div className="flex flex-col">
                     <div className="flex flex-row flex-wrap gap-4">
-                      {data?.response?.docs.map((product, index) => (
+                      {data?.response?.docs.map((product) => (
                         <Link
                           className="m-2 w-48 shadow-md rounded-md border border-slate-100"
                           href={`/products/${product.pid}`}
-                          key={index}
+                          key={product.pid}
                         >
                           <div className="flex flex-col gap-2">
                             <div className="w-full rounded-t-md overflow-hidden border-b border-slate-200 ">

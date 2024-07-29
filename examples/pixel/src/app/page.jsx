@@ -4,12 +4,23 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import JsonView from '@uiw/react-json-view';
 import { Price } from '../components/Price';
-import { useDebugTools } from '../hooks/useDebugTools';
+import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useSearchApi from '../hooks/useSearchApi';
 import { config } from '../utils';
 
+function getRandomCategories(data) {
+  const categories = data.facet_counts.facets.filter((facet) => facet.name === 'category');
+  if (!categories.length) {
+    return [];
+  }
+
+  return categories[0].value
+    .filter((cat) => cat.cat_name.split(' ').length === 1)
+    .slice(0, 12);
+}
+
 export default function Home() {
-  const { showJson } = useDebugTools();
+  const { showJson } = useDeveloperTools();
   const [categories, setCategories] = useState([]);
   const [options] = useState({
     q: '*',
@@ -72,11 +83,11 @@ export default function Home() {
                 {!loading && data?.response?.docs?.length ? (
                   <div className="flex flex-col">
                     <div className="flex flex-row flex-wrap">
-                      {data?.response?.docs.map((product, index) => (
+                      {data?.response?.docs.map((product) => (
                         <Link
                           href={`/products/${product.pid}`}
                           className="m-2 w-56 shadow-md rounded-md border border-slate-100"
-                          key={index}
+                          key={product.pid}
                         >
                           <div className="flex flex-col gap-2">
                             <div className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
@@ -109,15 +120,4 @@ export default function Home() {
       )}
     </div>
   );
-}
-
-function getRandomCategories(data) {
-  const categories = data.facet_counts.facets.filter((facet) => facet.name === 'category');
-  if (!categories.length) {
-    return [];
-  }
-
-  return categories[0].value
-    .filter((cat) => cat.cat_name.split(' ').length === 1)
-    .slice(0, 12);
 }

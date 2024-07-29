@@ -7,7 +7,7 @@ import { useIntersectionObserver } from 'usehooks-ts';
 import { Price } from '../../../components/Price';
 import useCart from '../../../hooks/useCart';
 import useDataLayer from '../../../hooks/useDataLayer';
-import { useDebugTools } from '../../../hooks/useDebugTools';
+import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
 import { ProductsCarouselWidget } from '../../../components/ProductsCarouselWidget';
 import useSearchApi from '../../../hooks/useSearchApi';
 import { config } from '../../../utils';
@@ -16,7 +16,7 @@ import { similar_products_widget_id } from '../../../config';
 
 export default function Page({ params }) {
   const { id: pid } = params;
-  const { showJson } = useDebugTools();
+  const { showJson } = useDeveloperTools();
   const { addItem } = useCart();
   const dataLayer = useDataLayer();
   const [options, setOptions] = useState({});
