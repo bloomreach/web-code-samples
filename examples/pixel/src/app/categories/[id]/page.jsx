@@ -10,7 +10,7 @@ import { CategoryNav } from './category-nav';
 import { Price } from '../../../components/Price';
 
 import { buildCategoryHierarchy, getActiveCategories } from './utils';
-import useDataLayer from '../../../hooks/useDataLayer';
+import useAnalytics from '../../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
 import useSearchApi from '../../../hooks/useSearchApi';
 import { config } from '../../../utils';
@@ -21,7 +21,7 @@ export default function Page({ params, searchParams }) {
   const router = useRouter();
   const pathname = usePathname();
   const { showJson } = useDeveloperTools();
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
   const [categories, setCategories] = useState([]);
   const [categoryHierarchy, setCategoryHierarchy] = useState([]);
   const [categoryProductsOptions, setCategoryProductsOptions] = useState({});
@@ -59,7 +59,7 @@ export default function Page({ params, searchParams }) {
 
   useEffect(() => {
     if (categories.length > 0 && data) {
-      dataLayer.push({
+      trackEvent({
         event: 'view_category',
         cat_id: categoryId,
         cat_crumb: activeCategories.join('|'),

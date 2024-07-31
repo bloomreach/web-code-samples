@@ -3,15 +3,15 @@
 import { useState } from 'react';
 import { Button } from '@bloomreach/react-banana-ui';
 import useCart from '../../hooks/useCart';
-import useDataLayer from '../../hooks/useDataLayer';
+import useAnalytics from '../../hooks/useAnalytics';
 
 export default function Page() {
   const { cart, cartCount, cartTotal, clearCart } = useCart();
   const [isPurchaseComplete, setIsPurchaseComplete] = useState(false);
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
 
   const onConversion = () => {
-    dataLayer.push({
+    trackEvent({
       event: 'view_conversion',
       cartTotal,
       orderId: Date.now(),

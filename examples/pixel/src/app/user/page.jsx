@@ -3,11 +3,11 @@
 import JsonView from '@uiw/react-json-view';
 import { useCookies } from 'react-cookie';
 import { Button, InputField } from '@bloomreach/react-banana-ui';
-import useDataLayer from '../../hooks/useDataLayer';
+import useAnalytics from '../../hooks/useAnalytics';
 import { BR_COOKIE } from '../../constants';
 
 export default function Page() {
-  const { userId, setUserId } = useDataLayer();
+  const { userId, setUserId } = useAnalytics();
   const [cookies, setCookie, removeCookie] = useCookies([BR_COOKIE]);
 
   const clearCookie = () => {

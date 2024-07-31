@@ -2,10 +2,10 @@
 
 import JsonView from '@uiw/react-json-view';
 import {Button, ExternalLinkIcon} from '@bloomreach/react-banana-ui';
-import useDataLayer from '../../hooks/useDataLayer';
+import useAnalytics from '../../hooks/useAnalytics';
 
 export default function Page() {
-  const { events, clearEvents } = useDataLayer();
+  const { events, clearEvents } = useAnalytics();
 
   return (
     <div>
