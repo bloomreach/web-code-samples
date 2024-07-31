@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useAnalytics from '../hooks/useAnalytics';
 import useAutosuggestApi from '../hooks/useAutosuggestApi';
-import { config } from '../utils';
+import { CONFIG } from '../constants';
 
 export function SearchBar() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export function SearchBar() {
   const [query, setQuery] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
   const [isHoveringResults, setIsHoveringResults] = useState(false);
-  const { loading, error, data } = useAutosuggestApi(config, options);
+  const { loading, error, data } = useAutosuggestApi(CONFIG, options);
 
   useEffect(() => {
     setQuery(searchParams.get('q') || '');

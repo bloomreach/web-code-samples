@@ -1,7 +1,7 @@
 'use client';
 
 import JsonView from '@uiw/react-json-view';
-import {Button, ExternalLinkIcon} from '@bloomreach/react-banana-ui';
+import { Button, ExternalLinkIcon } from '@bloomreach/react-banana-ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
 export default function Page() {

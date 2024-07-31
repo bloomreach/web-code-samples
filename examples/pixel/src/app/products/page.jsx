@@ -10,13 +10,8 @@ import { Price } from '../../components/Price';
 import useAnalytics from '../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../hooks/useDeveloperTools';
 import useSearchApi from '../../hooks/useSearchApi';
-import { account_id, auth_key, domain_key } from '../../config';
+import { CONFIG } from '../../constants';
 
-const config = {
-  account_id,
-  auth_key,
-  domain_key,
-};
 export default function Page({ searchParams }) {
   const { showJson } = useDeveloperTools();
   const router = useRouter();
@@ -24,7 +19,7 @@ export default function Page({ searchParams }) {
   const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
 
-  const { loading, error, data } = useSearchApi('keyword', config, options);
+  const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
 
   useEffect(() => {
     setOptions({

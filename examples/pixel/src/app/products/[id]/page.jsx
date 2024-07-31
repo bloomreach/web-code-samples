@@ -10,9 +10,9 @@ import useAnalytics from '../../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
 import { ProductsCarouselWidget } from '../../../components/ProductsCarouselWidget';
 import useSearchApi from '../../../hooks/useSearchApi';
-import { config } from '../../../utils';
 import useRecommendationsApi from '../../../hooks/useRecommendationsApi';
 import { similar_products_widget_id } from '../../../config';
+import { CONFIG } from '../../../constants';
 
 export default function Page({ params }) {
   const { id: pid } = params;
@@ -21,8 +21,8 @@ export default function Page({ params }) {
   const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
   const [recOptions, setRecOptions] = useState({});
-  const { loading, error, data } = useSearchApi('keyword', config, options);
-  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, config, recOptions);
+  const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
+  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, CONFIG, recOptions);
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,

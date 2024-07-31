@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { autoSuggest } from '@bloomreach/discovery-web-sdk';
 import { useCookies } from 'react-cookie';
 import { BR_COOKIE } from '../constants';
+import { catalog_views } from '../config';
 
 function useAutosuggestApi(config, options) {
   const [data, setData] = useState(null);
@@ -23,6 +24,7 @@ function useAutosuggestApi(config, options) {
         ref_url: window.location.href,
         request_id: Date.now(),
         q: options.q,
+        catalog_views,
       },
     ).then((res) => {
       setLoading(false);
