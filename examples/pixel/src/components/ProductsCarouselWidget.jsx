@@ -3,15 +3,15 @@ import Link from 'next/link';
 import { InfoIcon, Tooltip } from '@bloomreach/react-banana-ui';
 import JsonView from '@uiw/react-json-view';
 import { Price } from './Price';
-import useDataLayer from '../hooks/useDataLayer';
+import useAnalytics from '../hooks/useAnalytics';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
 
 export function ProductsCarouselWidget({ title = 'Similar products', data }) {
   const { showJson } = useDeveloperTools();
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
 
   function sendClickEvent(id) {
-    dataLayer.push({
+    trackEvent({
       event: 'event_widgetClick',
       widgetId: data.metadata.widget.id,
       widgetType: data.metadata.widget.type,
@@ -21,13 +21,13 @@ export function ProductsCarouselWidget({ title = 'Similar products', data }) {
   }
 
   useEffect(() => {
-    dataLayer.push({
+    trackEvent({
       event: 'event_widgetView',
       widgetId: data.metadata.widget.id,
       widgetType: data.metadata.widget.type,
       widgetRequestId: data.metadata.widget.rid,
     });
-  }, []);
+  }, [data]);
 
   if (!data) {
     return null;

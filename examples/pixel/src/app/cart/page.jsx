@@ -8,14 +8,14 @@ import { useEffect, useState } from 'react';
 import useCart from '../../hooks/useCart';
 import useRecommendationsApi from '../../hooks/useRecommendationsApi';
 import { similar_products_widget_id } from '../../config';
-import { config } from '../../utils';
 import { ProductsCarouselWidget } from '../../components/ProductsCarouselWidget';
+import { CONFIG } from '../../constants';
 
 export default function Page() {
   const router = useRouter();
   const { cart, incrementItem, decrementItem, removeItem, cartCount, cartTotal } = useCart();
   const [recOptions, setRecOptions] = useState({});
-  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, config, recOptions);
+  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, CONFIG, recOptions);
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,

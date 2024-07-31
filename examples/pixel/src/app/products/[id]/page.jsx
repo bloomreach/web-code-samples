@@ -6,23 +6,23 @@ import { Button } from '@bloomreach/react-banana-ui';
 import { useIntersectionObserver } from 'usehooks-ts';
 import { Price } from '../../../components/Price';
 import useCart from '../../../hooks/useCart';
-import useDataLayer from '../../../hooks/useDataLayer';
+import useAnalytics from '../../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
 import { ProductsCarouselWidget } from '../../../components/ProductsCarouselWidget';
 import useSearchApi from '../../../hooks/useSearchApi';
-import { config } from '../../../utils';
 import useRecommendationsApi from '../../../hooks/useRecommendationsApi';
 import { similar_products_widget_id } from '../../../config';
+import { CONFIG } from '../../../constants';
 
 export default function Page({ params }) {
   const { id: pid } = params;
   const { showJson } = useDeveloperTools();
   const { addItem } = useCart();
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
   const [recOptions, setRecOptions] = useState({});
-  const { loading, error, data } = useSearchApi('keyword', config, options);
-  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, config, recOptions);
+  const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
+  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, CONFIG, recOptions);
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,
@@ -52,7 +52,7 @@ export default function Page({ params }) {
     if (!product) {
       return;
     }
-    dataLayer.push({
+    trackEvent({
       event: 'view_product',
       pid: product.pid,
       title: product.title,
@@ -60,18 +60,18 @@ export default function Page({ params }) {
     });
   }, [product, sku]);
 
-  const addToCart = (product) => {
+  const addToCart = (item) => {
     addItem({
-      id: product.pid,
+      id: item.pid,
       sku,
-      image: product.thumb_image,
-      title: product.title,
+      image: item.thumb_image,
+      title: item.title,
       subtitle: '',
-      price: product.salePrice || product.price,
+      price: item.salePrice || item.price,
     });
-    dataLayer.push({
+    trackEvent({
       event: 'event_addToCart',
-      pid: product.pid,
+      pid: item.pid,
       sku,
     });
   };

@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import { useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
 import { account_id, catalog_views, domain_key } from '../config';
 
-function useDataLayer() {
-  const [events, setEvents] = useLocalStorage('BrPixelDemoDataLayer', []);
+function useAnalytics() {
+  const [events, setEvents] = useLocalStorage('BrPixelDemoAnalytics', []);
   const [userId, setUserId] = useLocalStorage('BrPixelDemoUserId', '');
   const [eventsCount, setEventsCount] = useState(0);
   const pathname = usePathname();
@@ -14,7 +14,21 @@ function useDataLayer() {
     setEventsCount(events.length);
   }, [events]);
 
-  function push(data) {
+  const constructPayload = (data) => {
+    return {
+      ...{
+        debug: true, // set to false in production
+        test_data: true, // set to false in production
+        acct_id: account_id,
+        domain_key,
+        user_id: userId,
+        orig_ref_url: `${window.location.origin}${pathname}`,
+      },
+      ...data,
+    };
+  };
+
+  const trackEvent = (data) => {
     let payload;
 
     switch (data.event) {
@@ -131,31 +145,17 @@ function useDataLayer() {
         break;
       default:
         payload = {};
-        console.log('[useDataLayer] unknown event', data);
+        console.log('[useAnalytics] unknown event', data);
         break;
     }
 
     setEvents(_.take([...[{ ...payload, ...{ event: data.event } }], ...events], 25));
-  }
-
-  function constructPayload(data) {
-    return {
-      ...{
-        debug: true, // set to false in production
-        test_data: true, // set to false in production
-        acct_id: account_id,
-        domain_key,
-        user_id: userId,
-        orig_ref_url: `${window.location.origin}${pathname}`,
-      },
-      ...data,
-    };
-  }
+  };
 
   function clearEvents() {
     setEvents([]);
   }
 
-  return { events, eventsCount, push, clearEvents, setUserId, userId };
+  return { events, eventsCount, trackEvent, clearEvents, setUserId, userId };
 }
-export default useDataLayer;
+export default useAnalytics;

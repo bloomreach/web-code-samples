@@ -6,7 +6,7 @@ import JsonView from '@uiw/react-json-view';
 import { Price } from '../components/Price';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useSearchApi from '../hooks/useSearchApi';
-import { config } from '../utils';
+import { CONFIG } from '../constants';
 
 function getRandomCategories(data) {
   const categories = data.facet_counts.facets.filter((facet) => facet.name === 'category');
@@ -26,7 +26,7 @@ export default function Home() {
     q: '*',
     rows: 12,
   });
-  const { loading, error, data } = useSearchApi('bestseller', config, options);
+  const { loading, error, data } = useSearchApi('bestseller', CONFIG, options);
 
   useEffect(() => {
     if (data) {

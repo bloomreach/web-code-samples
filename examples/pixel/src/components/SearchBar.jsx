@@ -5,19 +5,19 @@ import Highlighter from 'react-highlight-words';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import useDataLayer from '../hooks/useDataLayer';
+import useAnalytics from '../hooks/useAnalytics';
 import useAutosuggestApi from '../hooks/useAutosuggestApi';
-import { config } from '../utils';
+import { CONFIG } from '../constants';
 
 export function SearchBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
   const [query, setQuery] = useState('');
   const [isInputActive, setIsInputActive] = useState(false);
   const [isHoveringResults, setIsHoveringResults] = useState(false);
-  const { loading, error, data } = useAutosuggestApi(config, options);
+  const { loading, error, data } = useAutosuggestApi(CONFIG, options);
 
   useEffect(() => {
     setQuery(searchParams.get('q') || '');
@@ -29,7 +29,7 @@ export function SearchBar() {
 
   const handleSubmit = (e) => {
     e && e.preventDefault();
-    dataLayer.push({
+    trackEvent({
       event: 'event_search',
       query,
     });
@@ -39,7 +39,7 @@ export function SearchBar() {
 
   const handleQuerySearch = (term) => {
     setIsHoveringResults(false);
-    dataLayer.push({
+   trackEvent({
       event: 'event_suggest',
       userQuery: query,
       query: term,

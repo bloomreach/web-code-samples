@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { ToggleField } from '@bloomreach/react-banana-ui';
 import { account_id, account_name } from '../config';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
-import useDataLayer from '../hooks/useDataLayer';
+import useAnalytics from '../hooks/useAnalytics';
 
 export function DeveloperToolbar() {
   const { showJson, setShowJson } = useDeveloperTools();
-  const { eventsCount } = useDataLayer();
+  const { eventsCount } = useAnalytics();
 
   return (
     <div className="bg-[#002840]">

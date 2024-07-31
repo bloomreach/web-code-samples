@@ -7,24 +7,19 @@ import Highlighter from 'react-highlight-words';
 import JsonView from '@uiw/react-json-view';
 import { Pagination } from '@bloomreach/react-banana-ui';
 import { Price } from '../../components/Price';
-import useDataLayer from '../../hooks/useDataLayer';
+import useAnalytics from '../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../hooks/useDeveloperTools';
 import useSearchApi from '../../hooks/useSearchApi';
-import { account_id, auth_key, domain_key } from '../../config';
+import { CONFIG } from '../../constants';
 
-const config = {
-  account_id,
-  auth_key,
-  domain_key,
-};
 export default function Page({ searchParams }) {
   const { showJson } = useDeveloperTools();
   const router = useRouter();
   const { q = '', sort = '', page = 0, rows = 12 } = searchParams;
-  const dataLayer = useDataLayer();
+  const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
 
-  const { loading, error, data } = useSearchApi('keyword', config, options);
+  const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
 
   useEffect(() => {
     setOptions({
@@ -41,7 +36,7 @@ export default function Page({ searchParams }) {
     if (!data) {
       return;
     }
-    dataLayer.push({
+    trackEvent({
       event: 'view_search',
       query: q,
     });
