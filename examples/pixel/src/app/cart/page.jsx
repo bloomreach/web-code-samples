@@ -37,7 +37,7 @@ export default function Page() {
         <div className="grid gap-8">
           <h1 className="text-2xl font-bold">Cart</h1>
           {
-            cart.length > 0
+            cartCount > 0
               ? (
                 <>
                   <div className="grid gap-6">

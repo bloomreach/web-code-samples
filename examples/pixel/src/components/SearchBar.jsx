@@ -39,7 +39,7 @@ export function SearchBar() {
 
   const handleQuerySearch = (term) => {
     setIsHoveringResults(false);
-   trackEvent({
+    trackEvent({
       event: 'event_suggest',
       userQuery: query,
       query: term,

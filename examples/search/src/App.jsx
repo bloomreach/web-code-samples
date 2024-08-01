@@ -98,7 +98,7 @@ export default function App() {
 
         <div>
           <InputField
-            helperText="Search for chair, bed, office furniture, kitchen tools, chiar (for autocorrect)..."
+            helperText="Search for chair, bed, office furniture, chandeliers, chiar (for autocorrect)..."
             value={query}
             leftElement={loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />}
             clearable

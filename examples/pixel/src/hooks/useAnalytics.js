@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
 import { account_id, catalog_views, domain_key } from '../config';
