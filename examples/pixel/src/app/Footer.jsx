@@ -60,30 +60,10 @@ export function Footer() {
               <a
                 target="_blank"
                 className="text-slate-500 hover:underline"
-                href="https://documentation.bloomreach.com/discovery/docs/events-management"
+                href="https://documentation.bloomreach.com/discovery/docs/pixel-reference"
                 rel="noreferrer"
               >
-                Events management
-              </a>
-            </li>
-            <li className="mb-2">
-              <a
-                target="_blank"
-                className="text-slate-500 hover:underline"
-                href="https://documentation.bloomreach.com/discovery/docs/page-view-pixels"
-                rel="noreferrer"
-              >
-                Page view pixels
-              </a>
-            </li>
-            <li className="mb-2">
-              <a
-                target="_blank"
-                className="text-slate-500 hover:underline"
-                href="https://documentation.bloomreach.com/discovery/docs/event-pixels"
-                rel="noreferrer"
-              >
-                Event pixels
+                Pixel reference
               </a>
             </li>
             <li className="mb-2">

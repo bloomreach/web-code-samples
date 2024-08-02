@@ -8,7 +8,7 @@ import { BR_COOKIE } from '../../constants';
 
 export default function Page() {
   const { userId, setUserId } = useAnalytics();
-  const [cookies, setCookie, removeCookie] = useCookies([BR_COOKIE]);
+  const [cookies, , removeCookie] = useCookies([BR_COOKIE]);
 
   const clearCookie = () => {
     removeCookie(BR_COOKIE);

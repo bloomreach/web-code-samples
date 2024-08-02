@@ -69,15 +69,15 @@ export default function Page({ params, searchParams }) {
 
   const updateQueryParams = useCallback(
     (obj) => {
-      const params = new URLSearchParams(searchParams);
+      const qParams = new URLSearchParams(searchParams);
 
       Object.keys(obj).forEach((key) => {
         if (Object.prototype.hasOwnProperty.call(obj, key)) {
-          params.set(key, obj[key]);
+          qParams.set(key, obj[key]);
         }
       });
 
-      router.push(`${pathname}?${params.toString()}`);
+      router.push(`${pathname}?${qParams.toString()}`);
     },
     [router, pathname, searchParams],
   );

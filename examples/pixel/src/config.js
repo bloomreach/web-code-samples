@@ -8,3 +8,6 @@ export const catalog_views = 'showcase_pacifichome';
 export const similar_products_widget_id = '09zwz059';
 
 export const product_fields = 'pid,score,is_live,title,description,brand,price,price_range,sale_price,sale_price_range,url,promotions,thumb_image,skuid,sku_color,sku_size,sku_thumb_images,sku_swatch_images,sku_price,sku_sale_price,onSale,inStock';
+
+// See https://documentation.bloomreach.com/discovery/docs/pixel-reference#currency for valid values
+export const currency = 'USD';

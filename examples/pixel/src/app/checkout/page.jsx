@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@bloomreach/react-banana-ui';
+import { nanoid } from 'nanoid';
 import useCart from '../../hooks/useCart';
 import useAnalytics from '../../hooks/useAnalytics';
 
@@ -14,7 +15,7 @@ export default function Page() {
     trackEvent({
       event: 'view_conversion',
       cartTotal,
-      orderId: Date.now(),
+      orderId: nanoid(),
       cart,
     });
     clearCart();

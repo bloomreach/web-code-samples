@@ -1,8 +1,11 @@
+// See https://documentation.bloomreach.com/discovery/docs/pixel-reference for pixel params reference
+
 import _ from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
-import { account_id, catalog_views, domain_key } from '../config';
+import { nanoid } from 'nanoid';
+import { account_id, catalog_views, currency, domain_key } from '../config';
 
 function useAnalytics() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoAnalytics', []);
@@ -14,11 +17,15 @@ function useAnalytics() {
     setEventsCount(events.length);
   }, [events]);
 
+  /**
+   * Adds default params that are relevant to all pixel events
+   */
   const constructPayload = (data) => {
     return {
       ...{
         debug: true, // set to false in production
         test_data: true, // set to false in production
+        rand: nanoid(),
         acct_id: account_id,
         domain_key,
         user_id: userId,
@@ -67,6 +74,7 @@ function useAnalytics() {
           is_conversion: 1,
           basket_value: data.cartTotal,
           order_id: data.orderId,
+          currency,
           basket: {
             items: data.cart.map((item) => {
               return {
