@@ -68,6 +68,13 @@ export function ProductsCarouselWidget({ title = 'Similar products', data }) {
                     </div>
                     <div className="p-2 pt-0">
                       <h3 className="text-sm font-bold">{doc.title}</h3>
+                      {doc.variants?.length > 1 ? (
+                        <p className="text-sm opacity-50 mb-1">
+                          {doc.variants.length}
+                          {' '}
+                          variants
+                        </p>
+                      ) : null}
                       <Price className="text-sm" product={doc} />
                     </div>
                   </div>

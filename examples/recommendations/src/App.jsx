@@ -100,6 +100,13 @@ export default function App() {
                       </div>
                       <div className="flex flex-col gap-2 w-96">
                         <h2 className="text-xl font-bold">{product.title}</h2>
+                        {product.variants?.length > 1 ? (
+                          <p className="opacity-50">
+                            {product.variants.length}
+                            {' '}
+                            variants
+                          </p>
+                        ) : null}
                         <Price product={product} />
                         <p className="text-sm">{product.description}</p>
                       </div>
@@ -138,6 +145,13 @@ export default function App() {
                             </div>
                             <div className="p-2 pt-0">
                               <h3 className="text-sm font-bold">{doc.title}</h3>
+                              {doc.variants?.length > 1 ? (
+                                <p className="text-sm opacity-50 mb-1">
+                                  {doc.variants.length}
+                                  {' '}
+                                  variants
+                                </p>
+                              ) : null}
                               <Price className="text-sm" product={doc} />
                             </div>
                           </div>

@@ -103,6 +103,13 @@ export default function Page({ params }) {
                 </div>
                 <div className="flex flex-col gap-2 w-96">
                   <h2 className="text-xl font-bold">{product.title}</h2>
+                  {product.variants?.length > 1 ? (
+                    <p className="opacity-50">
+                      {product.variants.length}
+                      {' '}
+                      variants
+                    </p>
+                  ) : null}
                   <Price product={product} />
                   <p className="text-sm">{product.description}</p>
                   <Button type="primary" onClick={() => addToCart(product)}>Add to cart</Button>
