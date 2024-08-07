@@ -297,6 +297,13 @@ export default function App() {
                                   searchWords={[searchedQuery]}
                                   textToHighlight={product.title}
                                 />
+                                {product.variants?.length > 1 ? (
+                                  <p className="text-sm opacity-50 mb-1">
+                                    {product.variants.length}
+                                    {' '}
+                                    variants
+                                  </p>
+                                ) : null}
                                 <Price className="text-sm" product={product} />
                               </div>
                             </div>

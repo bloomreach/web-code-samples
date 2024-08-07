@@ -15,7 +15,7 @@ export function Price({ product, className }) {
   return (
     <p className={className}>
       {formatPrice(product.sale_price)}
-      <span className="line-through ml-2">{formatPrice(product.price)}</span>
+      <span className="line-through ml-2 opacity-50">{formatPrice(product.price)}</span>
     </p>
   );
 }

@@ -28,7 +28,7 @@ export function SearchBar() {
   }, [query]);
 
   const handleSubmit = (e) => {
-    e && e.preventDefault();
+    e.preventDefault();
     trackEvent({
       event: 'event_search',
       query,

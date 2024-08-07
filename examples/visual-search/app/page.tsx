@@ -213,6 +213,13 @@ export default function Home() {
                             <div className="w-full text-sm font-bold">
                               {product.title}
                             </div>
+                            {product.variants?.length > 1 ? (
+                              <p className="text-sm opacity-50 mb-1">
+                                {product.variants.length}
+                                {' '}
+                                variants
+                              </p>
+                            ) : null}
                             <Price className="text-sm" product={product} />
                           </div>
                         </div>
