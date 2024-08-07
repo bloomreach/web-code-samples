@@ -77,7 +77,7 @@ export default function App() {
     setLoading(true);
     setError(null);
 
-    getSearchResults(query, page, perPage, sort, selectedFacets, facets)
+    getSearchResults(query, page, perPage, sort, selectedFacets)
       .then((response) => {
         setLoading(false);
         setData(response);
@@ -291,14 +291,14 @@ export default function App() {
                                   className="mr-2 w-full object-cover object-top"
                                 />
                               </div>
-                              <div className="p-2 pt-0 flex flex-col gap-2">
+                              <div className="p-2 pt-0 flex flex-col gap-1">
                                 <Highlighter
                                   className="w-full text-sm font-bold"
                                   searchWords={[searchedQuery]}
                                   textToHighlight={product.title}
                                 />
                                 {product.variants?.length > 1 ? (
-                                  <p className="text-sm opacity-50 mb-1">
+                                  <p className="text-sm opacity-50">
                                     {product.variants.length}
                                     {' '}
                                     variants
