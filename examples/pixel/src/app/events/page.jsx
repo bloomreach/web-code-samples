@@ -1,7 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 import JsonView from '@uiw/react-json-view';
-import { Button, ExternalLinkIcon } from '@bloomreach/react-banana-ui';
+import {ArrowLeftIcon, Button, ExternalLinkIcon} from '@bloomreach/react-banana-ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
 export default function Page() {
@@ -13,6 +14,10 @@ export default function Page() {
         <div className="flex flex-col gap-8">
           <div className="flex items-center justify-between">
             <div>
+              <Link href="/" className="text-sm cursor-pointer text-blue-400 flex gap-2 hover:underline items-center">
+                <ArrowLeftIcon />
+                Back to home
+              </Link>
               <h1 className="text-2xl font-bold">Pixel events</h1>
               <p className="text-gray-500 dark:text-gray-400">
                 View the last 25 pixel events. See the events on the dashboard in
