@@ -41,11 +41,13 @@ export default function Home() {
   }
 
   const handleImageFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.currentTarget.files[0];
+    const file = event.currentTarget.files && event.currentTarget.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        setImageSrc(e.target.result);
+        if (e?.target?.result) {
+          setImageSrc(e.target.result.toString());
+        }
       };
       reader.readAsDataURL(file);
       await uploadImage(file);

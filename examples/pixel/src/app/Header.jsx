@@ -9,14 +9,16 @@ export function Header() {
   return (
     <>
       <div className="flex gap-2 items-center mt-4 mb-8">
-        <div className="flex gap-2 items-center grow">
-          <Link href="/">
-            <img src="/br-logo-primary.svg" alt="" width={150} />
+        <div className="flex grow items-center">
+          <Link href="/" className="inline-block">
+            <div className="flex gap-2 items-center">
+              <img src="/br-logo-primary.svg" alt="" width={150} />
+              <span>✨</span>
+              <div className="text-lg font-semibold text-[#002840]">
+                Pixel
+              </div>
+            </div>
           </Link>
-          <span>✨</span>
-          <div className="text-lg font-semibold text-[#002840]">
-            Pixel
-          </div>
         </div>
         <div className="flex gap-4 items-center">
           <div>

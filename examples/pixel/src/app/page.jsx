@@ -77,7 +77,7 @@ export default function Home() {
           )}
           <div className="flex gap-4 mt-4">
             {showJson ? (
-              <JsonView value={data} collapsed={1} />
+              <div>{data ? <JsonView value={data} collapsed={1} /> : null}</div>
             ) : (
               <div className="w-full">
                 {!loading && data?.response?.docs?.length ? (
