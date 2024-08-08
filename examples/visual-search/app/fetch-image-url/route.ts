@@ -1,17 +1,17 @@
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
+  const {searchParams} = new URL(req.url);
+  const url = searchParams.get('url');
+
+  if (!url) {
+    return new NextResponse(JSON.stringify({message: 'url query parameter is required'}), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
   try {
-    const {searchParams} = new URL(req.url);
-    const url = searchParams.get('url');
-
-    if (!url) {
-      return new NextResponse(JSON.stringify({message: 'url query parameter is required'}), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    }
-
     const response = await fetch(url);
     if (!response.ok) throw new Error(`unexpected response ${response.statusText}`);
     if (response.headers.get('content-length') === '0') throw new Error('no content-length');
