@@ -3,10 +3,13 @@ import {NextRequest, NextResponse} from "next/server";
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const {searchParams} = new URL(req.url);
-    const url = searchParams.get('url')
+    const url = searchParams.get('url');
 
     if (!url) {
-      return res.status(400).json({message: 'url query parameter is required'});
+      return new NextResponse(JSON.stringify({message: 'url query parameter is required'}), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const response = await fetch(url);
@@ -22,11 +25,14 @@ export async function GET(req: NextRequest, res: NextResponse) {
       status: 200,
       headers: {
         'Content-Type': response.headers.get('content-type') || 'image/*',
-        'Content-Length': response.headers.get('content-length') || arr.length,
+        'Content-Length': response.headers.get('content-length') || String(arr.length),
       },
     })
-  } catch (e) {
+  } catch (e: any) {
     console.error(e);
-    return new NextResponse.error(e);
+    return new NextResponse(JSON.stringify({ message: e.message || 'An error occurred' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 }
