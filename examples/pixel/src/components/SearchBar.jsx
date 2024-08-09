@@ -1,15 +1,15 @@
 import _ from 'lodash';
+import { Suspense, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { InputField, LoaderIcon, SearchIcon } from '@bloomreach/react-banana-ui';
 import JsonView from '@uiw/react-json-view';
 import Highlighter from 'react-highlight-words';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import useAnalytics from '../hooks/useAnalytics';
 import useAutosuggestApi from '../hooks/useAutosuggestApi';
 import { CONFIG } from '../constants';
 
-export function SearchBar() {
+function SearchBarInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { trackEvent } = useAnalytics();
@@ -152,5 +152,13 @@ export function SearchBar() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+export function SearchBar() {
+  return (
+    <Suspense>
+      <SearchBarInner />
+    </Suspense>
   );
 }

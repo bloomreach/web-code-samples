@@ -1,0 +1,10 @@
+{
+  "name": "@bloomreach/web-code-samples",
+  "private": true,
+  "workspaces": [
+    "examples/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}
