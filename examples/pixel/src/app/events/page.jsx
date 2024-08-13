@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import JsonView from '@uiw/react-json-view';
-import {ArrowLeftIcon, Button, ExternalLinkIcon} from '@bloomreach/react-banana-ui';
+import { ArrowLeftIcon, Button, ExternalLinkIcon } from '@bloomreach/react-banana-ui';
 import useAnalytics from '../../hooks/useAnalytics';
 
 export default function Page() {
