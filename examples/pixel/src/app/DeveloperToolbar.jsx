@@ -25,8 +25,9 @@ export function DeveloperToolbar() {
     <>
       {isInIframe ? (
         <Alert type="warning">
-          For the cookie to be set and sent in the pixel events and see the full set of features in
-          this code sample, open the codesandbox preview in a new tab or run the example locally.
+          In the codesandbox iframe preview, the cookie is not set in the correct domain. For the
+          cookie to be set and sent in the pixel events to see the full set of features in this
+          code sample, open the codesandbox preview in a separate window or run the example locally.
         </Alert>
       ) : null}
       <div className="bg-[#002840]">
