@@ -21,6 +21,10 @@ export function ProductsCarouselWidget({ title = 'Similar products', data }) {
   }
 
   useEffect(() => {
+    if (!data?.metadata) {
+      return;
+    }
+
     trackEvent({
       event: 'event_widgetView',
       widgetId: data.metadata.widget.id,
@@ -29,7 +33,7 @@ export function ProductsCarouselWidget({ title = 'Similar products', data }) {
     });
   }, [data]);
 
-  if (!data) {
+  if (!data || !data.response) {
     return null;
   }
 
