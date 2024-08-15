@@ -35,15 +35,15 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: ./examples/${{ example.project }}
+        working-directory: ./examples/${{ matrix.example }}
         run: npm install
 
       - name:
           Verify the integrity of provenance attestations and registry signatures for installed
           dependencies
-        working-directory: ./examples/${{ example.project }}
+        working-directory: ./examples/${{ matrix.example }}
         run: npm audit signatures
 
       - name: Build
-        working-directory: ./examples/${{ example.project }}
+        working-directory: ./examples/${{ matrix.example }}
         run: npm run build
