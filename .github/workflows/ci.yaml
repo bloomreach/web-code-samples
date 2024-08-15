@@ -21,7 +21,6 @@ jobs:
           - relevance-by-segment
           - search
           - visual-search
-  build:
     runs-on: ubuntu-latest
 
     steps:
