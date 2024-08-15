@@ -8,10 +8,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  project_matrix:
+  examples_matrix:
     strategy:
       matrix:
-        project:
+        example:
           - autosuggest
           - categories
           - dynamic-grouping
@@ -35,15 +35,15 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        working-directory: ./examples/${{ matrix.project }}
+        working-directory: ./examples/${{ example.project }}
         run: npm install
 
       - name:
           Verify the integrity of provenance attestations and registry signatures for installed
           dependencies
-        working-directory: ./examples/${{ matrix.project }}
+        working-directory: ./examples/${{ example.project }}
         run: npm audit signatures
 
       - name: Build
-        working-directory: ./examples/${{ matrix.project }}
-        run: npm run build --workspaces
+        working-directory: ./examples/${{ example.project }}
+        run: npm run build
