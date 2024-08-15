@@ -8,6 +8,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  project_matrix:
+    strategy:
+      matrix:
+        project:
+          - autosuggest
+          - categories
+          - dynamic-grouping
+          - facets
+          - pixel
+          - recommendations
+          - relevance-by-segment
+          - search
+          - visual-search
   build:
     runs-on: ubuntu-latest
 
@@ -20,15 +33,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: package.json
+          node-version: '20'
 
       - name: Install dependencies
+        working-directory: ./examples/${{ matrix.project }}
         run: npm install
 
       - name:
           Verify the integrity of provenance attestations and registry signatures for installed
           dependencies
+        working-directory: ./examples/${{ matrix.project }}
         run: npm audit signatures
 
       - name: Build
+        working-directory: ./examples/${{ matrix.project }}
         run: npm run build --workspaces
