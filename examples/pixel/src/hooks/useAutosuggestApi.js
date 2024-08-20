@@ -12,6 +12,9 @@ function useAutosuggestApi(config, options) {
 
   useEffect(() => {
     if (!options.q) {
+      setLoading(false);
+      setError(null);
+      setData(null);
       return;
     }
 

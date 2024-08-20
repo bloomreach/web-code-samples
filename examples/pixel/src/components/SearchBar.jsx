@@ -6,7 +6,6 @@ import {
   autoUpdate,
   size,
   flip,
-  useId,
   useDismiss,
   useFloating,
   useInteractions,
@@ -101,12 +100,12 @@ function SearchBarComponent() {
 
   // Handle when a query term is selected (using keyboard)/clicked
   const handleQuerySelect = (term) => {
-    setOpen(false);
     trackEvent({
       event: 'event_suggest',
       userQuery: query,
       query: term,
     });
+    setOpen(false);
     router.push(`/products?q=${term}`);
   };
 
@@ -154,6 +153,9 @@ function SearchBarComponent() {
             placeholder="Search for chair, sofa, bed, pillow"
             {...getReferenceProps({
               onChange,
+              onFocus() {
+                setOpen(!!query);
+              },
               value: query,
               'aria-autocomplete': 'list',
             })}

@@ -47,7 +47,7 @@ export default function Home() {
                 {categories.map((category) => (
                   <Link
                     href={`/categories/${category.cat_id}`}
-                    className="w-56 rounded-md border border-slate-200 bg-yellow-50 hover:bg-yellow-100"
+                    className="w-56 rounded-md border border-slate-200 bg-gray-50 hover:bg-cyan-50"
                     key={category.cat_id}
                   >
                     <div className="flex flex-col gap-2">

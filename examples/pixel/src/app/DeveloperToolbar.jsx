@@ -1,14 +1,24 @@
-import Link from 'next/link';
-import { Alert, ToggleField } from '@bloomreach/react-banana-ui';
+import {
+  Alert,
+  Button,
+  ExternalLinkIcon,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalHeaderTitle,
+  ToggleField,
+} from '@bloomreach/react-banana-ui';
 import { useEffect, useState } from 'react';
+import JsonView from '@uiw/react-json-view';
 import { account_id, account_name } from '../config';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useAnalytics from '../hooks/useAnalytics';
 
 export function DeveloperToolbar() {
   const { showJson, setShowJson } = useDeveloperTools();
-  const { eventsCount } = useAnalytics();
+  const { events, eventsCount, clearEvents } = useAnalytics();
   const [isInIframe, setIsInIframe] = useState(false);
+  const [showEvents, setShowEvents] = useState(false);
 
   useEffect(() => {
     try {
@@ -20,6 +30,11 @@ export function DeveloperToolbar() {
       setIsInIframe(true);
     }
   }, []);
+
+  function handleShowEvents(e) {
+    e.preventDefault();
+    setShowEvents(true);
+  }
 
   return (
     <>
@@ -44,14 +59,15 @@ export function DeveloperToolbar() {
             )
           </div>
           <div>
-            <Link href="/events" className="flex gap-1 hover:text-white">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a href="#" role="button" onClick={handleShowEvents} className="flex gap-1 hover:text-white">
               Pixel events
               <span
                 className="bg-[#ffd500] rounded-full px-2 text-[#002840] font-bold"
               >
                 {eventsCount}
               </span>
-            </Link>
+            </a>
           </div>
           <div>&middot;</div>
           <ToggleField
@@ -63,6 +79,38 @@ export function DeveloperToolbar() {
           />
         </div>
       </div>
+      <Modal
+        open={showEvents}
+        onClose={() => setShowEvents(false)}
+        width="lg"
+      >
+        <ModalHeader>
+          <div className="flex gap-4">
+            <ModalHeaderTitle>
+              Pixel events
+            </ModalHeaderTitle>
+            <Button type="secondary" onClick={clearEvents}>Clear all</Button>
+          </div>
+          <p className="mb-2 text-gray-500 dark:text-gray-400">
+            View the last 25 pixel events. See the events on the dashboard in
+            {' '}
+            <a
+              className="text-blue-400 hover:underline inline-flex flex-row gap-2 items-center"
+              href="https://tools.bloomreach.com/navapp/discovery/events/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Events Manager
+              <ExternalLinkIcon size={16} />
+            </a>
+          </p>
+        </ModalHeader>
+        <ModalBody>
+          <div className="min-h-40">
+            <JsonView value={events} collapsed={2} />
+          </div>
+        </ModalBody>
+      </Modal>
     </>
   );
 }

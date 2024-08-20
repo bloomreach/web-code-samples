@@ -1,10 +1,9 @@
 // See https://documentation.bloomreach.com/discovery/docs/pixel-reference for pixel params reference
 
 import _ from 'lodash';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
-import { nanoid } from 'nanoid';
 import { account_id, catalog_views, currency, domain_key } from '../config';
 
 function useAnalytics() {
@@ -20,12 +19,11 @@ function useAnalytics() {
   /**
    * Adds default params that are relevant to all pixel events
    */
-  const constructPayload = (data) => {
+  const constructPayload = useCallback((data) => {
     return {
       ...{
         debug: true, // set to false in production
         test_data: true, // set to false in production
-        rand: nanoid(),
         acct_id: account_id,
         domain_key,
         user_id: userId,
@@ -33,9 +31,9 @@ function useAnalytics() {
       },
       ...data,
     };
-  };
+  }, []);
 
-  const trackEvent = (data) => {
+  const trackEvent = useCallback((data) => {
     let payload;
 
     switch (data.event) {
@@ -46,8 +44,8 @@ function useAnalytics() {
           prod_name: data.title,
           sku: data.sku,
         };
-        BrTrk?.getTracker().updateBrData(constructPayload(payload));
-        BrTrk?.getTracker().logPageView();
+        window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
+        window.BrTrk?.getTracker().logPageView();
         break;
       case 'view_category':
         payload = {
@@ -55,8 +53,8 @@ function useAnalytics() {
           cat_id: data.cat_id,
           cat: data.cat_crumb,
         };
-        BrTrk?.getTracker().updateBrData(constructPayload(payload));
-        BrTrk?.getTracker().logPageView();
+        window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
+        window.BrTrk?.getTracker().logPageView();
 
         break;
       case 'view_search':
@@ -65,8 +63,8 @@ function useAnalytics() {
           search_term: data.query,
         };
 
-        BrTrk?.getTracker().updateBrData(constructPayload(payload));
-        BrTrk?.getTracker().logPageView();
+        window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
+        window.BrTrk?.getTracker().logPageView();
         break;
       case 'view_conversion':
         payload = {
@@ -88,8 +86,8 @@ function useAnalytics() {
           },
         };
 
-        BrTrk?.getTracker().updateBrData(constructPayload(payload));
-        BrTrk?.getTracker().logPageView();
+        window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
+        window.BrTrk?.getTracker().logPageView();
         break;
       case 'event_addToCart':
         payload = {
@@ -97,7 +95,7 @@ function useAnalytics() {
           sku: data.sku,
         };
 
-        BrTrk?.getTracker().logEvent(
+        window.BrTrk?.getTracker().logEvent(
           'cart',
           'click-add',
           constructPayload(payload),
@@ -109,7 +107,7 @@ function useAnalytics() {
           catalogs: [{ name: catalog_views }],
         };
 
-        BrTrk?.getTracker().logEvent(
+        window.BrTrk?.getTracker().logEvent(
           'suggest',
           'submit',
           constructPayload(payload),
@@ -124,7 +122,7 @@ function useAnalytics() {
           catalogs: [{ name: catalog_views }],
         };
 
-        BrTrk?.getTracker().logEvent(
+        window.BrTrk?.getTracker().logEvent(
           'suggest',
           'click',
           constructPayload(payload),
@@ -139,7 +137,7 @@ function useAnalytics() {
           wrid: data.widgetRequestId,
         };
 
-        BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload), true);
+        window.BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload), true);
         break;
       case 'event_widgetClick':
         payload = {
@@ -149,7 +147,7 @@ function useAnalytics() {
           item_id: data.itemId,
         };
 
-        BrTrk?.getTracker().logEvent('widget', 'widget-click', constructPayload(payload), true);
+        window.BrTrk?.getTracker().logEvent('widget', 'widget-click', constructPayload(payload), true);
         break;
       default:
         payload = {};
@@ -158,7 +156,7 @@ function useAnalytics() {
     }
 
     setEvents(_.take([...[{ ...payload, ...{ event: data.event } }], ...events], 25));
-  };
+  }, [constructPayload, events, setEvents]);
 
   function clearEvents() {
     setEvents([]);
