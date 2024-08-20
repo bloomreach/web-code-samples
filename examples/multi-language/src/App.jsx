@@ -1,9 +1,8 @@
 import {
-  ToggleField,
   InputField,
   LoaderIcon,
-  SearchIcon,
-  Pagination,
+  SearchIcon, SelectField, SelectOption,
+  ToggleField,
 } from "@bloomreach/react-banana-ui";
 import { useEffect, useMemo, useState } from "react";
 import _ from "lodash";
@@ -14,41 +13,38 @@ import "@bloomreach/react-banana-ui/style.css";
 import { getSearchResults } from "./api";
 import { Price } from "./components/price";
 import { Footer } from "./Footer";
-import { account_id, account_name } from "./config";
+import { account_id, account_name, catalogs } from "./config";
 import BrLogo from "./assets/br-logo-primary.svg";
 
 import "./app.css";
 
 export default function App() {
   const [showJson, setShowJson] = useState(false);
+  const [domainKey, setDomainKey] = useState(catalogs[0].domainKey);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("chair");
   const [searchedQuery, setSearchedQuery] = useState("");
   const [data, setData] = useState({});
-  const [sort, setSort] = useState("");
-  const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(12);
 
   const debouncedSearch = useMemo(() => _.debounce(search, 300), []);
 
   useEffect(() => {
     if (query.length > 1) {
-      debouncedSearch(query, page, perPage, sort);
+      debouncedSearch(query, domainKey);
     } else {
       setData({});
     }
-
     return () => {
       debouncedSearch.cancel();
     };
-  }, [query, page, perPage, sort, debouncedSearch]);
+  }, [query, domainKey, debouncedSearch]);
 
-  function search(query, page, perPage, sort) {
+  function search(query, domainKey) {
     setLoading(true);
     setError(null);
 
-    getSearchResults(query, page, perPage, sort)
+    getSearchResults(query, domainKey)
       .then((response) => {
         setLoading(false);
         setData(response);
@@ -63,8 +59,6 @@ export default function App() {
   }
 
   function updateQuery(newQuery) {
-    setPage(0);
-    setSort("");
     setQuery(newQuery);
   }
 
@@ -92,13 +86,25 @@ export default function App() {
               <img src={BrLogo} width={150} />
             </a>
             <span>✨</span>
-            <div className="text-lg font-semibold text-[#002840]">Search</div>
+            <div className="text-lg font-semibold text-[#002840]">Multi-language</div>
+          </div>
+          <div>
+            <SelectField
+              value={domainKey}
+              onChange={(event, value) =>setDomainKey(value)}
+            >
+              {catalogs.map(catalog => (
+                <SelectOption key={catalog.domainKey} value={catalog.domainKey}>
+                  {catalog.label}
+                </SelectOption>
+              ))}
+            </SelectField>
           </div>
         </div>
 
         <div>
           <InputField
-            helperText="Search for chair, bed, office furniture, chandeliers, chiar (for autocorrect)..."
+            helperText="Search for chair, bed, home decor, office decor, lights, chiar (for autocorrect)..."
             value={query}
             leftElement={loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />}
             clearable
@@ -117,50 +123,31 @@ export default function App() {
               <JsonView value={data} collapsed={1} />
             ) : (
               <div className="w-full">
-                <div className="flex">
-                  <div className="grow text-sm my-2">
-                    Search results for{" "}
-                    <span className="font-semibold">{searchedQuery}</span>
-                    {data.autoCorrectQuery ? (
-                      <span> (autocorrected)</span>
-                    ) : null}
-                    {data.did_you_mean?.length ? (
-                      <div className="my-2">
-                        Did you mean:{" "}
-                        {data.did_you_mean.map((term) => (
-                          <span
-                            key={term}
-                            className="cursor-pointer px-2 mr-2 bg-blue-100 text-blue-600 hover:underline"
-                            onClick={() => setQuery(term)}
-                          >
-                            {term}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div>
-                    <select
-                      className="p-2 rounded border text-sm"
-                      value={sort}
-                      onChange={(e) => setSort(e.target.value || "")}
-                    >
-                      <option value="">Relevance</option>
-                      <option value="price asc">Price (low to high)</option>
-                      <option value="price desc">Price (high to low)</option>
-                      <option value="sale_price asc">
-                        Sale Price (low to high)
-                      </option>
-                      <option value="sale_price desc">
-                        Sale Price (high to low)
-                      </option>
-                    </select>
-                  </div>
-                </div>
-
                 {data?.response?.docs?.length ? (
                   <div className="flex flex-col">
+                    <div className="flex">
+                      <div className="grow text-sm my-2">
+                        Search results for{" "}
+                        <span className="font-semibold">{searchedQuery}</span>
+                        {data.autoCorrectQuery ? (
+                          <span> (autocorrected)</span>
+                        ) : null}
+                        {data.did_you_mean?.length ? (
+                          <div className="my-2">
+                            Did you mean:{" "}
+                            {data.did_you_mean.map((term) => (
+                              <span
+                                key={term}
+                                className="cursor-pointer px-2 mr-2 bg-blue-100 text-blue-600 hover:underline"
+                                onClick={() => setQuery(term)}
+                              >
+                            {term}
+                          </span>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
                     <div className="flex flex-row flex-wrap">
                       {data?.response?.docs.map((product, index) => (
                         <div
@@ -168,7 +155,8 @@ export default function App() {
                           key={product.pid}
                         >
                           <div className="flex flex-col gap-2">
-                            <div className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
+                            <div
+                              className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
                               <img
                                 src={product.thumb_image}
                                 className="mr-2 w-full object-cover object-top"
@@ -187,26 +175,12 @@ export default function App() {
                                   variants
                                 </p>
                               ) : null}
-                              <Price className="text-sm" product={product} />
+                              <Price className="text-sm" product={product}/>
                             </div>
                           </div>
                         </div>
                       ))}
                     </div>
-                    {data.response.numFound > 0 ? (
-                      <div className="my-8">
-                        <Pagination
-                          count={data.response.numFound}
-                          itemsPerPage={perPage}
-                          itemsPerPageOptions={[12, 24, 48]}
-                          onItemsPerPageChange={(newPerPage) =>
-                            setPerPage(newPerPage)
-                          }
-                          onPageChange={(newPage) => setPage(newPage)}
-                          page={page}
-                        />
-                      </div>
-                    ) : null}
                   </div>
                 ) : (
                   <div className="text-sm text-slate-500">NA</div>
@@ -216,7 +190,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

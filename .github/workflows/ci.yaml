@@ -16,6 +16,7 @@ jobs:
           - categories
           - dynamic-grouping
           - facets
+          - multi-language
           - pixel
           - recommendations
           - relevance-by-segment
