@@ -25,7 +25,7 @@ export const CheckboxGroup = ({ options, value, onChange }) => {
     : options.slice(0, DEFAULT_DISPLAYED_OPTIONS);
 
   return (
-    <div className="py-2 px-4">
+    <div>
       <div className="py-2 flex flex-col gap-2">
         {displayedOptions.map((opt) => (
           <label className="text-sm flex gap-2" key={opt.value}>
@@ -36,7 +36,7 @@ export const CheckboxGroup = ({ options, value, onChange }) => {
               checked={selected ? selected.includes(opt.value) : false}
             />
             <span className="grow">{opt.label}</span>
-            <span className="px-2 bg-slate-200 rounded">{opt.count}</span>
+            <span className="px-2 bg-slate-200 rounded-full">{opt.count}</span>
           </label>
         ))}
       </div>

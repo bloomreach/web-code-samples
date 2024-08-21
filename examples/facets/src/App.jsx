@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import JsonView from "@uiw/react-json-view";
 import {
+  AccordionGroup,
   ToggleField,
   InputField,
   SearchIcon,
@@ -32,6 +33,7 @@ export default function App() {
 
   const [searchedQuery, setSearchedQuery] = useState("");
   const [selectedFacets, setSelectedFacets] = useState({});
+  const [activeFilters, setActiveFilters] = useState([]);
 
   const [showJson, setShowJson] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -48,9 +50,19 @@ export default function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
+    const queryParamFilters = getFiltersFromQueryParams(params)
     setQueryParams(params);
-    setSelectedFacets(getFiltersFromQueryParams(params));
-  }, [searchParams]);
+    setSelectedFacets(queryParamFilters);
+    // Only set this on initial load if there are any selected
+    // for URL updates later on when the user is applying filters, ignore this
+    setActiveFilters((activeFilters) => {
+      if (Object.keys(activeFilters).length === 0) {
+        return Object.keys(queryParamFilters);
+      }
+      return activeFilters;
+    })
+
+  }, [setActiveFilters, searchParams]);
 
   const debouncedSearch = useMemo(() => _.debounce(search, 1000), []);
 
@@ -265,14 +277,20 @@ export default function App() {
                     Filters
                   </div>
                   <div className="flex flex-col">
-                    {data?.facet_counts?.facets?.map((facet, index) => (
-                      <Facet
-                        key={facet.name}
-                        facet={facet}
-                        value={selectedFacets[facet.name]}
-                        onChange={(value) => onFacetChange(facet.name, value)}
-                      />
-                    ))}
+                    <AccordionGroup
+                      value={activeFilters}
+                      multiple={true}
+                      onValueChange={(val) => setActiveFilters(val)}
+                    >
+                      {data?.facet_counts?.facets?.map((facet) => (
+                        <Facet
+                          key={facet.name}
+                          facet={facet}
+                          value={selectedFacets[facet.name]}
+                          onChange={(value) => onFacetChange(facet.name, value)}
+                        />
+                      ))}
+                    </AccordionGroup>
                   </div>
                 </div>
                 <div className="w-full">
