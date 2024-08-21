@@ -16,6 +16,7 @@ This repository holds code samples that demonstrate how to implement the various
 | Dynamic grouping      | [Source](./examples/dynamic-grouping/README.md)     | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/dynamic-grouping)     |
 | Relevance by segment  | [Source](./examples/relevance-by-segment/README.md) | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/relevance-by-segment) |
 | Visual search         | [Source](./examples/visual-search/README.md)        | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/visual-search)        |
+| Multi-language        | [Source](./examples/multi-language/README.md)       | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/multi-language)       |
 | Pixel instrumentation | [Source](./examples/pixel/README.md)                | [![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/sandbox/github/bloomreach/web-code-samples/tree/main/examples/pixel)                |
 
 ## Guidelines for writing a code sample
