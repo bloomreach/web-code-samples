@@ -14,7 +14,7 @@ export const Facet = ({ facet, value, onChange }) => {
     return (
       <Accordion value={facet.name}>
         <AccordionHeader>
-          <span className="grow text-sm uppercase">{facet.name}</span>
+          <span className="uppercase">{facet.name}</span>
         </AccordionHeader>
         <AccordionContent>
           <FacetInner facet={facet} value={value} onChange={onChange} />

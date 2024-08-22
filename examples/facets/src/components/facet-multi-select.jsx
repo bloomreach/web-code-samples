@@ -1,8 +1,9 @@
 import { CheckboxGroup } from "./checkbox-group";
+import {capitalize} from "lodash";
 
 export const FacetMultiSelect = ({ facet, value, onChange }) => {
   const options = facet.value.map((val) => ({
-    label: val.name,
+    label: capitalize(val.name),
     value: val.name,
     count: val.count,
   }));
