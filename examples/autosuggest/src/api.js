@@ -1,5 +1,5 @@
-import { account_id, auth_key, catalog_views, domain_key } from './config';
-import { autoSuggest } from '@bloomreach/discovery-web-sdk';
+import { account_id, auth_key, catalog_views, domain_key } from "./config";
+import { autoSuggest } from "@bloomreach/discovery-web-sdk";
 
 const config = {
   account_id: account_id,
@@ -14,9 +14,9 @@ export const getSuggestions = (query) => {
   const searchOptions = {
     _br_uid_2: uid,
     catalog_views: catalog_views,
-    url: 'https://example.com',
-    ref_url: 'https://example.com',
-    request_id: '12345',
+    url: "https://example.com",
+    ref_url: "https://example.com",
+    request_id: "12345",
     q: query,
   };
 

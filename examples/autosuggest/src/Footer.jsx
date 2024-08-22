@@ -23,8 +23,8 @@ export const Footer = () => {
         <div className="w-64">
           <div className="text-md font-semibold mb-2">About</div>
           <p className="text-sm">
-            This code sample shows the autosuggest feature that guides site
-            visitors by providing search term and product suggestions
+            This code sample shows the autosuggest feature that guides site visitors by providing
+            search term and product suggestions
           </p>
           <div className="my-2 text-sm">
             <a
@@ -46,6 +46,15 @@ export const Footer = () => {
                 href="https://documentation.bloomreach.com/discovery/docs/bloomreach-discovery-sdk-1"
               >
                 Bloomreach SDK
+              </a>
+            </li>
+            <li className="mb-2">
+              <a
+                target="_blank"
+                className="text-slate-500 hover:underline"
+                href="https://documentation.bloomreach.com/discovery/docs/autosuggest"
+              >
+                Autosuggest
               </a>
             </li>
             <li className="mb-2">
