@@ -1,4 +1,5 @@
 import { AssetTag } from "@bloomreach/react-banana-ui";
+import {capitalize} from "lodash";
 
 export const AppliedFacetMultiSelect = ({ value, onClear }) => {
   return (
@@ -10,7 +11,7 @@ export const AppliedFacetMultiSelect = ({ value, onClear }) => {
           key={val}
           onDismiss={() => onClear(val)}
         >
-          {val}
+          {capitalize(val)}
         </AssetTag>
       ))}
     </div>
