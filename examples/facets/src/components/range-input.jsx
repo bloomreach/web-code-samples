@@ -16,7 +16,7 @@ export const RangeInput = ({ value, onChange }) => {
   }, [value]);
 
   return (
-    <div className="px-4 py-2 flex flex-row gap-2 items-center">
+    <div className="py-2 flex flex-row gap-2 items-center">
       <input
         className="text-sm border p-2 w-24"
         type="number"

@@ -1,26 +1,25 @@
-import { useState } from "react";
-import { Button, PlusIcon, MinusIcon } from "@bloomreach/react-banana-ui";
+import {
+  Accordion,
+  AccordionHeader,
+  AccordionContent
+} from "@bloomreach/react-banana-ui";
 import { FacetMultiSelect } from "./facet-multi-select";
 import { FacetNumberStats } from "./facet-number-stats";
 import { FacetCategory } from "./facet-category";
 import { FacetNumberRange } from "./facet-number-range";
+import { FacetColor } from "./facet-color";
 
 export const Facet = ({ facet, value, onChange }) => {
-  const [expanded, setExpanded] = useState(!!value);
   if (facet.value && !(facet.type === "text" && !facet.value.length)) {
     return (
-      <div className="border-b">
-        <Button
-          className="facet-label flex py-6 w-full border-0"
-          onClick={() => setExpanded(!expanded)}
-        >
-          <span className="grow text-left uppercase">{facet.name}</span>
-          {expanded ? <MinusIcon /> : <PlusIcon />}
-        </Button>
-        {expanded ? (
+      <Accordion value={facet.name}>
+        <AccordionHeader>
+          <span className="grow text-sm uppercase">{facet.name}</span>
+        </AccordionHeader>
+        <AccordionContent>
           <FacetInner facet={facet} value={value} onChange={onChange} />
-        ) : null}
-      </div>
+        </AccordionContent>
+      </Accordion>
     );
   } else {
     return null;
@@ -30,6 +29,10 @@ export const Facet = ({ facet, value, onChange }) => {
 export const FacetInner = ({ facet, value, onChange }) => {
   if (facet.name === "category") {
     return <FacetCategory facet={facet} value={value} onChange={onChange} />;
+  }
+
+  if (facet.name.toLowerCase().includes("color")) {
+    return <FacetColor facet={facet} value={value} onChange={onChange} />;
   }
 
   if (facet.type === "text" || facet.type === "number") {
