@@ -1,7 +1,7 @@
-export const account_id = "6413";
-export const account_name = "PacificHome";
-export const auth_key = "bcvpynhij980k0y1";
-export const domain_key = "pacifichome";
+export const account_id = "7634";
+export const auth_key = "zjlc0tsp2xu7l7ro";
+export const domain_key = "showcase_pacifichome";
+export const account_name = "showcase-pacifichome.bloomreach.io";
 
 export const group_options = [
   {
