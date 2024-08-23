@@ -13,6 +13,13 @@ import {
   TabList,
 } from "@bloomreach/react-banana-ui";
 import "@bloomreach/react-banana-ui/style.css";
+import {
+  SuggestResponse,
+  SuggestResponseSuggestionGroups,
+  SuggestResponseQuerySuggestions,
+  SuggestResponseSearchSuggestions,
+  SuggestResponseAttributeSuggestions,
+} from "@bloomreach/discovery-web-sdk";
 
 import { getSuggestions } from "./api";
 import { Footer } from "./Footer";
@@ -21,19 +28,19 @@ import BrLogo from "./assets/br-logo-primary.svg";
 
 import "./app.css";
 
-const formatPrice = (price) => {
+const formatPrice = (price: string) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format(price);
+  }).format(Number(price));
 };
 
 export default function App() {
-  const [showJson, setShowJson] = useState(false);
-  const [query, setQuery] = useState("cha");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState({});
+  const [showJson, setShowJson] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>("cha");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<unknown>(null);
+  const [data, setData] = useState<SuggestResponse>({});
 
   const debouncedSearch = useMemo(() => _.debounce(searchSuggestions, 300), []);
 
@@ -48,16 +55,16 @@ export default function App() {
     };
   }, [query, debouncedSearch]);
 
-  function searchSuggestions(query) {
+  function searchSuggestions(query: string) {
     setLoading(true);
     setError(null);
 
     getSuggestions(query)
-      .then((response) => {
+      .then((response: SuggestResponse) => {
         setLoading(false);
         setData(response);
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         setLoading(false);
         setError(error);
         setData({});
@@ -102,12 +109,12 @@ export default function App() {
             helperText="Search for chair, sofa, bed, pillow..."
             onChange={(e) => setQuery(e.target.value)}
           />
-          {error && (
+          {error ? (
             <div>
               <h1 className="text-lg">Error: </h1>
               <JsonView value={error} />
             </div>
-          )}
+          ) : null}
 
           {showJson ? (
             <>{data ? <JsonView value={data} collapsed={3} /> : null}</>
@@ -115,7 +122,7 @@ export default function App() {
             <Tabs defaultValue={0}>
               {results.length > 1 ? (
                 <TabList variant="primary">
-                  {results.map((result, index) => (
+                  {results.map((result: SuggestResponseSuggestionGroups, index: number) => (
                     <Tab key={`${result.catalogName}_${result.view}`} value={index}>
                       <span className="uppercase text-xs">
                         {result.catalogName} ({result.view})
@@ -124,15 +131,15 @@ export default function App() {
                   ))}
                 </TabList>
               ) : null}
-              {results.map((result, index) => (
+              {results.map((result: SuggestResponseSuggestionGroups, index: number) => (
                 <TabPanel keepMounted key={`${result.catalogName}_${result.view}`} value={index}>
-                  <div className="flex gap-8 mt-4">
+                  <div className="flex flex-col gap-2 mt-4 md:flex-row md:gap-8">
                     <div className="w-full">
                       <div className="text-sm my-2 uppercase font-semibold">Query Suggestions</div>
                       {result.querySuggestions?.length ? (
                         <ul>
-                          {result.querySuggestions.map((suggestion, index) => (
-                            <li className="list-none py-2 border-b border-slate-200" key={index}>
+                          {result.querySuggestions.map((suggestion: SuggestResponseQuerySuggestions) => (
+                            <li className="list-none py-2 border-b border-slate-200" key={suggestion.displayText}>
                               <Highlighter
                                 highlightClassName="bg-yellow-300 rounded"
                                 className="w-full text-sm"
@@ -153,10 +160,10 @@ export default function App() {
                       </div>
                       {result.searchSuggestions?.length ? (
                         <ul>
-                          {result.searchSuggestions.map((suggestion, index) => (
+                          {result.searchSuggestions.map((suggestion: SuggestResponseSearchSuggestions) => (
                             <li
                               className="list-none my-4 rounded overflow-hidden shadow-sm border border-slate-200"
-                              key={index}
+                              key={suggestion.pid}
                             >
                               <div className="flex gap-2">
                                 <div className="w-24">
@@ -190,8 +197,8 @@ export default function App() {
                       </div>
                       {result.attributeSuggestions?.length ? (
                         <ul>
-                          {result.attributeSuggestions.map((suggestion, index) => (
-                            <li className="list-none py-2 border-b border-slate-200" key={index}>
+                          {result.attributeSuggestions.map((suggestion: SuggestResponseAttributeSuggestions) => (
+                            <li className="list-none py-2 border-b border-slate-200" key={suggestion.name}>
                               <p className="opacity-50 text-xs uppercase">
                                 {suggestion.attributeType}
                               </p>
