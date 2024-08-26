@@ -1,6 +1,6 @@
 # Bloomreach - Autosuggest example
 
-This example demonstrates how to setup Bloomreach's autosuggest feature. See `config.js` file to configure it to run for your account and catalog
+This example demonstrates how to setup Bloomreach's autosuggest feature. See `config.ts` file to configure it to run for your account and catalog
 
 ## How to use
 
