@@ -4,6 +4,10 @@ export const domain_key = 'showcase_pacifichome';
 export const account_name = 'showcase-pacifichome.bloomreach.io';
 export const catalog_views = 'showcase_pacifichome';
 
+// Sets the pixel to debug mode, so the events will not be used as learning data for Bloomreach's
+// algorithms and you can see the pixels in realtime on Event Management
+export const debugPixel = true;
+
 // Comment the line below, if the similar products widget does not exist in your account
 export const similar_products_widget_id = '09zwz059';
 

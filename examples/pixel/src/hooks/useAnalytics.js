@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import { usePathname } from 'next/navigation';
-import { account_id, catalog_views, currency, domain_key } from '../config';
+import { account_id, catalog_views, currency, debugPixel, domain_key } from '../config';
 
 function useAnalytics() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoAnalytics', []);
@@ -22,8 +22,8 @@ function useAnalytics() {
   const constructPayload = useCallback((data) => {
     return {
       ...{
-        debug: true, // set to false in production
-        test_data: true, // set to false in production
+        debug: debugPixel, // set to false in production
+        test_data: debugPixel, // set to false in production
         acct_id: account_id,
         domain_key,
         user_id: userId,

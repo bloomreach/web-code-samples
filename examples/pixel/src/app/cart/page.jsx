@@ -33,7 +33,7 @@ export default function Page() {
 
   return (
     <div>
-      <div className="container py-4">
+      <div className="py-4">
         <div className="grid gap-8">
           <h1 className="text-2xl font-bold">Cart</h1>
           {
@@ -62,21 +62,21 @@ export default function Page() {
                           >
                             {item.subtitle}
                           </p>
-                        </div>
-                        <div className="flex items-center gap-4">
                           <div className="flex items-center gap-2">
                             <Button
                               onClick={() => decrementItem(item.id)}
                               disabled={item.count === 1}
                               type="tertiary"
                             >
-                              <MinusIcon className="h-4 w-4" />
+                              <MinusIcon className="h-4 w-4"/>
                             </Button>
                             <span>{item.count}</span>
                             <Button type="tertiary" onClick={() => incrementItem(item.id)}>
-                              <PlusIcon className="h-4 w-4" />
+                              <PlusIcon className="h-4 w-4"/>
                             </Button>
                           </div>
+                        </div>
+                        <div className="flex items-center gap-4">
                           <div className="flex gap-2 text-right items-center">
                             <p className="font-medium">
                               $
@@ -87,7 +87,7 @@ export default function Page() {
                               color="danger"
                               onClick={() => removeItem(item.id)}
                             >
-                              <TrashIcon className="h-4 w-4" />
+                              <TrashIcon className="h-4 w-4"/>
                             </Button>
                           </div>
                         </div>
