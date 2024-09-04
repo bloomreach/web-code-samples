@@ -1,10 +1,9 @@
-export const account_id = "6413";
-export const auth_key = "bcvpynhij980k0y1";
-export const domain_key = "pacifichome";
-export const account_name = "Pacific Home";
+export const account_id = "7634";
+export const auth_key = "zjlc0tsp2xu7l7ro";
+export const domain_key = "showcase_pacifichome";
+export const account_name = "showcase-pacifichome.bloomreach.io";
 
-export const visual_search_widget_id = "dl48rdp9";
-
+export const visual_search_widget_id = "p9p1r359";
 
 export const sample_images = [{
   label: 'lantern',
