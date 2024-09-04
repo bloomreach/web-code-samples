@@ -1,7 +1,7 @@
 name: CI
 run-name: ${{github.workflow}} (${{github.event_name}} on ${{ github.ref_name}})
 
-on: [push, pull_request]
+on: [push]
 
 concurrency:
   group: 'ci'
