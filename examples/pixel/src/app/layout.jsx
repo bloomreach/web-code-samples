@@ -9,8 +9,8 @@ import { Header } from './Header';
 import DeveloperToolsProvider from '../hooks/useDeveloperTools';
 import { DeveloperToolbar } from './DeveloperToolbar';
 
-import './globals.css';
 import '@bloomreach/react-banana-ui/style.css';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

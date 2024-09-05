@@ -68,11 +68,11 @@ export default function Page() {
                               disabled={item.count === 1}
                               type="tertiary"
                             >
-                              <MinusIcon className="h-4 w-4"/>
+                              <MinusIcon className="h-4 w-4" />
                             </Button>
                             <span>{item.count}</span>
                             <Button type="tertiary" onClick={() => incrementItem(item.id)}>
-                              <PlusIcon className="h-4 w-4"/>
+                              <PlusIcon className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
@@ -87,7 +87,7 @@ export default function Page() {
                               color="danger"
                               onClick={() => removeItem(item.id)}
                             >
-                              <TrashIcon className="h-4 w-4"/>
+                              <TrashIcon className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>

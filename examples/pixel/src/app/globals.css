@@ -6,3 +6,17 @@
   color: #cbd5e1;
   font-size: 11px;
 }
+/* Unset button styles from Banana UI */
+button:not(.rbui-button), button:not(.rbui-button)[type=button] {
+  outline: none;
+  display: unset;
+  height: auto;
+  width: auto;
+  padding: unset;
+  gap: unset;
+  border-radius: unset;
+  border: none;
+  background-color: transparent;
+  color: unset;
+  cursor: pointer;
+}

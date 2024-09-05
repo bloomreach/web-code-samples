@@ -59,15 +59,18 @@ export function DeveloperToolbar() {
             )
           </div>
           <div>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#" role="button" onClick={handleShowEvents} className="flex gap-1 hover:text-white">
+            <button
+              type="button"
+              onClick={handleShowEvents}
+              className="flex text-xs gap-1 items-center hover:text-white"
+            >
               Pixel events
               <span
-                className="bg-[#ffd500] rounded-full px-2 text-[#002840] font-bold"
+                className="bg-[#ffd500] rounded-full px-2 ml-1 text-[#002840] font-bold"
               >
                 {eventsCount}
               </span>
-            </a>
+            </button>
           </div>
           <div>&middot;</div>
           <ToggleField
