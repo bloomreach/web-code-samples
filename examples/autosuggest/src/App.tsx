@@ -51,7 +51,7 @@ export default function App() {
     url: "https://example.com",
     ref_url: "https://example.com",
     request_id: 12345,
-    q: query,
+    q: '',
   })
 
   const { loading, error, response: data } = useAutoSuggest(config, options);
