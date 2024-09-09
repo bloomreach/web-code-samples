@@ -14,16 +14,16 @@ import {
 } from "@bloomreach/react-banana-ui";
 import "@bloomreach/react-banana-ui/style.css";
 import {
-  SuggestResponse,
+  AutosuggestOptions,
+  Configuration,
   SuggestResponseSuggestionGroups,
   SuggestResponseQuerySuggestions,
   SuggestResponseSearchSuggestions,
   SuggestResponseAttributeSuggestions,
 } from "@bloomreach/discovery-web-sdk";
-
-import { getSuggestions } from "./api";
+import { useAutoSuggest } from "@bloomreach/limitless-ui-react";
 import { Footer } from "./Footer";
-import { account_id, account_name } from "./config";
+import { account_id, account_name, auth_key, domain_key, catalog_views } from "./config";
 import BrLogo from "./assets/br-logo-primary.svg";
 
 import "./app.css";
@@ -35,40 +35,41 @@ const formatPrice = (price: string) => {
   }).format(Number(price));
 };
 
+const config: Configuration = {
+  account_id: account_id,
+  auth_key: auth_key,
+  domain_key: domain_key,
+};
+const uid = encodeURIComponent(`uid=12345:v=11.8:ts=${Date.now()}:hc=3`);
+
 export default function App() {
   const [showJson, setShowJson] = useState<boolean>(false);
   const [query, setQuery] = useState<string>("cha");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<unknown>(null);
-  const [data, setData] = useState<SuggestResponse>({});
+  const [options, setOptions] = useState<AutosuggestOptions>({
+    _br_uid_2: uid,
+    catalog_views: catalog_views,
+    url: "https://example.com",
+    ref_url: "https://example.com",
+    request_id: 12345,
+    q: query,
+  })
 
-  const debouncedSearch = useMemo(() => _.debounce(searchSuggestions, 300), []);
+  const { loading, error, response: data } = useAutoSuggest(config, options);
+
+  const debouncedSearch = useMemo(() => _.debounce(updateOptions, 300), []);
 
   useEffect(() => {
-    if (query.length > 0) {
-      debouncedSearch(query);
-    } else {
-      setData({});
-    }
+    debouncedSearch(query);
     return () => {
       debouncedSearch.cancel();
     };
   }, [query, debouncedSearch]);
 
-  function searchSuggestions(query: string) {
-    setLoading(true);
-    setError(null);
-
-    getSuggestions(query)
-      .then((response: SuggestResponse) => {
-        setLoading(false);
-        setData(response);
-      })
-      .catch((error: unknown) => {
-        setLoading(false);
-        setError(error);
-        setData({});
-      });
+  function updateOptions(query: string) {
+    setOptions((opts: AutosuggestOptions) => ({
+      ...opts,
+      ...{q: query},
+    }));
   }
 
   const results = data?.suggestionGroups || [];

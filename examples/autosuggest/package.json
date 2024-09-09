@@ -7,7 +7,7 @@
   "main": "src/index.tsx",
   "dependencies": {
     "@bloomreach/discovery-web-sdk": "1.2.0",
-    "@bloomreach/limitless-ui-react": "0.0.2",
+    "@bloomreach/limitless-ui-react": "0.1.0",
     "@bloomreach/react-banana-ui": "1.25.0",
     "@types/lodash": "4.17.7",
     "@types/node": "22.5.0",
