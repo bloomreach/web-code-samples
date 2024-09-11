@@ -91,9 +91,9 @@ export default function Page({ params }) {
         ) : (
           <div>
             {product ? (
-              <div className="flex flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div
-                  className="w-128 gap-4 shadow-md rounded-md border border-slate-100 overflow-hidden"
+                  className="gap-4 shadow-md rounded-md border border-slate-100 overflow-hidden sm:w-1/2"
                 >
                   <img
                     src={product.thumb_image}
@@ -101,8 +101,9 @@ export default function Page({ params }) {
                     className="w-full"
                   />
                 </div>
-                <div className="flex flex-col gap-2 w-96">
+                <div className="flex flex-col gap-2 sm:w-1/2">
                   <h2 className="text-xl font-bold">{product.title}</h2>
+                  <p className="text-sm">{product.description}</p>
                   {product.variants?.length > 1 ? (
                     <p className="opacity-50">
                       {product.variants.length}
@@ -110,9 +111,10 @@ export default function Page({ params }) {
                       variants
                     </p>
                   ) : null}
-                  <Price product={product} />
-                  <p className="text-sm">{product.description}</p>
-                  <Button type="primary" onClick={() => addToCart(product)}>Add to cart</Button>
+                  <Price className="font-semibold" product={product} />
+                  <div className="flex flex-col sm:flex-row">
+                    <Button type="primary" onClick={() => addToCart(product)}>Add to cart</Button>
+                  </div>
                 </div>
               </div>
             ) : null}

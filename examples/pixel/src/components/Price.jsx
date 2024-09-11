@@ -6,7 +6,7 @@ export const formatPrice = (price) => {
 };
 
 export function Price({ product, className }) {
-  const hasDiscount = product.price !== product.sale_price;
+  const hasDiscount = product.price && product.sale_price && product.price !== product.sale_price;
 
   if (!hasDiscount) {
     return <p className={className}>{formatPrice(product.sale_price)}</p>;
@@ -14,8 +14,8 @@ export function Price({ product, className }) {
 
   return (
     <p className={className}>
-      {formatPrice(product.sale_price)}
-      <span className="line-through ml-2 opacity-50">{formatPrice(product.price)}</span>
+      {product.price ? <span className="line-through mr-2 opacity-50">{formatPrice(product.price)}</span> : null}
+      <span className="text-rose-500">{formatPrice(product.sale_price)}</span>
     </p>
   );
 }

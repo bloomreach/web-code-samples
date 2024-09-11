@@ -62,18 +62,20 @@ export default function Page() {
                           >
                             {item.subtitle}
                           </p>
-                          <div className="flex items-center gap-2">
-                            <Button
-                              onClick={() => decrementItem(item.id)}
-                              disabled={item.count === 1}
-                              type="tertiary"
-                            >
-                              <MinusIcon className="h-4 w-4" />
-                            </Button>
-                            <span>{item.count}</span>
-                            <Button type="tertiary" onClick={() => incrementItem(item.id)}>
-                              <PlusIcon className="h-4 w-4" />
-                            </Button>
+                          <div className="max-w-fit">
+                            <div className="flex items-center gap-2 border rounded-md">
+                              <Button
+                                onClick={() => decrementItem(item.id)}
+                                disabled={item.count === 1}
+                                type="tertiary"
+                              >
+                                <MinusIcon className="h-4 w-4" />
+                              </Button>
+                              <span>{item.count}</span>
+                              <Button type="tertiary" onClick={() => incrementItem(item.id)}>
+                                <PlusIcon className="h-4 w-4" />
+                              </Button>
+                            </div>
                           </div>
                         </div>
                         <div className="flex items-center gap-4">

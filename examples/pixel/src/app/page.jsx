@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import JsonView from '@uiw/react-json-view';
-import { Price } from '../components/Price';
+import { ProductCard } from '../components/ProductCard';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useSearchApi from '../hooks/useSearchApi';
 import { CONFIG } from '../constants';
@@ -43,27 +43,28 @@ export default function Home() {
             {showJson ? (
               <JsonView value={categories} collapsed={1} />
             ) : (
-              <div className="flex flex-row flex-wrap gap-4">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                 {categories.map((category) => (
-                  <Link
-                    href={`/categories/${category.cat_id}`}
-                    className="w-56 rounded-md border border-slate-200 bg-gray-50 hover:bg-cyan-50"
-                    key={category.cat_id}
-                  >
-                    <div className="flex flex-col gap-2">
-                      <div className="p-3">
-                        <div
-                          className="w-full text-sm font-bold"
-                        >
-                          {category.cat_name}
-                          {' '}
-                          (
-                          {category.count}
-                          )
+                  <div key={category.cat_id} className="flex">
+                    <Link
+                      href={`/categories/${category.cat_id}`}
+                      className="w-full rounded-md border border-slate-200 bg-gray-50 hover:bg-cyan-50"
+                    >
+                      <div className="flex flex-col gap-2">
+                        <div className="p-3">
+                          <div
+                            className="w-full text-sm font-bold"
+                          >
+                            {category.cat_name}
+                            {' '}
+                            (
+                            {category.count}
+                            )
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 ))}
               </div>
             )}
@@ -82,31 +83,9 @@ export default function Home() {
               <div className="w-full">
                 {!loading && data?.response?.docs?.length ? (
                   <div className="flex flex-col">
-                    <div className="flex flex-row flex-wrap">
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                       {data?.response?.docs.map((product) => (
-                        <Link
-                          href={`/products/${product.pid}`}
-                          className="m-2 w-56 shadow-md rounded-md border border-slate-100"
-                          key={product.pid}
-                        >
-                          <div className="flex flex-col gap-2">
-                            <div className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
-                              <img
-                                src={product.thumb_image}
-                                alt={product.title}
-                                className="mr-2 w-full object-cover object-top"
-                              />
-                            </div>
-                            <div className="p-2 pt-0">
-                              <div
-                                className="w-full text-sm"
-                              >
-                                <div className="font-bold">{product.title}</div>
-                                <Price className="text-sm" product={product} />
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
+                        <ProductCard key={product.pid} className="flex" product={product} href={`/products/${product.pid}`} />
                       ))}
                     </div>
                   </div>

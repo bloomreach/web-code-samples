@@ -7,7 +7,7 @@ import JsonView from '@uiw/react-json-view';
 import { LoaderIcon, Pagination } from '@bloomreach/react-banana-ui';
 import { Breadcrumbs } from './breadcrumbs';
 import { CategoryNav } from './category-nav';
-import { Price } from '../../../components/Price';
+import { ProductCard } from '../../../components/ProductCard';
 
 import { buildCategoryHierarchy, getActiveCategories } from './utils';
 import useAnalytics from '../../../hooks/useAnalytics';
@@ -129,29 +129,9 @@ export default function Page({ params, searchParams }) {
                 )}
                 {data?.response?.docs?.length ? (
                   <div className="flex flex-col">
-                    <div className="flex flex-row flex-wrap gap-4">
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                       {data?.response?.docs.map((product) => (
-                        <Link
-                          className="m-2 w-48 shadow-md rounded-md border border-slate-100"
-                          href={`/products/${product.pid}`}
-                          key={product.pid}
-                        >
-                          <div className="flex flex-col gap-2">
-                            <div className="w-full rounded-t-md overflow-hidden border-b border-slate-200 ">
-                              <img
-                                src={product.thumb_image}
-                                alt=""
-                                className="mr-2 w-full"
-                              />
-                            </div>
-                            <div className="p-2 pt-0 flex flex-col gap-2">
-                              <div className="w-full text-sm font-bold">
-                                {product.title}
-                              </div>
-                              <Price className="text-sm" product={product} />
-                            </div>
-                          </div>
-                        </Link>
+                        <ProductCard key={product.pid} className="flex" product={product} href={`/products/${product.pid}`} />
                       ))}
                     </div>
                     {data.response.numFound > 0 ? (
