@@ -3,10 +3,9 @@
 import { useEffect, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Highlighter from 'react-highlight-words';
 import JsonView from '@uiw/react-json-view';
 import { Pagination } from '@bloomreach/react-banana-ui';
-import { Price } from '../../components/Price';
+import { ProductCard } from '../../components/ProductCard';
 import useAnalytics from '../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../hooks/useDeveloperTools';
 import useSearchApi from '../../hooks/useSearchApi';
@@ -72,7 +71,7 @@ export default function Page({ searchParams }) {
         {showJson ? (
           <JsonView value={data} collapsed={1} />
         ) : (
-          <div className="w-full">
+          <div className="flex flex-col gap-4">
             <div className="flex">
               <div className="grow text-sm my-2">
                 Search results for
@@ -118,44 +117,16 @@ export default function Page({ searchParams }) {
             </div>
 
             {data?.response?.docs?.length ? (
-              <div className="flex flex-col">
-                <div className="flex flex-row flex-wrap">
+              <div className="flex flex-col gap-8">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-8">
                   {data?.response?.docs.map((product) => (
-                    <Link
-                      href={`/products/${product.pid}`}
-                      className="m-2 w-56 shadow-md rounded-md border border-slate-100"
-                      key={product.pid}
-                    >
-                      <div className="flex flex-col gap-2">
-                        <div className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
-                          <img
-                            src={product.thumb_image}
-                            alt={product.title}
-                            className="mr-2 w-full object-cover object-top"
-                          />
-                        </div>
-                        <div className="p-2 pt-0">
-                          <Highlighter
-                            highlightClassName="bg-[#ffd500] rounded"
-                            className="w-full text-sm font-bold"
-                            searchWords={[searchedQuery]}
-                            textToHighlight={product.title}
-                          />
-                          {product.variants?.length > 1 ? (
-                            <p className="text-sm opacity-50 mb-1">
-                              {product.variants.length}
-                              {' '}
-                              variants
-                            </p>
-                          ) : null}
-                          <Price className="text-sm" product={product} />
-                        </div>
-                      </div>
-                    </Link>
+                    <div key={product.pid} className="flex">
+                      <ProductCard product={product} highlight={searchedQuery} href={`/products/${product.pid}`} />
+                    </div>
                   ))}
                 </div>
                 {data.response.numFound > 0 ? (
-                  <div className="my-8">
+                  <div>
                     <Pagination
                       count={data.response.numFound}
                       itemsPerPage={parseInt(rows, 10)}
