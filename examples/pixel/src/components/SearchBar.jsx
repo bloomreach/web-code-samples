@@ -376,7 +376,7 @@ function SearchBarComponent() {
                     </div>
                     <div
                       className={`${activeIndex === 0 ? 'bg-slate-100' : ''}
-                        flex border-t border-slate-200 p-2 mt-2
+                        flex border-t border-slate-200 p-4 mt-2
                         cursor-pointer hover:bg-slate-100 items-center
                       `}
                       {...getItemProps({
