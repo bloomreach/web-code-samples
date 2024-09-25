@@ -197,11 +197,11 @@ export default function Home() {
             {loading ? <div className="text-sm text-slate-500">Loading...</div> : null}
             {!loading && data?.response ? (
               <div className="w-full flex flex-col gap-4">
-                <div className="flex flex-row flex-wrap gap-4">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                   {data?.response?.docs?.map((product: any) => {
                     return (
                       <div
-                        className="m-2 w-56 shadow-md rounded-md border border-slate-100"
+                        className="shadow-md rounded-md border border-slate-100"
                         key={product.pid}
                       >
                         <div className="flex flex-col gap-2">

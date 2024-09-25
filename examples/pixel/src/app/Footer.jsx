@@ -3,8 +3,8 @@ import { ExternalLinkIcon } from '@bloomreach/react-banana-ui';
 export function Footer() {
   return (
     <div className="footer mt-4 border-t p-4">
-      <div className="max-w-5xl mx-auto flex flex-row gap-4">
-        <div className="flex flex-col gap-4 w-80">
+      <div className="max-w-5xl mx-auto flex flex-col gap-4 md:flex-row md:gap-2">
+        <div className="flex flex-col gap-4 md:w-64">
           <div className="text-lg font-semibold">
             <img src="/br-experience-discovery-full.svg" alt="" className="w-32" />
           </div>
@@ -23,7 +23,7 @@ export function Footer() {
             Get in touch
           </a>
         </div>
-        <div className="w-64">
+        <div className="md:w-64">
           <div className="text-md font-semibold mb-2">About</div>
           <p className="text-sm">
             This code sample shows how to instrument pixel across a simple storefront
@@ -40,72 +40,113 @@ export function Footer() {
               <ExternalLinkIcon size={12} />
             </a>
           </div>
-          <div className="my-2 text-sm">
-            <a
-              target="_blank"
-              className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
-              href="https://github.com/bloomreach/web-code-samples"
-              rel="noreferrer"
-            >
-              See other code samples
-              {' '}
-              <ExternalLinkIcon size={12} />
-            </a>
-          </div>
         </div>
         <div className="grow">
           <div className="text-md font-semibold mb-2">
             Related documentation
           </div>
-          <ul className="list-none text-sm">
-            <li className="mb-2">
+          <ul className="list-none text-sm flex flex-col gap-2">
+            <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
                 href="https://documentation.bloomreach.com/discovery/docs/pixel-overview"
                 rel="noreferrer"
               >
                 Pixel overview
+                {' '}
+                <ExternalLinkIcon size={12} />
               </a>
             </li>
-            <li className="mb-2">
+            <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
                 href="https://documentation.bloomreach.com/discovery/docs/pixel-reference"
                 rel="noreferrer"
               >
                 Pixel reference
+                {' '}
+                <ExternalLinkIcon size={12} />
               </a>
             </li>
-            <li className="mb-2">
+            <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
                 href="https://documentation.bloomreach.com/discovery/docs/virtual-page-view-pixel"
                 rel="noreferrer"
               >
                 Single page application tracking
+                {' '}
+                <ExternalLinkIcon size={12} />
               </a>
             </li>
-            <li className="mb-2">
+            <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
                 href="https://documentation.bloomreach.com/discovery/docs/using-tag-manager"
                 rel="noreferrer"
               >
                 Tag manager pixel integration
+                {' '}
+                <ExternalLinkIcon size={12} />
               </a>
             </li>
-            <li className="mb-2">
+          </ul>
+        </div>
+        <div className="grow">
+          <div className="text-md font-semibold mb-2">
+            Developer resources
+          </div>
+          <ul className="list-none text-sm flex flex-col gap-2">
+            <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline"
-                href="https://documentation.bloomreach.com/discovery/docs/bloomreach-discovery-sdk-1"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                href="https://documentation.bloomreach.com/discovery/docs/discovery-sdks"
                 rel="noreferrer"
               >
                 Bloomreach SDK
+                {' '}
+                <ExternalLinkIcon size={12} />
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                href="https://bloomreach.github.io/limitless-ui-react"
+                rel="noreferrer"
+              >
+                Limitless commerce UI kit
+                {' '}
+                <ExternalLinkIcon size={12} />
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                href="https://documentation.bloomreach.com/discovery/docs/discovery-web-code-samples"
+                rel="noreferrer"
+              >
+                Web code samples
+                {' '}
+                <ExternalLinkIcon size={12} />
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                href="https://github.com/bloomreach/sample-catalogs"
+                rel="noreferrer"
+              >
+                Sample catalogs
+                {' '}
+                <ExternalLinkIcon size={12} />
               </a>
             </li>
           </ul>

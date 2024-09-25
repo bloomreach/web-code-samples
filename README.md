@@ -28,6 +28,12 @@ This repository holds code samples that demonstrate how to implement the various
 - Do not make a code sample that is too complex or has too many dependencies. Keep in mind long term maintenance of a code sample, as the underlying APIs and the libraries are updated over time.
 - If a code sample stops working, it should be removed.
 
+## Related resources
+
+- [Bloomreach SDK](https://documentation.bloomreach.com/discovery/docs/discovery-sdks)
+- [Limitless Commerce UI Kit](https://bloomreach.github.io/limitless-ui-react)
+- [Sample Catalogs](https://github.com/bloomreach/sample-catalogs)
+
 ## Contributing
 
 Contributions are welcome. Please read the guidelines above and open a pull request and one of our team members will help get it reviewed and merged
