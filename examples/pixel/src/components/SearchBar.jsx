@@ -228,6 +228,24 @@ function SearchBarComponent() {
                 {error ? <JsonView value={error} /> : null}
                 {query && data ? (
                   <div>
+                    <div
+                      className={`${activeIndex === 0 ? 'bg-slate-100' : ''}
+                        flex border-b border-slate-200 py-2 px-4 mb-1
+                        cursor-pointer hover:bg-slate-100 items-center
+                      `}
+                      {...getItemProps({
+                        ref(node) {
+                          listRef.current[0] = node;
+                        },
+                      })}
+                    >
+                      <div className="text-sm grow">
+                        Search for:
+                        {' '}
+                        <span className="font-bold">{query}</span>
+                      </div>
+                      <ArrowRightIcon />
+                    </div>
                     <div className="flex flex-col gap-2 mt-4 rounded sm:flex-row">
                       <div className="flex flex-col gap-4 px-2 grow sm:w-1/3">
                         <div>
@@ -268,6 +286,7 @@ function SearchBarComponent() {
                                   </a>
                                   <Button
                                     type="tertiary"
+                                    className="p-2"
                                     onClick={() => setNewQuery(suggestion.displayText)}
                                   >
                                     <ArrowLeftIcon className="rotate-45" />
@@ -326,7 +345,7 @@ function SearchBarComponent() {
                           Product Suggestions
                         </div>
                         {productSuggestions.length ? (
-                          <div className="flex flex-wrap">
+                          <div className="flex flex-col sm:flex-row sm:flex-wrap">
                             {productSuggestions.map((suggestion, index) => (
                               <a
                                 role="button"
@@ -343,53 +362,40 @@ function SearchBarComponent() {
                                     handleProductSelect(suggestion.pid);
                                   },
                                 })}
-                                className="flex list-none w-1/3 px-2 pb-4"
+                                className="flex flex-col sm:flex-row sm:w-1/3 sm:px-2 sm:py-2"
                               >
                                 <div className={`
-                              ${activeIndex === index + productIndexOffset ? 'bg-slate-100' : ''}
-                              flex flex-col gap-2 border border-slate-200 rounded-md cursor-pointer shadow-sm
-                              `}
+                                ${activeIndex === index + productIndexOffset ? 'bg-slate-100' : ''}
+                                 p-2 flex gap-2 cursor-pointer border-b border-slate-200
+                                 sm:p-0 sm:flex-col sm:border sm:rounded-md sm:shadow-sm
+                                `}
                                 >
                                   <img
-                                    className="rounded-t-md"
+                                    className="rounded-md sm:rounded-t-md w-16 border
+                                    border-slate-200 sm:w-full sm:border-0"
                                     src={suggestion.thumb_image}
                                     alt={suggestion.title}
                                   />
-                                  <Highlighter
-                                    highlightClassName="bg-transparent font-bold"
-                                    className="w-full text-sm px-2 pt-1 grow"
-                                    searchWords={[query]}
-                                    textToHighlight={suggestion.title}
-                                  />
-                                  <Price
-                                    className="text-sm px-2 opacity-50 pb-1"
-                                    product={suggestion}
-                                  />
+                                  <div className="flex flex-col gap-2">
+                                    <Highlighter
+                                      highlightClassName="bg-transparent font-bold"
+                                      className="w-full text-sm px-2 pt-1 sm:grow"
+                                      searchWords={[query]}
+                                      textToHighlight={suggestion.title}
+                                    />
+                                    <Price
+                                      className="text-sm px-2 opacity-50 pb-1"
+                                      product={suggestion}
+                                    />
+                                  </div>
                                 </div>
                               </a>
                             ))}
                           </div>
                         ) : (
-                          <div className="text-sm px-2">NA</div>
+                          <div className="text-sm text-slate-500 px-2">NA</div>
                         )}
                       </div>
-                    </div>
-                    <div
-                      className={`${activeIndex === 0 ? 'bg-slate-100' : ''}
-                        flex border-t border-slate-200 p-4 mt-2
-                        cursor-pointer hover:bg-slate-100 items-center
-                      `}
-                      {...getItemProps({
-                        ref(node) {
-                          listRef.current[0] = node;
-                        },
-                      })}
-                    >
-                      <div className="text-sm grow">
-                        Search for:{" "}
-                        <span className="font-bold">{query}</span>
-                      </div>
-                      <ArrowRightIcon className="" />
                     </div>
                   </div>
                 ) : null}

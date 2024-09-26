@@ -161,10 +161,10 @@ export default function App() {
 
                 {data?.response?.docs?.length ? (
                   <div className="flex flex-col">
-                    <div className="flex flex-row flex-wrap">
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                       {data?.response?.docs.map((product, index) => (
                         <div
-                          className="m-2 w-56 shadow-md rounded-md border border-slate-100"
+                          className="shadow-md rounded-md border border-slate-100"
                           key={product.pid}
                         >
                           <div className="flex flex-col gap-2">
