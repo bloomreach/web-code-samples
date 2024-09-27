@@ -68,7 +68,7 @@ export function DeveloperToolbar() {
               <span
                 className="bg-[#ffd500] rounded-full px-2 ml-1 text-[#002840] font-bold"
               >
-                {eventsCount}
+                {eventsCount > 25 ? '25+' : eventsCount}
               </span>
             </button>
           </div>

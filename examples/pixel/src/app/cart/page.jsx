@@ -6,16 +6,14 @@ import { Button, MinusIcon, PlusIcon, TrashIcon } from '@bloomreach/react-banana
 import { useIntersectionObserver } from 'usehooks-ts';
 import { useEffect, useState } from 'react';
 import useCart from '../../hooks/useCart';
-import useRecommendationsApi from '../../hooks/useRecommendationsApi';
 import { similar_products_widget_id } from '../../config';
-import { ProductsCarouselWidget } from '../../components/ProductsCarouselWidget';
-import { CONFIG } from '../../constants';
+
+import { ItemBasedRecommendationsWidget } from '../../components/ItemBasedRecommendationsWidget';
 
 export default function Page() {
   const router = useRouter();
   const { cart, incrementItem, decrementItem, removeItem, cartCount, cartTotal } = useCart();
-  const [recOptions, setRecOptions] = useState({});
-  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, CONFIG, recOptions);
+  const [recPids, setRecPids] = useState([]);
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,
@@ -23,12 +21,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    setRecOptions({
-      item_ids: cart.map((item) => item.id).join(','),
-      filter: `-pid:(${cart.map((item) => `"${item.id}"`).join(' OR ')})`,
-      rows: 4,
-      start: 0,
-    });
+    setRecPids(cart.map((item) => item.id));
   }, [cart]);
 
   return (
@@ -116,8 +109,13 @@ export default function Page() {
                     </div>
                   </div>
                   <div className="w-full" ref={ref}>
-                    {isIntersecting && similarProducts && (
-                    <ProductsCarouselWidget title="Recommendations based on items in cart" data={similarProducts} />)}
+                    {isIntersecting && (
+                      <ItemBasedRecommendationsWidget
+                        widgetId={similar_products_widget_id}
+                        title="Recommendations based on items in cart"
+                        pids={recPids}
+                      />
+                    )}
                   </div>
                 </>
               )

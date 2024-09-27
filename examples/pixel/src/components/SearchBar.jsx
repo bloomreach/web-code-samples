@@ -228,7 +228,8 @@ function SearchBarComponent() {
                 {error ? <JsonView value={error} /> : null}
                 {query && data ? (
                   <div>
-                    <div
+                    <a
+                      href={`/products?q=${query}`}
                       className={`${activeIndex === 0 ? 'bg-slate-100' : ''}
                         flex border-b border-slate-200 py-2 px-4 mb-1
                         cursor-pointer hover:bg-slate-100 items-center
@@ -236,6 +237,10 @@ function SearchBarComponent() {
                       {...getItemProps({
                         ref(node) {
                           listRef.current[0] = node;
+                        },
+                        onClick(e) {
+                          e.preventDefault();
+                          handleQuerySuggestionSelect(query);
                         },
                       })}
                     >
@@ -245,7 +250,7 @@ function SearchBarComponent() {
                         <span className="font-bold">{query}</span>
                       </div>
                       <ArrowRightIcon />
-                    </div>
+                    </a>
                     <div className="flex flex-col gap-2 mt-4 rounded sm:flex-row">
                       <div className="flex flex-col gap-4 px-2 grow sm:w-1/3">
                         <div>
