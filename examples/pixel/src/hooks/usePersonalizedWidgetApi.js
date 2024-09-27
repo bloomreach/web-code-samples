@@ -4,17 +4,13 @@ import { useCookies } from 'react-cookie';
 import { BR_COOKIE } from '../constants';
 import { product_fields } from '../config';
 
-function useRecommendationsApi(widgetId, config, options) {
+function usePersonalizedWidgetApi(widgetId, config, options) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cookies] = useCookies([BR_COOKIE]);
 
   useEffect(() => {
-    if (!widgetId || !options.item_ids) {
-      return;
-    }
-
     setLoading(true);
     getItemWidget(
       widgetId,
@@ -43,4 +39,4 @@ function useRecommendationsApi(widgetId, config, options) {
 
   return { data, loading, error };
 }
-export default useRecommendationsApi;
+export default usePersonalizedWidgetApi;

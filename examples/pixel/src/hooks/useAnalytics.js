@@ -155,7 +155,7 @@ function useAnalytics() {
         break;
     }
 
-    setEvents(_.take([...[{ ...payload, ...{ event: data.event } }], ...events], 25));
+    setEvents(_.take([...[{ ...payload, ...{ event: data.event } }], ...events], 26));
   }, [constructPayload, events, setEvents]);
 
   function clearEvents() {

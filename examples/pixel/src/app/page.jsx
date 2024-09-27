@@ -3,9 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import JsonView from '@uiw/react-json-view';
+import { useIntersectionObserver } from 'usehooks-ts';
 import { ProductCard } from '../components/ProductCard';
 import { useDeveloperTools } from '../hooks/useDeveloperTools';
 import useSearchApi from '../hooks/useSearchApi';
+import { PersonalizedWidget } from '../components/PersonalizedWidget';
+import { recently_viewed_widget_id } from '../config';
 import { CONFIG } from '../constants';
 
 function getRandomCategories(data) {
@@ -26,6 +29,11 @@ export default function Home() {
     q: '*',
     rows: 12,
   });
+  const [ref, isIntersecting] = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: '0px',
+  });
   const { loading, error, data } = useSearchApi('bestseller', CONFIG, options);
 
   useEffect(() => {
@@ -38,10 +46,10 @@ export default function Home() {
     <div>
       {loading ? <div>Loading...</div> : (
         <>
-          <div className="font-medium my-4 mt-8 uppercase opacity-50">Shop by category</div>
+          <div className="font-semibold text-xl my-4 mt-8 opacity-80">Shop by category</div>
           <div className="flex flex-col">
             {showJson ? (
-              <JsonView value={categories} collapsed={1} />
+              <JsonView value={categories} collapsed={1}/>
             ) : (
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                 {categories.map((category) => (
@@ -69,7 +77,7 @@ export default function Home() {
               </div>
             )}
           </div>
-          <div className="font-medium mt-8 uppercase opacity-50">Shop our best sellers</div>
+          <div className="font-semibold mt-8 text-xl opacity-80">Shop our best sellers</div>
           {error && (
             <div>
               <h1 className="text-lg">Error: </h1>
@@ -94,6 +102,10 @@ export default function Home() {
                 )}
               </div>
             )}
+          </div>
+
+          <div className="w-full mt-8" ref={ref}>
+            {isIntersecting && (<PersonalizedWidget widgetId={recently_viewed_widget_id}/>)}
           </div>
         </>
       )}

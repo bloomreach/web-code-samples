@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import JsonView from '@uiw/react-json-view';
 import { Button } from '@bloomreach/react-banana-ui';
 import { useIntersectionObserver } from 'usehooks-ts';
@@ -8,9 +8,8 @@ import { Price } from '../../../components/Price';
 import useCart from '../../../hooks/useCart';
 import useAnalytics from '../../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../../hooks/useDeveloperTools';
-import { ProductsCarouselWidget } from '../../../components/ProductsCarouselWidget';
+import { ItemBasedRecommendationsWidget } from '../../../components/ItemBasedRecommendationsWidget';
 import useSearchApi from '../../../hooks/useSearchApi';
-import useRecommendationsApi from '../../../hooks/useRecommendationsApi';
 import { similar_products_widget_id } from '../../../config';
 import { CONFIG } from '../../../constants';
 
@@ -20,9 +19,8 @@ export default function Page({ params }) {
   const { addItem } = useCart();
   const { trackEvent } = useAnalytics();
   const [options, setOptions] = useState({});
-  const [recOptions, setRecOptions] = useState({});
+  const [recPids, setRecPids] = useState([]);
   const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
-  const { data: similarProducts } = useRecommendationsApi(similar_products_widget_id, CONFIG, recOptions);
   const [ref, isIntersecting] = useIntersectionObserver({
     threshold: 0,
     root: null,
@@ -36,29 +34,26 @@ export default function Page({ params }) {
         rows: 1,
         fq: `pid:"${pid}"`,
       });
-      setRecOptions({
-        item_ids: pid,
-        filter: `-pid:("${pid}")`,
-        rows: 4,
-        start: 0,
-      });
+
+      setRecPids([pid]);
     }
   }, [pid]);
 
-  const product = data?.response?.docs[0];
-  const sku = product?.variants.length ? product.variants[0].skuid : undefined;
+  const product = useMemo(() => data?.response?.docs[0], [data]);
+  const sku = useMemo(() => product && product.variants.length ? product.variants[0].skuid : undefined, [product]);
+  const title = useMemo(() => product ? product.title : undefined, [product]);
 
   useEffect(() => {
-    if (!product) {
+    if (!pid || !title) {
       return;
     }
     trackEvent({
       event: 'view_product',
-      pid: product.pid,
-      title: product.title,
+      pid,
+      title,
       sku,
     });
-  }, [product, sku]);
+  }, [pid, sku]);
 
   const addToCart = (item) => {
     addItem({
@@ -122,7 +117,7 @@ export default function Page({ params }) {
         )}
       </div>
       <div className="w-full" ref={ref}>
-        {isIntersecting && similarProducts && (<ProductsCarouselWidget data={similarProducts} />)}
+        {isIntersecting && (<ItemBasedRecommendationsWidget widgetId={similar_products_widget_id} pids={recPids} />)}
       </div>
     </div>
   );
