@@ -48,11 +48,12 @@ export default function App() {
   const [options, setOptions] = useState<AutosuggestOptions>({
     _br_uid_2: uid,
     catalog_views: catalog_views,
-    url: "https://example.com",
-    ref_url: "https://example.com",
-    request_id: 12345,
+    url: window.location.href,
+    ref_url: window.location.href,
+    request_id: Date.now(),
+    br_diagnostic: 'all',
     q: '',
-  })
+  } as AutosuggestOptions)
 
   const { loading, error, response: data } = useAutoSuggest(config, options);
 

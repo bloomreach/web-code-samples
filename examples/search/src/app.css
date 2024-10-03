@@ -11,3 +11,11 @@ If the tailwind play cdn javascript is not working, uncomment the block below an
   color: var(--banana-neutral-100);
   font-size: 11px;
 }
+
+.lcui-product-card-price-value--crossed {
+  text-decoration: line-through;
+}
+
+.lcui-product-card-price-value--sale {
+  color: crimson;
+}
