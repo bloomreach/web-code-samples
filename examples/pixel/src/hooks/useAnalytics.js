@@ -10,7 +10,6 @@ function useAnalytics() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoAnalytics', []);
   const [userId, setUserId] = useLocalStorage('BrPixelDemoUserId', '');
   const [eventsCount, setEventsCount] = useState(0);
-  const pathname = usePathname();
 
   useEffect(() => {
     setEventsCount(events.length);

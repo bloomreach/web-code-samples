@@ -33,7 +33,6 @@ export function ItemBasedRecommendationsWidget({ title = 'Similar products', wid
     });
   }, [data]);
 
-
   if (!data?.response) {
     return null;
   }
