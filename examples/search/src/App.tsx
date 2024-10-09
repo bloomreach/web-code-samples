@@ -10,12 +10,13 @@ import {
   Configuration,
   ProductSearchOptions,
 } from "@bloomreach/discovery-web-sdk";
-import { ProductCard, useSearch } from '@bloomreach/limitless-ui-react';
+import { ProductCard, useSearch, Theme } from '@bloomreach/limitless-ui-react';
 import _ from "lodash";
 import Highlighter from "react-highlight-words";
 import JsonView from "@uiw/react-json-view";
 
 import "@bloomreach/react-banana-ui/style.css";
+import "@bloomreach/limitless-ui-react/style.css";
 import { Footer } from "./Footer";
 import { account_id, account_name, auth_key, domain_key, product_fields } from "./config";
 import BrLogo from "./assets/br-logo-primary.svg";
@@ -151,7 +152,7 @@ export default function App() {
               {showJson ? (
                 <>{data ? <JsonView value={data} collapsed={1} /> : null}</>
               ) : (
-                <div className="w-full">
+                <Theme className="w-full">
                   <div className="flex mb-4 items-center">
                     <div className="grow text-sm my-2">
                       Search results for{" "}
@@ -198,29 +199,22 @@ export default function App() {
                     <div className="flex flex-col">
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                         {data?.response?.docs.map((product) => (
-                          <ProductCard.Root
-                            className="flex flex-col shadow-md rounded-md border border-slate-100"
-                            key={product.pid}
-                          >
-                            <ProductCard.Header className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
-                              <img src={product.thumb_image} alt={product.title} className="mr-2 w-full object-cover object-top" />
+                          <ProductCard.Root key={product.pid} className="shadow-md">
+                            <ProductCard.Header>
+                              <ProductCard.Image src={product.thumb_image} alt={product.title}  />
                             </ProductCard.Header>
-                            <ProductCard.Body className="flex flex-col grow p-2">
+                            <ProductCard.Body>
                               <Highlighter
                                 className="w-full text-sm font-bold"
                                 searchWords={[searchedQuery]}
                                 textToHighlight={product.title}
                               />
                               {product.variants?.length > 1 ? (
-                                <ProductCard.SubTitle className="text-sm opacity-60">
-                                  {product.variants.length}
-                                  {' '}
-                                  variants
-                                </ProductCard.SubTitle>
+                                <ProductCard.SubTitle>{`${product.variants.length} variants`}</ProductCard.SubTitle>
                               ) : null}
                             </ProductCard.Body>
-                            <ProductCard.Footer className="flex flex-col gap-2 p-2">
-                              <ProductCard.Price className="text-sm flex gap-2" price={product.price} salePrice={product.sale_price} />
+                            <ProductCard.Footer>
+                              <ProductCard.Price price={product.price} salePrice={product.sale_price} />
                             </ProductCard.Footer>
                           </ProductCard.Root>
                         ))}
@@ -243,7 +237,7 @@ export default function App() {
                   ) : (
                     <div className="text-sm text-slate-500">No results!</div>
                   )}
-                </div>
+                </Theme>
               )}
             </div>
           ) : null}
