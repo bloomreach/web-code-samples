@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import JsonView from '@uiw/react-json-view';
 import { LoaderIcon, Pagination } from '@bloomreach/react-banana-ui';

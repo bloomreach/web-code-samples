@@ -10,7 +10,6 @@ function useAnalytics() {
   const [events, setEvents] = useLocalStorage('BrPixelDemoAnalytics', []);
   const [userId, setUserId] = useLocalStorage('BrPixelDemoUserId', '');
   const [eventsCount, setEventsCount] = useState(0);
-  const pathname = usePathname();
 
   useEffect(() => {
     setEventsCount(events.length);
@@ -27,7 +26,7 @@ function useAnalytics() {
         acct_id: account_id,
         domain_key,
         user_id: userId,
-        orig_ref_url: `${window.location.origin}${pathname}`,
+        explicit_referrer: window.__BR_PRIOR_REFERRER__ ? window.__BR_PRIOR_REFERRER__ : document.referrer,
       },
       ...data,
     };
@@ -44,8 +43,12 @@ function useAnalytics() {
           prod_name: data.title,
           sku: data.sku,
         };
+        // for initial load, when the tracker script has not loaded, this will ensure that the view event
+        // fires after the tracker script loads
+        window.br_data = constructPayload(payload);
         window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
         window.BrTrk?.getTracker().logPageView();
+        window.__BR_PRIOR_REFERRER__ = window.location.href;
         break;
       case 'view_category':
         payload = {
@@ -53,18 +56,24 @@ function useAnalytics() {
           cat_id: data.cat_id,
           cat: data.cat_crumb,
         };
+        // for initial load, when the tracker script has not loaded, this will ensure that the view event
+        // fires after the tracker script loads
+        window.br_data = constructPayload(payload);
         window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
         window.BrTrk?.getTracker().logPageView();
-
+        window.__BR_PRIOR_REFERRER__ = window.location.href;
         break;
       case 'view_search':
         payload = {
           ptype: 'search',
           search_term: data.query,
         };
-
+        // for initial load, when the tracker script has not loaded, this will ensure that the view event
+        // fires after the tracker script loads
+        window.br_data = constructPayload(payload);
         window.BrTrk?.getTracker().updateBrData(constructPayload(payload));
         window.BrTrk?.getTracker().logPageView();
+        window.__BR_PRIOR_REFERRER__ = window.location.href;
         break;
       case 'view_conversion':
         payload = {
@@ -134,15 +143,17 @@ function useAnalytics() {
         payload = {
           wid: data.widgetId,
           wty: data.widgetType,
+          wq: data.widgetQuery, // Applicable for query widgets like search, category, past_purchases widgets
           wrid: data.widgetRequestId,
         };
 
-        window.BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload), true);
+        window.BrTrk?.getTracker().logEvent('widget', 'widget-view', constructPayload(payload));
         break;
       case 'event_widgetClick':
         payload = {
           wid: data.widgetId,
           wty: data.widgetType,
+          wq: data.widgetQuery, // Applicable for query widgets like search, category, past_purchases widgets
           wrid: data.widgetRequestId,
           item_id: data.itemId,
         };

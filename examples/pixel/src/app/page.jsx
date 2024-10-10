@@ -49,7 +49,7 @@ export default function Home() {
           <div className="font-semibold text-xl my-4 mt-8 opacity-80">Shop by category</div>
           <div className="flex flex-col">
             {showJson ? (
-              <JsonView value={categories} collapsed={1}/>
+              <JsonView value={categories} collapsed={1} />
             ) : (
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                 {categories.map((category) => (
@@ -105,7 +105,7 @@ export default function Home() {
           </div>
 
           <div className="w-full mt-8" ref={ref}>
-            {isIntersecting && (<PersonalizedWidget widgetId={recently_viewed_widget_id}/>)}
+            {isIntersecting && (<PersonalizedWidget widgetId={recently_viewed_widget_id} />)}
           </div>
         </>
       )}

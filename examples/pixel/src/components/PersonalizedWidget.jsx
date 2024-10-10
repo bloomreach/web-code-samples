@@ -22,7 +22,6 @@ export function PersonalizedWidget({ widgetId, title = 'Recently viewed products
     });
   }, [data]);
 
-
   if (!data?.response) {
     return null;
   }

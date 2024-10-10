@@ -40,8 +40,8 @@ export default function Page({ params }) {
   }, [pid]);
 
   const product = useMemo(() => data?.response?.docs[0], [data]);
-  const sku = useMemo(() => product && product.variants.length ? product.variants[0].skuid : undefined, [product]);
-  const title = useMemo(() => product ? product.title : undefined, [product]);
+  const sku = useMemo(() => ((product && product.variants.length) ? product.variants[0].skuid : undefined), [product]);
+  const title = useMemo(() => (product ? product.title : undefined), [product]);
 
   useEffect(() => {
     if (!pid || !title) {
