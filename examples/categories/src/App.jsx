@@ -4,6 +4,7 @@ import JsonView from "@uiw/react-json-view";
 import {
   ToggleField,
   LoaderIcon,
+  ExternalLinkIcon,
 } from "@bloomreach/react-banana-ui";
 import "@bloomreach/react-banana-ui/style.css";
 
@@ -91,6 +92,14 @@ export default function App() {
             checked={showJson}
             onChange={() => setShowJson(!showJson)}
           />
+          <a
+            href="https://github.com/bloomreach/web-code-samples/discussions/new"
+            target="_blank"
+            className="flex gap-2 items-center font-semibold bg-amber-300 text-slate-800 mx-2 px-2 rounded"
+          >
+            Feedback
+            <ExternalLinkIcon size={10}/>
+          </a>
         </div>
       </div>
       <div className="app p-2 max-w-5xl w-full mx-auto grow">

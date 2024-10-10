@@ -7,6 +7,7 @@ import {
   InputField,
   SearchIcon,
   LoaderIcon,
+  ExternalLinkIcon,
   TabPanel,
   Tab,
   Tabs,
@@ -85,17 +86,25 @@ export default function App() {
           <ToggleField
             className="text-slate-300 toggle-field"
             label="Show JSON"
-            inputProps={{ id: "show-json-toggle" }}
+            inputProps={{id: "show-json-toggle"}}
             checked={showJson}
             onChange={() => setShowJson(!showJson)}
           />
+          <a
+          href="https://github.com/bloomreach/web-code-samples/discussions/new"
+          target="_blank"
+          className="flex gap-2 items-center font-semibold bg-amber-300 text-slate-800 mx-2 px-2 rounded"
+          >
+            Feedback
+            <ExternalLinkIcon size={10}/>
+          </a>
         </div>
       </div>
       <div className="app p-2 max-w-5xl w-full mx-auto grow">
         <div className="flex gap-2 items-center mt-4 mb-8">
           <div className="flex gap-2 items-center grow">
             <a href="https://bloomreach.com" target="_blank">
-              <img src={BrLogo} width={150} />
+              <img src={BrLogo} width={150}/>
             </a>
             <span>✨</span>
             <div className="text-lg font-semibold text-[#002840]">Autosuggest</div>
