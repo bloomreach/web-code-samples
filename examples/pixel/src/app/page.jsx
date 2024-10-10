@@ -18,7 +18,7 @@ function getRandomCategories(data) {
   }
 
   return categories[0].value
-    .filter((cat) => cat.cat_name.split(' ').length === 1)
+    .filter((cat) => cat.cat_name.split(/[\s\%]+/g).length === 1)
     .slice(0, 12);
 }
 

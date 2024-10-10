@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import parse from "html-react-parser";
 import {
   ToggleField,
   InputField,
@@ -133,7 +134,7 @@ export default function App() {
 
         <div>
           <InputField
-            helperText="Search for chair, bed, office furniture, chandeliers, chiar (for autocorrect)..."
+            helperText="Search for chair, bed, office furniture, chiar (for autocorrect), plant (for campaign), bloomreach (for redirect)..."
             value={query}
             leftElement={loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />}
             clearable
@@ -194,6 +195,17 @@ export default function App() {
                       </select>
                     </div>
                   </div>
+
+                  {data?.keywordRedirect ? <div className="text-sm my-8">
+                    Redirect to
+                    {' '}
+                    <a className="font-semibold text-blue-600" href={data.keywordRedirect["redirected url"]} target="_blank">
+                    {data.keywordRedirect["redirected url"]}
+                  </a>
+                  </div> : null}
+                  {data?.campaign?.htmlText ? <div className="my-8">
+                    {parse(data.campaign.htmlText)}
+                  </div> : null}
 
                   {data?.response?.docs?.length ? (
                     <div className="flex flex-col">
