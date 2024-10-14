@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bloomreach/limitless-ui-react": "^0.4.0",
     "@bloomreach/react-banana-ui": "^1.9.1",
     "@uiw/react-json-view": "^2.0.0-alpha.24",
     "next": "14.2.1",

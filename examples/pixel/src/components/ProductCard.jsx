@@ -1,23 +1,16 @@
 import Link from 'next/link';
 import Highlighter from 'react-highlight-words';
-import { Price } from './Price';
+import { ProductCard as PC } from '@bloomreach/limitless-ui-react';
 
 export function ProductCard({ product, highlight, href, onClick }) {
   return (
-    <article className="flex flex-col gap-2 shadow-md rounded-md border border-slate-100">
-      <Link href={href} {...{ onClick }}>
-        <figure
-          className="rounded-t-md"
-        >
-          <img
-            src={product.thumb_image}
-            alt={product.title}
-            className="rounded-t-md w-full object-cover object-top max-h-56"
-          />
-        </figure>
-      </Link>
-      <div className="flex flex-col px-2 gap-1 grow">
-        {product.brand ? <div className="uppercase opacity-50 text-xs">{product.brand}</div> : null}
+    <PC.Root>
+      <PC.Header>
+        <Link href={href} {...{ onClick }}>
+          <PC.Image src={product.thumb_image} alt={product.title}  />
+        </Link>
+      </PC.Header>
+      <PC.Body>
         <Link href={href} {...{ onClick }}>
           <Highlighter
             highlightClassName="bg-amber-300 rounded"
@@ -27,14 +20,12 @@ export function ProductCard({ product, highlight, href, onClick }) {
           />
         </Link>
         {product.variants?.length > 1 ? (
-          <p className="text-sm opacity-50">
-            {product.variants.length}
-            {' '}
-            variants
-          </p>
+          <PC.SubTitle>{`${product.variants.length} variants`}</PC.SubTitle>
         ) : null}
-      </div>
-      <Price className="p-2 text-sm" product={product} />
-    </article>
+      </PC.Body>
+      <PC.Footer>
+        <PC.Price price={product.price} salePrice={product.sale_price} />
+      </PC.Footer>
+    </PC.Root>
   );
 }

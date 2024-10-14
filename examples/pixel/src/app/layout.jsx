@@ -3,6 +3,7 @@
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import { CookiesProvider } from 'react-cookie';
+import { Theme } from '@bloomreach/limitless-ui-react';
 import { account_id } from '../config';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -10,6 +11,7 @@ import DeveloperToolsProvider from '../hooks/useDeveloperTools';
 import { DeveloperToolbar } from './DeveloperToolbar';
 
 import '@bloomreach/react-banana-ui/style.css';
+import '@bloomreach/limitless-ui-react/style.css';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -24,7 +26,9 @@ export default function RootLayout({ children }) {
               <DeveloperToolbar />
               <div className="app p-2 max-w-5xl w-full mx-auto grow flex flex-col">
                 <Header />
-                {children}
+                <Theme>
+                  {children}
+                </Theme>
               </div>
               <Footer />
             </main>

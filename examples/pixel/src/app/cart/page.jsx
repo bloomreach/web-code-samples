@@ -15,6 +15,7 @@ export default function Page() {
   const { cart, incrementItem, decrementItem, removeItem, cartCount, cartTotal } = useCart();
   const [recPids, setRecPids] = useState([]);
   const [ref, isIntersecting] = useIntersectionObserver({
+    freezeOnceVisible: true,
     threshold: 0,
     root: null,
     rootMargin: '0px',

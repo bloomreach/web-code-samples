@@ -1,6 +1,7 @@
 "use client";
 import {useState, useEffect, useRef, ChangeEvent} from "react";
 import {account_name, account_id, domain_key, visual_search_widget_id, sample_images} from "../config";
+import { ProductCard, Theme } from "@bloomreach/limitless-ui-react";
 import {
   ToggleField,
   InputField,
@@ -9,7 +10,6 @@ import {
 } from "@bloomreach/react-banana-ui";
 import JsonView from "@uiw/react-json-view";
 import useVisualSearchApi from "../hooks/useVisualSearchApi";
-import { Price } from "../components/Price";
 import { Footer } from "./Footer";
 
 export default function Home() {
@@ -199,7 +199,7 @@ export default function Home() {
           </div>
           {showJson ?
             <JsonView value={data} collapsed={1} /> :
-          <div className="w-full">
+          <Theme className="w-full">
             {uploadError ? <div className="text-sm text-rose-600">{uploadError}</div> : null}
             {uploading ? <div className="text-sm text-slate-500">Uploading image...</div> : null}
             {loading ? <div className="text-sm text-slate-500">Loading...</div> : null}
@@ -208,32 +208,20 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                   {data?.response?.docs?.map((product: any) => {
                     return (
-                      <div
-                        className="shadow-md rounded-md border border-slate-100"
-                        key={product.pid}
-                      >
-                        <div className="flex flex-col gap-2">
-                          <div className="w-full max-h-56 rounded-t-md overflow-hidden border-b border-slate-200 ">
-                            <img
-                              src={product.thumb_image}
-                              className="mr-2 w-full object-cover object-top"
-                            />
-                          </div>
-                          <div className="p-2 pt-0">
-                            <div className="w-full text-sm font-bold">
-                              {product.title}
-                            </div>
-                            {product.variants?.length > 1 ? (
-                              <p className="text-sm opacity-50 mb-1">
-                                {product.variants.length}
-                                {' '}
-                                variants
-                              </p>
-                            ) : null}
-                            <Price className="text-sm" product={product} />
-                          </div>
-                        </div>
-                      </div>
+                      <ProductCard.Root key={product.pid}>
+                        <ProductCard.Header>
+                          <ProductCard.Image src={product.thumb_image} alt={product.title}  />
+                        </ProductCard.Header>
+                        <ProductCard.Body>
+                          <ProductCard.Title>{product.title}</ProductCard.Title>
+                          {product.variants?.length > 1 ? (
+                            <ProductCard.SubTitle>{`${product.variants.length} variants`}</ProductCard.SubTitle>
+                          ) : null}
+                        </ProductCard.Body>
+                        <ProductCard.Footer>
+                          <ProductCard.Price price={product.price} salePrice={product.sale_price} />
+                        </ProductCard.Footer>
+                      </ProductCard.Root>
                     );
                   })}
                 </div>
@@ -244,7 +232,7 @@ export default function Home() {
               </div>
 
             ) : null}
-          </div>
+          </Theme>
           }
         </div>
       </div>

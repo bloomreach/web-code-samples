@@ -22,6 +22,7 @@ export default function Page({ params }) {
   const [recPids, setRecPids] = useState([]);
   const { loading, error, data } = useSearchApi('keyword', CONFIG, options);
   const [ref, isIntersecting] = useIntersectionObserver({
+    freezeOnceVisible: true,
     threshold: 0,
     root: null,
     rootMargin: '0px',
