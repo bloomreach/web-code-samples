@@ -84,10 +84,18 @@ export function DeveloperToolbar() {
           <ToggleField
             className="text-slate-300 toggle-field"
             label="Show JSON"
-            inputProps={{ id: 'show-json-toggle' }}
+            inputProps={{id: 'show-json-toggle'}}
             checked={showJson}
             onChange={() => setShowJson(!showJson)}
           />
+          <a
+            href="https://github.com/bloomreach/web-code-samples/discussions/new"
+            target="_blank"
+            className="flex gap-2 items-center font-semibold bg-amber-300 text-slate-800 mx-2 px-2 rounded"
+          >
+            Feedback
+            <ExternalLinkIcon size={10}/>
+          </a>
         </div>
       </div>
       <Modal

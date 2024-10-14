@@ -31,13 +31,13 @@ export function Footer() {
           <div className="my-2 text-sm">
             <a
               target="_blank"
-              className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+              className="text-slate-500 hover:underline"
               href="https://github.com/bloomreach/web-code-samples/tree/main/examples/pixel"
               rel="noreferrer"
             >
               See the source on Github
               {' '}
-              <ExternalLinkIcon size={12} />
+              <ExternalLinkIcon className="inline" size={12} />
             </a>
           </div>
         </div>
@@ -49,49 +49,49 @@ export function Footer() {
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/pixel-overview"
                 rel="noreferrer"
               >
                 Pixel overview
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/pixel-reference"
                 rel="noreferrer"
               >
                 Pixel reference
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/virtual-page-view-pixel"
                 rel="noreferrer"
               >
                 Single page application tracking
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/using-tag-manager"
                 rel="noreferrer"
               >
                 Tag manager pixel integration
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
           </ul>
@@ -104,49 +104,49 @@ export function Footer() {
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/discovery-sdks"
                 rel="noreferrer"
               >
                 Bloomreach SDK
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://bloomreach.github.io/limitless-ui-react"
                 rel="noreferrer"
               >
                 Limitless commerce UI kit
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://documentation.bloomreach.com/discovery/docs/discovery-web-code-samples"
                 rel="noreferrer"
               >
                 Web code samples
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
             <li>
               <a
                 target="_blank"
-                className="text-slate-500 hover:underline flex flex-row gap-2 items-center"
+                className="text-slate-500 hover:underline"
                 href="https://github.com/bloomreach/sample-catalogs"
                 rel="noreferrer"
               >
                 Sample catalogs
                 {' '}
-                <ExternalLinkIcon size={12} />
+                <ExternalLinkIcon className="inline" size={12} />
               </a>
             </li>
           </ul>

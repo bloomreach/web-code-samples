@@ -1,6 +1,6 @@
 # Bloomreach - Search example
 
-This example demonstrates how to setup Bloomreach's search feature. See `config.js` file to configure it to run for your account and catalog
+This example demonstrates how to setup Bloomreach's search feature and the various search usecases. See `config.js` file to configure it to run for your account and catalog
 To see an example with facets, see the facets example
 
 ## How to use
