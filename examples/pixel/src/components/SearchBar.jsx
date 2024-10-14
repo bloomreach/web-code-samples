@@ -195,7 +195,7 @@ function SearchBarComponent() {
           </div>
           <input
             className="border rounded w-full p-2 rounded pl-10 focus:outline-0"
-            placeholder="Search for chair, sofa, bed, pillow, pen, paper"
+            placeholder="Search for chair, sofa, bed, pillow, pen, plants, wall art"
             ref={refs.setReference}
             {...getReferenceProps({
               onChange,
