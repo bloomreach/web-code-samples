@@ -177,7 +177,7 @@ export default function App() {
                             <span
                               key={term}
                               className="cursor-pointer px-2 mr-2 bg-blue-100 text-blue-600 hover:underline"
-                              onClick={() => setQuery(term)}
+                              onClick={() => updateQuery(term)}
                             >
                               {term}
                             </span>
@@ -220,7 +220,7 @@ export default function App() {
                     <div className="flex flex-col">
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                         {data?.response?.docs.map((product) => (
-                          <ProductCard.Root key={product.pid} className="shadow-md">
+                          <ProductCard.Root key={product.pid}>
                             <ProductCard.Header>
                               <ProductCard.Image src={product.thumb_image} alt={product.title}  />
                             </ProductCard.Header>

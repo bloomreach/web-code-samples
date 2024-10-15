@@ -55,7 +55,7 @@ export function DeveloperToolbar() {
       ) : null}
       <div className="bg-[#002840]">
         <div
-          className="max-w-5xl mx-auto flex flex-row gap-2 p-2 text-slate-300 text-xs items-center"
+          className="max-w-5xl mx-auto flex flex-col gap-2 p-2 text-slate-300 text-xs sm:flex-row sm:items-center"
         >
           <div className="grow">
             <span className="font-semibold">Account:</span>
@@ -66,36 +66,38 @@ export function DeveloperToolbar() {
             {account_id}
             )
           </div>
-          <div>
-            <button
-              type="button"
-              onClick={handleShowEvents}
-              className="flex text-xs gap-1 items-center hover:text-white"
-            >
-              Pixel events
-              <span
-                className="bg-[#ffd500] rounded-full px-2 ml-1 text-[#002840] font-bold"
+          <div className="flex gap-2 sm:items-center">
+            <div>
+              <button
+                type="button"
+                onClick={handleShowEvents}
+                className="flex text-xs gap-1 items-center hover:text-white"
               >
-                {eventsCount > 25 ? '25+' : eventsCount}
-              </span>
-            </button>
+                Pixel events
+                <span
+                  className="bg-[#ffd500] rounded-full px-2 ml-1 text-[#002840] font-bold"
+                >
+                  {eventsCount > 25 ? '25+' : eventsCount}
+                </span>
+              </button>
+            </div>
+            <div>&middot;</div>
+            <ToggleField
+              className="text-slate-300 toggle-field"
+              label="Show JSON"
+              inputProps={{id: 'show-json-toggle'}}
+              checked={showJson}
+              onChange={() => setShowJson(!showJson)}
+            />
+            <a
+              href="https://github.com/bloomreach/web-code-samples/discussions/new"
+              target="_blank"
+              className="flex gap-2 items-center font-semibold bg-amber-300 text-slate-800 mx-2 px-2 rounded"
+            >
+              Feedback
+              <ExternalLinkIcon size={10}/>
+            </a>
           </div>
-          <div>&middot;</div>
-          <ToggleField
-            className="text-slate-300 toggle-field"
-            label="Show JSON"
-            inputProps={{id: 'show-json-toggle'}}
-            checked={showJson}
-            onChange={() => setShowJson(!showJson)}
-          />
-          <a
-            href="https://github.com/bloomreach/web-code-samples/discussions/new"
-            target="_blank"
-            className="flex gap-2 items-center font-semibold bg-amber-300 text-slate-800 mx-2 px-2 rounded"
-          >
-            Feedback
-            <ExternalLinkIcon size={10}/>
-          </a>
         </div>
       </div>
       <Modal

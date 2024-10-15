@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import JsonView from "@uiw/react-json-view";
+import { Theme, ProductCard } from "@bloomreach/limitless-ui-react";
 import {
   AccordionGroup,
   ToggleField,
@@ -12,17 +13,17 @@ import {
   ExternalLinkIcon,
   Pagination,
 } from "@bloomreach/react-banana-ui";
-import "@bloomreach/react-banana-ui/style.css";
 
 import { getSearchResults } from "./api";
 import { Facet } from "./components/facet";
 import { AppliedFacet } from "./components/applied-facet";
-import { Price } from "./components/price";
-
-import "./app.css";
 import { Footer } from "./Footer";
 import { account_id, account_name } from "./config";
 import BrLogo from "./assets/br-logo-primary.svg";
+
+import "@bloomreach/react-banana-ui/style.css";
+import "@bloomreach/limitless-ui-react/style.css";
+import "./app.css";
 
 export default function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -203,7 +204,7 @@ export default function App() {
 
         <div className="grow">
           <InputField
-            helperText="Search for chair, outdoor furniture, bed, pillow, chiar (for autocorrect)..."
+            helperText="Search for chair, outdoor furniture, bed, pillow, art, plants..."
             value={q}
             leftElement={
               loading ? <LoaderIcon className="animate-spin" /> : <SearchIcon />
@@ -221,7 +222,7 @@ export default function App() {
           {showJson ? (
             <JsonView value={data} collapsed={2} />
           ) : (
-            <div className="my-2">
+            <Theme className="my-2">
               <div className="flex">
                 <div className="grow text-sm my-2">
                   Search results for{" "}
@@ -306,35 +307,25 @@ export default function App() {
                   {data?.response?.docs?.length ? (
                     <div className="flex flex-col">
                       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-                        {data?.response?.docs.map((product, index) => (
-                          <div
-                            className="shadow-md rounded-md border border-slate-100"
-                            key={index}
-                          >
-                            <div className="flex flex-col gap-2">
-                              <div className="w-full max-h-48 rounded-t-md overflow-hidden border-b border-slate-200 ">
-                                <img
-                                  src={product.thumb_image}
-                                  className="mr-2 w-full object-cover object-top"
-                                />
-                              </div>
-                              <div className="p-2 pt-0 flex flex-col gap-1">
-                                <Highlighter
-                                  className="w-full text-sm font-bold"
-                                  searchWords={[searchedQuery]}
-                                  textToHighlight={product.title}
-                                />
-                                {product.variants?.length > 1 ? (
-                                  <p className="text-sm opacity-50">
-                                    {product.variants.length}
-                                    {' '}
-                                    variants
-                                  </p>
-                                ) : null}
-                                <Price className="text-sm" product={product} />
-                              </div>
-                            </div>
-                          </div>
+                        {data?.response?.docs.map((product) => (
+                          <ProductCard.Root key={product.pid}>
+                            <ProductCard.Header>
+                              <ProductCard.Image src={product.thumb_image} alt={product.title}  />
+                            </ProductCard.Header>
+                            <ProductCard.Body>
+                              <Highlighter
+                                className="w-full text-sm font-bold"
+                                searchWords={[searchedQuery]}
+                                textToHighlight={product.title}
+                              />
+                              {product.variants?.length > 1 ? (
+                                <ProductCard.SubTitle>{`${product.variants.length} variants`}</ProductCard.SubTitle>
+                              ) : null}
+                            </ProductCard.Body>
+                            <ProductCard.Footer>
+                              <ProductCard.Price price={product.price} salePrice={product.sale_price} />
+                            </ProductCard.Footer>
+                          </ProductCard.Root>
                         ))}
                       </div>
                       {data.response.numFound > 0 ? (
@@ -359,7 +350,7 @@ export default function App() {
                   )}
                 </div>
               </div>
-            </div>
+            </Theme>
           )}
         </div>
       </div>

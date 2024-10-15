@@ -30,6 +30,7 @@ export default function Home() {
     rows: 12,
   });
   const [ref, isIntersecting] = useIntersectionObserver({
+    freezeOnceVisible: true,
     threshold: 0,
     root: null,
     rootMargin: '0px',

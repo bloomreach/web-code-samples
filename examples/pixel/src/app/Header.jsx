@@ -20,7 +20,7 @@ export function Header() {
             </div>
           </Link>
         </div>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center text-sm font-semibold">
           <div>
             <Link href="/user" className="flex gap-2">User</Link>
           </div>
@@ -31,13 +31,11 @@ export function Header() {
               >
                 <span className="pr-2">Cart</span>
               </Badge>
-
             </Link>
           </div>
         </div>
       </div>
       <SearchBar />
-
     </>
   );
 }

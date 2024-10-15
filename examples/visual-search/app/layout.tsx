@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "@bloomreach/react-banana-ui/style.css";
 
+import "@bloomreach/react-banana-ui/style.css";
+import "@bloomreach/limitless-ui-react/style.css";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

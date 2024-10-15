@@ -1,9 +1,4 @@
-export const formatPrice = (price) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(price);
-};
+import { formatPrice } from '@bloomreach/limitless-ui-react'
 
 export function Price({ product, className }) {
   const hasDiscount = product.price && product.sale_price && product.price !== product.sale_price;

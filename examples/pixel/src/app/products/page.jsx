@@ -118,7 +118,7 @@ export default function Page({ searchParams }) {
 
             {data?.response?.docs?.length ? (
               <div className="flex flex-col gap-8">
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 md:gap-8">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
                   {data?.response?.docs.map((product) => (
                     <div key={product.pid} className="flex">
                       <ProductCard product={product} highlight={searchedQuery} href={`/products/${product.pid}`} />
