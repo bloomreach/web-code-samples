@@ -1,4 +1,4 @@
-# Bloomreach - Pixel instrumentation example
+# Bloomreach - Storefront with pixel instrumentation example
 
 This example demonstrates how to instrument the pixel across a simple storefront for page view,
 widget view, suggest, search, click, add to cart and conversion events.
