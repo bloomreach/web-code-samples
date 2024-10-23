@@ -15,7 +15,7 @@ export function Header() {
               <img src="/br-logo-primary.svg" alt="" width={150} />
               <span>✨</span>
               <div className="text-lg font-semibold text-[#002840]">
-                Pixel
+                Storefront
               </div>
             </div>
           </Link>
