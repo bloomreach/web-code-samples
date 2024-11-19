@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { RangeInput } from "./range-input";
+import { Range, Currency } from "@bloomreach/limitless-ui-react";
 
 export const FacetNumberStats = ({ facet, value, onChange }) => {
-  const [min, setMin] = useState(facet.value.start);
-  const [max, setMax] = useState(facet.value.end);
+  const [rangeValue, setRangeValue] = useState([facet.value.start, facet.value.end]);
 
   useEffect(() => {
     const parsedValue = value
@@ -13,8 +12,9 @@ export const FacetNumberStats = ({ facet, value, onChange }) => {
           .map((fragment) => parseFloat(fragment))
       : [];
 
-    setMin(parsedValue[0] || facet.value.start);
-    setMax(parsedValue[1] || facet.value.end);
+    const _min = parsedValue[0] || facet.value.start;
+    const _max = parsedValue[1] || facet.value.end;
+    setRangeValue([_min, _max]);
   }, [facet, value]);
 
   const handleChange = (value) => {
@@ -25,5 +25,19 @@ export const FacetNumberStats = ({ facet, value, onChange }) => {
     }
   };
 
-  return <RangeInput value={[min, max]} onChange={handleChange} />;
+  return (
+    <div className="py-4">
+      <Range.Root autoUpdate={false} min={facet.value.start} max={facet.value.end} step={0.01} value={rangeValue} onChange={(newValue) => {handleChange(newValue)}}>
+        <Range.Slider />
+        <Range.Inputs>
+          {facet.name.includes("price") && <Currency />}
+          <Range.MinInput />
+          <Range.Separator />
+          {facet.name.includes("price") && <Currency />}
+          <Range.MaxInput />
+        </Range.Inputs>
+        <Range.UpdateButton>Update</Range.UpdateButton>
+      </Range.Root>
+    </div>
+  );
 };

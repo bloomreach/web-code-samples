@@ -1,4 +1,4 @@
-import {AssetTag} from "@bloomreach/react-banana-ui";
+import { Tag } from "@bloomreach/limitless-ui-react";
 
 export const AppliedFacetCategory = ({ facet, value, onClear }) => {
   function getCategoryName(id) {
@@ -9,14 +9,13 @@ export const AppliedFacetCategory = ({ facet, value, onClear }) => {
   return (
     <div className="flex flex-row flex-wrap gap-2">
       {value.map((val) => (
-        <AssetTag
-          className="applied-facet-tag"
-          dismissible
+        <Tag
+          className="font-semibold leading-none"
           key={val}
           onDismiss={() => onClear(val)}
         >
           {getCategoryName(val)}
-        </AssetTag>
+        </Tag>
       ))}
     </div>
   );
