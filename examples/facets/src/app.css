@@ -20,13 +20,15 @@ If the tailwind play cdn javascript is not working, uncomment the block below an
   font-size: 11px;
 }
 
-.applied-facet-tag {
-  --rbui-tag-color: var(--banana-tag-input-foreground-default);
-  --rbui-tag-background-color: var(--banana-tag-input-background-default);
-  --rbui-tag-background-color-hover: var(--banana-tag-input-background-hover);
-  font-weight: 600;
-}
-
 .lui-styled {
   --lui-pc-box-shadow: 0 2px 5px 0 #0028400f, 0 9px 9px 0 #0028400d, 0 20px 12px 0 #00284008, 0 36px 15px 0 #00284003, 0 57px 16px 0 #00284000;
+  --lui-pagination__item--active-background: #00b2db;
+}
+
+.lui-styled .lui-tag button {
+  height: auto;
+}
+
+.lui-styled .lui-cg-item-checkbox {
+  padding: 0;
 }

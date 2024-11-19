@@ -11,8 +11,8 @@ import {
   SearchIcon,
   LoaderIcon,
   ExternalLinkIcon,
-  Pagination,
 } from "@bloomreach/react-banana-ui";
+import { Pagination } from "@bloomreach/limitless-ui-react";
 
 import { getSearchResults } from "./api";
 import { Facet } from "./components/facet";
@@ -330,7 +330,7 @@ export default function App() {
                       </div>
                       {data.response.numFound > 0 ? (
                         <div className="my-8">
-                          <Pagination
+                          <Pagination.Root
                             count={data.response.numFound}
                             itemsPerPage={perPage}
                             itemsPerPageOptions={[12, 24, 48]}
@@ -341,7 +341,18 @@ export default function App() {
                               updateQueryParams("page", newPage)
                             }
                             page={page}
-                          />
+                          >
+                            <Pagination.Overview>
+                              <Pagination.ItemsPerPageSelector />
+                              <Pagination.Summary />
+                            </Pagination.Overview>
+                            <Pagination.Navigation>
+                              <Pagination.PreviousButton />
+                              <Pagination.Pages />
+                              <Pagination.NextButton />
+                            </Pagination.Navigation>
+                          </Pagination.Root>
+
                         </div>
                       ) : null}
                     </div>
