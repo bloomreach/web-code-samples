@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import JsonView from '@uiw/react-json-view';
-import { LoaderIcon, Pagination } from '@bloomreach/react-banana-ui';
+import { LoaderIcon } from '@bloomreach/react-banana-ui';
+import { Pagination } from '@bloomreach/limitless-ui-react';
 import { Breadcrumbs } from './breadcrumbs';
 import { CategoryNav } from './category-nav';
 import { ProductCard } from '../../../components/ProductCard';
@@ -135,14 +136,28 @@ export default function Page({ params, searchParams }) {
                     </div>
                     {data.response.numFound > 0 ? (
                       <div className="my-8">
-                        <Pagination
+                        <Pagination.Root
                           count={data.response.numFound}
                           itemsPerPage={parseInt(rows, 10)}
                           itemsPerPageOptions={[12, 24, 48]}
-                          onItemsPerPageChange={(newPerPage) => updateQueryParams({ rows: newPerPage, page: 0 })}
-                          onPageChange={(newPage) => updateQueryParams({ page: newPage })}
+                          onItemsPerPageChange={(newPerPage) =>
+                            updateQueryParams({ rows: newPerPage, page: 0 })
+                          }
+                          onPageChange={(newPage) =>
+                            updateQueryParams({ page: newPage })
+                          }
                           page={parseInt(page, 10)}
-                        />
+                        >
+                          <Pagination.Overview>
+                            <Pagination.ItemsPerPageSelector />
+                            <Pagination.Summary />
+                          </Pagination.Overview>
+                          <Pagination.Navigation>
+                            <Pagination.PreviousButton />
+                            <Pagination.Pages />
+                            <Pagination.NextButton />
+                          </Pagination.Navigation>
+                        </Pagination.Root>
                       </div>
                     ) : null}
 

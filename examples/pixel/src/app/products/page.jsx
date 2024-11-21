@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import JsonView from '@uiw/react-json-view';
-import { Pagination } from '@bloomreach/react-banana-ui';
+import { Pagination } from '@bloomreach/limitless-ui-react';
 import { ProductCard } from '../../components/ProductCard';
 import useAnalytics from '../../hooks/useAnalytics';
 import { useDeveloperTools } from '../../hooks/useDeveloperTools';
@@ -127,14 +127,28 @@ export default function Page({ searchParams }) {
                 </div>
                 {data.response.numFound > 0 ? (
                   <div>
-                    <Pagination
+                    <Pagination.Root
                       count={data.response.numFound}
                       itemsPerPage={parseInt(rows, 10)}
                       itemsPerPageOptions={[12, 24, 48]}
-                      onItemsPerPageChange={(newPerPage) => updateQueryParams({ rows: newPerPage, page: 0 })}
-                      onPageChange={(newPage) => updateQueryParams({ page: newPage })}
+                      onItemsPerPageChange={(newPerPage) =>
+                        updateQueryParams({ rows: newPerPage, page: 0 })
+                      }
+                      onPageChange={(newPage) =>
+                        updateQueryParams({ page: newPage })
+                      }
                       page={parseInt(page, 10)}
-                    />
+                    >
+                      <Pagination.Overview>
+                        <Pagination.ItemsPerPageSelector />
+                        <Pagination.Summary />
+                      </Pagination.Overview>
+                      <Pagination.Navigation>
+                        <Pagination.PreviousButton />
+                        <Pagination.Pages />
+                        <Pagination.NextButton />
+                      </Pagination.Navigation>
+                    </Pagination.Root>
                   </div>
                 ) : null}
               </div>

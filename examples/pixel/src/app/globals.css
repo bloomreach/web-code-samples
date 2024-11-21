@@ -22,5 +22,15 @@ button:not(.rbui-button), button:not(.rbui-button)[type=button] {
 }
 
 .lui-styled {
-  --lui-pc-box-shadow: 0 2px 5px 0 #0028400f, 0 9px 9px 0 #0028400d, 0 20px 12px 0 #00284008, 0 36px 15px 0 #00284003, 0 57px 16px 0 #00284000;
+  --lui-pc__box-shadow: 0 2px 5px 0 #0028400f, 0 9px 9px 0 #0028400d, 0 20px 12px 0 #00284008, 0 36px 15px 0 #00284003, 0 57px 16px 0 #00284000;
+  --lui-pagination__item-background--active: #00b2db;
+}
+
+/* Reset the Limitless UI styles to override the button styles from above */
+.lui-styled button.lui-pagination__select {
+  display: flex;
+  gap: 0.5rem;
+  border: var(--lui-pagination__select-border);
+  border-radius: var(--lui-pagination__item-border-radius);
+  padding: 0.5rem;
 }

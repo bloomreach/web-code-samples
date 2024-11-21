@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@bloomreach/discovery-web-sdk": "^1.1.0",
-    "@bloomreach/limitless-ui-react": "^0.4.0",
+    "@bloomreach/limitless-ui-react": "^0.10.0",
     "@bloomreach/react-banana-ui": "1.20.0",
     "@floating-ui/react": "^0.26.22",
     "@mui/base": "^5.0.0-beta.40",
