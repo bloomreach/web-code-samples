@@ -40,13 +40,15 @@ export default function Page() {
                         key={item.id}
                         className="grid grid-cols-[100px_1fr_auto] items-center gap-4 border-b border-slate-200 pb-4"
                       >
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          width={100}
-                          height={100}
-                          className="rounded-md object-cover"
-                        />
+                        <Link href={`/products/${item.id}`}>
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            width={100}
+                            height={100}
+                            className="rounded-md object-cover"
+                          />
+                        </Link>
                         <div className="grid gap-1">
                           <Link href={`/products/${item.id}`}>
                             <h3 className="font-medium">{item.title}</h3>

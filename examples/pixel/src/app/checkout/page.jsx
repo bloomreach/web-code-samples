@@ -54,20 +54,39 @@ export default function Page() {
                     Edit Cart
                   </Link>
                 </div>
-                <div className="flex flex-row flex-wrap">
+                <div className="flex flex-col">
                   {cart.map((item) => (
-                    <div key={item.id} className="w-1/3">
-                      <div className="relative p-2">
+                    <div key={item.id} className="flex flex-row">
+                      <div className="relative w-1/3">
                         <img
                           src={item.image}
                           alt={item.title}
                           className="rounded-md object-cover w-full"
                         />
-                        <span className="rounded-br-md rounded-tl-md absolute bottom-2 right-2 px-2 py-1 text-xs font-semibold bg-yellow-400">
+
+                      </div>
+                      <div className="flex flex-col w-full p-2">
+                        <h3 className="font-medium">{item.title}</h3>
+                        <p className="text-sm text-gray-600">
+                          {item.subtitle}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Price:
+                          {' '}
+                          $
+                          {item.price.toFixed(2)}
+                        </p>
+                        <p className="text-sm text-gray-600">
                           Qty:
                           {' '}
                           {item.count}
-                        </span>
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Item total:
+                          {' '}
+                          $
+                          {(item.price * item.count).toFixed(2)}
+                        </p>
                       </div>
                     </div>
                   ))}
